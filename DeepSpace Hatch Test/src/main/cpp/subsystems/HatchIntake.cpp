@@ -5,20 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#pragma once
-#include <frc/Joystick.h>
-#include <frc/Buttons/JoystickButton.h>
+#include "subsystems/HatchIntake.h"
 
-class OI {
- public:
-  OI();
-  frc::Joystick& GetJoystick();
-	double GetDriverAxis(int axis);
-  double GetDriverButton(int button);
+HatchIntake::HatchIntake() : Subsystem("ExampleSubsystem") {}
 
-private:
-	frc::Joystick driver_controller{0};
+void HatchIntake::InitDefaultCommand() {
+  SetDefaultCommand(new HatchWheelsRun());
+}
 
-  frc::JoystickButton * ClawWheelsOut;
-	frc::JoystickButton * ClawWheelsIn;
-};
+void HatchIntake::RunWheels(double speed) {
+  m_left_wheel.Set(-speed);
+  m_right_wheel.Set(speed);
+}
+
+// Put methods for controlling this subsystem
+// here. Call these from Commands.

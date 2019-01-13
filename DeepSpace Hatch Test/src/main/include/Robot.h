@@ -18,6 +18,7 @@
 #include "subsystems/DriveTrain.h"
 #include "subsystems/ExampleSubsystem.h"
 #include "subsystems/BallClaw.h"
+#include "subsystems/HatchIntake.h"
 
 class Robot : public frc::TimedRobot {
  public:
@@ -25,6 +26,7 @@ class Robot : public frc::TimedRobot {
  	static DriveTrain m_drivetrain;
 	static OI m_oi;
   static BallClaw m_ball_claw;
+  static HatchIntake m_hatch_intake;
 
   void RobotInit() override;
   void RobotPeriodic() override;

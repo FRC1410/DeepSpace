@@ -11,6 +11,7 @@
 
 #include "RobotMap.h"
 #include "commands/BallWheelsRun.h"
+#include "commands/HatchWheelsRun.h"
 
 OI::OI() {
 	ClawWheelsIn = new frc::JoystickButton(&driver_controller, ball_claw_outtake_button);
@@ -18,6 +19,12 @@ OI::OI() {
 
 	ClawWheelsIn->WhenPressed(new BallWheelsRun);
 	ClawWheelsOut->WhenPressed(new BallWheelsRun);
+
+	HatchWheelsIn = new frc::JoystickButton(&driver_controller, hatch_intake_button);
+	HatchWheelsOut = new frc::JoystickButton(&driver_controller, hatch_outtake_button);
+
+	HatchWheelsIn->WhenPressed(new HatchWheelsRun);
+	HatchWheelsOut->WhenPressed(new HatchWheelsRun);
 }
 
 frc::Joystick& OI::GetJoystick() {

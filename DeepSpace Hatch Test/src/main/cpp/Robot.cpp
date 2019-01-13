@@ -14,6 +14,7 @@ DriveTrain Robot::m_drivetrain;
 OI Robot::m_oi;
 ExampleSubsystem Robot::m_subsystem;
 BallClaw Robot::m_ball_claw;
+HatchIntake Robot::m_hatch_intake;
 
 void Robot::RobotInit() {
   m_chooser.SetDefaultOption("Default Auto", &m_defaultAuto);
