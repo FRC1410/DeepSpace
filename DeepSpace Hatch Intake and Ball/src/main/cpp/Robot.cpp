@@ -15,6 +15,7 @@ OI Robot::m_oi;
 ExampleSubsystem Robot::m_subsystem;
 BallClaw Robot::m_ball_claw;
 HatchIntake Robot::m_hatch_intake;
+BallIntake Robot::m_ball_intake;
 
 void Robot::RobotInit() {
   m_chooser.SetDefaultOption("Default Auto", &m_defaultAuto);

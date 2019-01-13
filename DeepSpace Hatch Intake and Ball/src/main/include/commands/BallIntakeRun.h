@@ -9,9 +9,9 @@
 
 #include <frc/commands/Command.h>
 
-class HatchWheelsRun : public frc::Command {
+class BallIntakeRun : public frc::Command {
  public:
-  HatchWheelsRun();
+  BallIntakeRun();
   void Initialize() override;
   void Execute() override;
   bool IsFinished() override;

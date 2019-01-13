@@ -12,13 +12,13 @@
 #include <frc/smartdashboard/SendableChooser.h>
 
 #include "OI.h"
-#include "commands/Drive.h"
 #include "commands/ExampleCommand.h"
 #include "commands/MyAutoCommand.h"
 #include "subsystems/DriveTrain.h"
 #include "subsystems/ExampleSubsystem.h"
 #include "subsystems/BallClaw.h"
 #include "subsystems/HatchIntake.h"
+#include "subsystems/BallIntake.h"
 
 class Robot : public frc::TimedRobot {
  public:
@@ -27,6 +27,7 @@ class Robot : public frc::TimedRobot {
 	static OI m_oi;
   static BallClaw m_ball_claw;
   static HatchIntake m_hatch_intake;
+  static BallIntake m_ball_intake;
 
   void RobotInit() override;
   void RobotPeriodic() override;

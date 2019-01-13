@@ -33,9 +33,11 @@ constexpr int right_back_drive = 4;
 //Balls
 constexpr int ball_claw_left = 5;
 constexpr int ball_claw_right = 6;
+constexpr int Ball_intake = 9;
 
 constexpr int ball_claw_outtake_button = 5;
 constexpr int ball_claw_intake_button = 6;
+constexpr int ball_roller_button = 3;
 
 //Hatch
 constexpr int hatch_wheels_left = 8;

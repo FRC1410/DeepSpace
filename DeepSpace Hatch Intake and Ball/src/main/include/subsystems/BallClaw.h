@@ -6,22 +6,20 @@
 /*----------------------------------------------------------------------------*/
 
 #pragma once
-#include <frc/Joystick.h>
-#include <frc/Buttons/JoystickButton.h>
 
-class OI {
- public:
-  OI();
-  frc::Joystick& GetJoystick();
-	double GetDriverAxis(int axis);
-  double GetDriverButton(int button);
+#include <frc/commands/Subsystem.h>
+#include <ctre/Phoenix.h>
 
-private:
-	frc::Joystick driver_controller{0};
+#include "RobotMap.h"
+#include "commands/BallClawWheelsRun.h"
 
-  frc::JoystickButton * ClawWheelsOut;
-	frc::JoystickButton * ClawWheelsIn;
-  frc::JoystickButton * HatchWheelsIn;
-	frc::JoystickButton * HatchWheelsOut;
-  frc::JoystickButton * BallRoller;
+class BallClaw : public frc::Subsystem {
+  private:
+    WPI_TalonSRX m_left_wheel{ball_claw_left};
+    WPI_TalonSRX m_right_wheel{ball_claw_right};
+
+  public:
+    BallClaw();
+    void InitDefaultCommand() override;
+    void RunWheels(double speed);
 };

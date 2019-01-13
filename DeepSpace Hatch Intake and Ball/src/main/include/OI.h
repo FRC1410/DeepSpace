@@ -5,16 +5,24 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/BallClaw.h"
+#pragma once
 
-BallClaw::BallClaw() : Subsystem("ExampleSubsystem") {}
+#include <frc/Joystick.h>
+#include <frc/Buttons/JoystickButton.h>
 
-void BallClaw::InitDefaultCommand() {
-  SetDefaultCommand(new BallWheelsRun());
-}
-// Put methods for controlling this subsystem
-// here. Call these from Commands.
-void BallClaw::RunWheels(double speed) {
-  m_left_wheel.Set(-speed);
-  m_right_wheel.Set(speed);
-}
+class OI {
+ public:
+  OI();
+  frc::Joystick& GetJoystick();
+	double GetDriverAxis(int axis);
+  double GetDriverButton(int button);
+
+private:
+	frc::Joystick driver_controller{0};
+
+  frc::JoystickButton * ClawWheelsOut;
+	frc::JoystickButton * ClawWheelsIn;
+  frc::JoystickButton * HatchWheelsIn;
+	frc::JoystickButton * HatchWheelsOut;
+  frc::JoystickButton * BallRoller;
+};

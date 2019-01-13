@@ -5,34 +5,26 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/HatchWheelsRun.h"
+#include "commands/MyAutoCommand.h"
 #include "Robot.h"
 
-HatchWheelsRun::HatchWheelsRun() {
+MyAutoCommand::MyAutoCommand() {
   // Use Requires() here to declare subsystem dependencies
-  // eg. Requires(Robot::chassis.get());
+  Requires(&Robot::m_subsystem);
 }
 
 // Called just before this Command runs the first time
-void HatchWheelsRun::Initialize() {}
+void MyAutoCommand::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void HatchWheelsRun::Execute() {
-  if (Robot::m_oi.GetDriverButton(hatch_intake_button)) {
-    Robot::m_hatch_intake.RunWheels(1);
-  } else if (Robot::m_oi.GetDriverButton(hatch_outtake_button)) {
-    Robot::m_hatch_intake.RunWheels(-1);
-  } else {
-    Robot::m_hatch_intake.RunWheels(0);
-  }
-}
+void MyAutoCommand::Execute() {}
 
 // Make this return true when this Command no longer needs to run execute()
-bool HatchWheelsRun::IsFinished() { return false; }
+bool MyAutoCommand::IsFinished() { return false; }
 
 // Called once after isFinished returns true
-void HatchWheelsRun::End() {}
+void MyAutoCommand::End() {}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void HatchWheelsRun::Interrupted() {}
+void MyAutoCommand::Interrupted() {}

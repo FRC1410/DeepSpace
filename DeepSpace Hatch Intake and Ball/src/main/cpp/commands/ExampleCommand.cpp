@@ -5,34 +5,26 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/Drive.h"
-#include "subsystems/DriveTrain.h"
-
+#include "commands/ExampleCommand.h"
 #include "Robot.h"
-#include "OI.h"
 
-Drive::Drive() {
-	Requires(&Robot::m_drivetrain);
+ExampleCommand::ExampleCommand() {
+  // Use Requires() here to declare subsystem dependencies
+  Requires(&Robot::m_subsystem);
 }
 
 // Called just before this Command runs the first time
-void Drive::Initialize() {}
+void ExampleCommand::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void Drive::Execute() {
-  left_stick_amount = -Robot::m_oi.GetDriverAxis(1);
-  right_stick_amount = -Robot::m_oi.GetDriverAxis(5);
-  Robot::m_drivetrain.TankDrive(left_stick_amount, right_stick_amount);
-}
+void ExampleCommand::Execute() {}
 
 // Make this return true when this Command no longer needs to run execute()
-bool Drive::IsFinished() {
-  return false;
-}
+bool ExampleCommand::IsFinished() { return false; }
 
 // Called once after isFinished returns true
-void Drive::End() {}
+void ExampleCommand::End() {}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void Drive::Interrupted() {}
+void ExampleCommand::Interrupted() {}

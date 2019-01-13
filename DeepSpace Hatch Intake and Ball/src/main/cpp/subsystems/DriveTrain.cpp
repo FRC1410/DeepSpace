@@ -5,16 +5,15 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#pragma once
+#include "subsystems/DriveTrain.h"
 
-#include <frc/commands/Command.h>
+DriveTrain::DriveTrain() : Subsystem("DriveTrain") {}
 
-class BallWheelsRun : public frc::Command {
- public:
-  BallWheelsRun();
-  void Initialize() override;
-  void Execute() override;
-  bool IsFinished() override;
-  void End() override;
-  void Interrupted() override;
-};
+void DriveTrain::InitDefaultCommand() {
+  SetDefaultCommand(new Drive());
+}
+
+void DriveTrain::TankDrive(double left, double right) {
+  m_front.TankDrive(left, right);
+  m_back.TankDrive(left, right);
+}
