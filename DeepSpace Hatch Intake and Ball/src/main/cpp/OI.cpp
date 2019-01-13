@@ -10,23 +10,8 @@
 #include <frc/WPILib.h>
 
 #include "RobotMap.h"
-//#include "commands/BallClawWheelsRun.h"
-//#include "commands/HatchWheelsRun.h"
-//#include "commands/BallIntakeRun.h"
 
-OI::OI() {
-	/*ClawWheelsIn = new frc::JoystickButton(&driver_controller, ball_claw_outtake_button);
-	ClawWheelsOut = new frc::JoystickButton(&driver_controller, ball_claw_intake_button);
-
-	ClawWheelsIn->WhenPressed(new BallClawWheelsRun);
-	ClawWheelsOut->WhenPressed(new BallClawWheelsRun);
-
-	HatchWheelsIn = new frc::JoystickButton(&driver_controller, hatch_intake_button);
-	HatchWheelsOut = new frc::JoystickButton(&driver_controller, hatch_outtake_button);
-
-	HatchWheelsIn->WhenPressed(new HatchWheelsRun);
-	HatchWheelsOut->WhenPressed(new HatchWheelsRun);*/
-}
+OI::OI() {}
 
 frc::Joystick& OI::GetJoystick() {
 	return driver_controller;
