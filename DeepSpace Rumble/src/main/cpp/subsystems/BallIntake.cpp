@@ -1,10 +1,10 @@
 #include "subsystems/BallIntake.h"
-#include "commands/BallIntakeRun.h"
+#include "commands/Rumble.h"
 
 BallIntake::BallIntake() : Subsystem("ExampleSubsystem") {}
 
 void BallIntake::InitDefaultCommand() {
-  SetDefaultCommand(new BallIntakeRun());
+  SetDefaultCommand(new Rumble());
 }
 
 void BallIntake::RunIntake(double speed) {

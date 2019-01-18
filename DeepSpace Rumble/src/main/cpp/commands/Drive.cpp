@@ -9,7 +9,7 @@ Drive::Drive() {
 
 // Called just before this Command runs the first time
 void Drive::Initialize() {
-  
+  Robot::m_drivetrain.ResetNavX();
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -34,6 +34,8 @@ void Drive::Execute() {
 
   frc::SmartDashboard::PutNumber("Left Stick Value", left_stick_amount);
   frc::SmartDashboard::PutNumber("Right Stick Value", right_stick_amount);
+
+  frc::SmartDashboard::PutNumber("NavX Value", Robot::m_drivetrain.GetAngle());
 
   if (invert_driving == false) {
   	Robot::m_drivetrain.TankDrive(left_stick_amount, right_stick_amount);

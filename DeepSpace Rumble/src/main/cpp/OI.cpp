@@ -5,10 +5,10 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "OI.h"
-
 #include <frc/WPILib.h>
+#include <frc/GenericHID.h>
 
+#include "OI.h"
 #include "commands/BallClawWheelsRun.h"
 #include "commands/HatchWheelsRun.h"
 #include "commands/BallIntakeRun.h"
@@ -75,4 +75,20 @@ double OI::GetOperatorAxis(int axis, double deadzone) {
 
 bool OI::GetOperatorButton(int button) {
   return operator_controller.GetRawButton(button);
+}
+
+void OI::SetDriverRumbleLeft(double value) {
+  driver_controller.SetRumble(frc::GenericHID::RumbleType::kLeftRumble, value);
+}
+
+void OI::SetDriverRumbleRight(double value) {
+  driver_controller.SetRumble(frc::GenericHID::RumbleType::kRightRumble, value);
+}
+
+void OI::SetOperatorRumbleLeft(double value) {
+  operator_controller.SetRumble(frc::GenericHID::RumbleType::kLeftRumble, value);
+}
+
+void OI::SetOperatorRumbleRight(double value) {
+  operator_controller.SetRumble(frc::GenericHID::RumbleType::kRightRumble, value);
 }

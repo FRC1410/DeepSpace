@@ -26,10 +26,6 @@ class Robot : public frc::TimedRobot {
     ExampleCommand m_defaultAuto;
     MyAutoCommand m_myAuto;
     frc::SendableChooser<frc::Command*> m_chooser;
-    /*void RobotInit() {
-      CameraServer::GetInstance()->StartAutomaticCapture("cam0");
-    }*/
-
 
   public:
     static ExampleSubsystem m_subsystem;

@@ -31,4 +31,8 @@ class OI {
     bool GetDriverButton(int button);
 	  double GetOperatorAxis(int axis, double deadzone);
     bool GetOperatorButton(int button);
+    void SetDriverRumbleLeft(double value);
+    void SetDriverRumbleRight(double value);
+    void SetOperatorRumbleLeft(double value);
+    void SetOperatorRumbleRight(double value);
 };
