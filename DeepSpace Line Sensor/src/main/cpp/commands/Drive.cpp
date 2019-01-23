@@ -42,12 +42,6 @@ void Drive::Execute() {
   if (Robot::m_drivetrain.GetMiddleSensor() == true) {
     Robot::m_oi.SetDriverRumbleLeft(0.3);
     Robot::m_oi.SetDriverRumbleRight(0.3);
-  } else if (Robot::m_drivetrain.GetRightSensor() == true) {
-    Robot::m_oi.SetDriverRumbleLeft(0);
-    Robot::m_oi.SetDriverRumbleRight(0.3);
-  } else if (Robot::m_drivetrain.GetLeftSensor() == true) {
-    Robot::m_oi.SetDriverRumbleLeft(0.3);
-    Robot::m_oi.SetDriverRumbleRight(0);
   } else {
     Robot::m_oi.SetDriverRumbleLeft(0);
     Robot::m_oi.SetDriverRumbleRight(0);

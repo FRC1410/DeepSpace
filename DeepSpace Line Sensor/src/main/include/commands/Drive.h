@@ -4,6 +4,7 @@
 
 class Drive : public frc::Command {
   private:
+    double left_trigger_amount, right_trigger_amount;
     double left_stick_amount, right_stick_amount;
 
     bool invert_driving = false;

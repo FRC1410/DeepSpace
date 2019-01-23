@@ -10,8 +10,7 @@
 
 #include "RobotMap.h"
 #include "OI.h"
-#include "commands/ExampleCommand.h"
-#include "commands/MyAutoCommand.h"
+
 #include "subsystems/ExampleSubsystem.h"
 #include "subsystems/DriveTrain.h"
 #include "subsystems/HatchPickup.h"
@@ -20,13 +19,19 @@
 #include "subsystems/BallRoller.h"
 #include "subsystems/SparkMax.h"
 
+#include "commands/ExampleCommand.h"
+#include "commands/MyAutoCommand.h"
+#include "commands/AutoLineSensor.h"
+
 class Robot : public frc::TimedRobot {
   private:
     // Have it null by default so that if testing teleop it
     // doesn't have undefined behavior and potentially crash.
-    frc::Command* m_autonomousCommand = nullptr;
+    frc::Command* m_autonomous_command = nullptr;
     ExampleCommand m_defaultAuto;
     MyAutoCommand m_myAuto;
+    AutoLineSensor m_auto_line_sensor;
+
     frc::SendableChooser<frc::Command*> m_chooser;
 
   public:

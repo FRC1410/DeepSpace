@@ -24,7 +24,9 @@ constexpr int invert_driving_button = 8;      //Start
 
 //Hatch Pickup and Stick
 constexpr int hatch_pickup_rotator = 8;       //Talon
-constexpr int stick_port = 0;                 //Solenoid
+constexpr int hatch_stick_port_start = 0;     //Solenoid
+constexpr int hatch_stick_port_end = 1;       //Double Solenoid
+constexpr int hatch_stick_button = 7;         //Select
 
 //Ball Intake and Claw
 constexpr int ball_claw_left = 5;             //Talon

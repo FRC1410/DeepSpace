@@ -43,7 +43,11 @@ void Robot::RobotPeriodic() {}
  */
 void Robot::DisabledInit() {}
 
-void Robot::DisabledPeriodic() { frc::Scheduler::GetInstance()->Run(); }
+void Robot::DisabledPeriodic() { 
+  frc::Scheduler::GetInstance()->Run(); 
+  Robot::m_oi.SetDriverRumbleLeft(0);
+  Robot::m_oi.SetDriverRumbleRight(0);
+}
 
 /**
  * This autonomous (along with the chooser code above) shows how to select
@@ -60,15 +64,17 @@ void Robot::AutonomousInit() {
   // std::string autoSelected = frc::SmartDashboard::GetString(
   //     "Auto Selector", "Default");
   // if (autoSelected == "My Auto") {
-  //   m_autonomousCommand = &m_myAuto;
+  //   m_autonomous_command = &m_myAuto;
   // } else {
-  //   m_autonomousCommand = &m_defaultAuto;
+  //   m_autonomous_command = &m_defaultAuto;
   // }
 
-  //m_autonomousCommand = m_chooser.GetSelected();
+  //m_autonomous_command = m_chooser.GetSelected();
 
-  if (m_autonomousCommand != nullptr) {
-    m_autonomousCommand->Start();
+m_autonomous_command = &m_auto_line_sensor;
+
+  if (m_autonomous_command != nullptr) {
+    m_autonomous_command->Start();
   }
 }
 
@@ -79,9 +85,9 @@ void Robot::TeleopInit() {
   // teleop starts running. If you want the autonomous to
   // continue until interrupted by another command, remove
   // this line or comment it out.
-  if (m_autonomousCommand != nullptr) {
-    m_autonomousCommand->Cancel();
-    m_autonomousCommand = nullptr;
+  if (m_autonomous_command != nullptr) {
+    m_autonomous_command->Cancel();
+    m_autonomous_command = nullptr;
   }
 }
 

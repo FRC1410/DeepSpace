@@ -13,7 +13,9 @@ void HatchPickupRotate::Execute() {
   left_trigger_amount = Robot::m_oi.GetDriverAxis(left_trigger, 0);
   right_trigger_amount = Robot::m_oi.GetDriverAxis(right_trigger, 0);
 
-  Robot::m_ball_roller.RunIntake(right_trigger_amount - left_trigger_amount);
+  Robot::m_hatch_pickup.RotatePickup(right_trigger_amount - left_trigger_amount);
+
+  frc::SmartDashboard::PutNumber("Trigger amount", right_trigger_amount - left_trigger_amount);
 }
 
 // Make this return true when this Command no longer needs to run execute()

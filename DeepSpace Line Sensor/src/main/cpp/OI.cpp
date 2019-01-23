@@ -10,7 +10,9 @@
 
 #include "OI.h"
 
-OI::OI() {}
+OI::OI() {
+	
+}
 
 double OI::ApplyDeadzone(int controller, int axis, double axis_value, double deadzone) {
   if (axis == 1 || axis == 5) {
