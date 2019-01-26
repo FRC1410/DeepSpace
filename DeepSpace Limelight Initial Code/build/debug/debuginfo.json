@@ -1,5 +1,12 @@
 [
   {
+    "artifact": "frcCpp (in project DeepSpace Limelight Initial Code)",
+    "target": "roborio",
+    "component": "frcUserProgram",
+    "debugfile": "frcCpp_roborio.debugconfig",
+    "language": "cpp"
+  },
+  {
     "artifact": "frcCpp (in project DeepSpace Line Sensor)",
     "target": "roborio",
     "component": "frcUserProgram",

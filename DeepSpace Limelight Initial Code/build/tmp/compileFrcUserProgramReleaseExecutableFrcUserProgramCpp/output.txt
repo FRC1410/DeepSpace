@@ -1,40 +1,4 @@
-See file:///C:/Users/randy/Documents/Visual%20Studio%20Code/DeepSpace%20Line%20Sensor/build/tmp/compileFrcUserProgramReleaseExecutableFrcUserProgramCpp/output.txt for all output for compileFrcUserProgramReleaseExecutableFrcUserProgramCpp.
-compiling Alerts.cpp successful.
+See file:///C:/Users/randy/Documents/Visual%20Studio%20Code/DeepSpace%20Limelight%20Initial%20Code/build/tmp/compileFrcUserProgramReleaseExecutableFrcUserProgramCpp/output.txt for all output for compileFrcUserProgramReleaseExecutableFrcUserProgramCpp.
+compiling AutoLimelightTargeting.cpp successful.
 
-compiling ExampleCommand.cpp successful.
-
-compiling AutoLineSensor.cpp successful.
-
-compiling BallRollerRun.cpp successful.
-
-compiling Drive.cpp successful.
-
-compiling ExampleSubsystem.cpp successful.
-
-compiling OI.cpp successful.
-
-compiling HatchStickActuate.cpp successful.
-
-compiling MyAutoCommand.cpp successful.
-
-compiling SparkMaxRun.cpp successful.
-
-compiling BallRoller.cpp successful.
-
-compiling HatchPickup.cpp successful.
-
-compiling BallClaw.cpp successful.
-
-compiling BallClawWheelsRun.cpp successful.
-
-compiling DriveTrain.cpp successful.
-
-compiling HatchStick.cpp successful.
-
-compiling SparkMax.cpp successful.
-
-compiling Robot.cpp successful.
-
-compiling HatchPickupRotate.cpp successful.
-
-Finished compileFrcUserProgramReleaseExecutableFrcUserProgramCpp, see full log file:///C:/Users/randy/Documents/Visual%20Studio%20Code/DeepSpace%20Line%20Sensor/build/tmp/compileFrcUserProgramReleaseExecutableFrcUserProgramCpp/output.txt.
+Finished compileFrcUserProgramReleaseExecutableFrcUserProgramCpp, see full log file:///C:/Users/randy/Documents/Visual%20Studio%20Code/DeepSpace%20Limelight%20Initial%20Code/build/tmp/compileFrcUserProgramReleaseExecutableFrcUserProgramCpp/output.txt.
