@@ -5,21 +5,26 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/SparkMax.h"
-#include "commands/SparkMaxRun.h"
+#include "subsystems/Elevator.h"
+#include "commands/ElevatorRun.h"
 
-SparkMax::SparkMax() : Subsystem("ExampleSubsystem") {}
+Elevator::Elevator() : Subsystem("ExampleSubsystem") {}
 
-void SparkMax::InitDefaultCommand() {
-  SetDefaultCommand(new SparkMaxRun());
+void Elevator::InitDefaultCommand() {
+  SetDefaultCommand(new ElevatorRun());
 }
 
-void SparkMax::RunNEO(double speed) {
-  m_spark_test.Set(speed);
+void Elevator::RunElevator(double speed) {
+  m_elevator_left.Set(speed);
+  m_elevator_right.Set(-speed);
 }
 
-double SparkMax::GetRevolutions() {
-  m_encoder.GetPosition();
+double Elevator::GetLeftRevolutions() {
+  return m_left_encoder.GetPosition();
+}
+
+double Elevator::GetRightRevolutions() {
+  return m_right_encoder.GetPosition();
 }
 
 // Put methods for controlling this subsystem

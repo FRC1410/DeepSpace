@@ -16,13 +16,14 @@ HatchPickup Robot::m_hatch_pickup;
 HatchStick Robot::m_hatch_stick;
 BallRoller Robot::m_ball_roller;
 BallClaw Robot::m_ball_claw;
-SparkMax Robot::m_spark_max;
+Elevator Robot::m_elevator;
 Limelight Robot::m_limelight;
 
 void Robot::RobotInit() {
   m_chooser.SetDefaultOption("Default Auto", &m_defaultAuto);
   m_chooser.AddOption("My Auto", &m_myAuto);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
+  Robot::m_limelight.TurnOffLights();
 }
 
 /*
@@ -61,17 +62,14 @@ void Robot::DisabledPeriodic() {
  * the if-else structure below with additional strings & commands.
  */
 void Robot::AutonomousInit() {
-  // std::string autoSelected = frc::SmartDashboard::GetString(
-  //     "Auto Selector", "Default");
-  // if (autoSelected == "My Auto") {
-  //   m_autonomous_command = &m_myAuto;
-  // } else {
-  //   m_autonomous_command = &m_defaultAuto;
-  // }
+  //std::string auto_selected = frc::SmartDashboard::GetString("Auto Selector", "Default");
+  //if (auto_selected == "Limelight") {
+    m_autonomous_command = &m_auto_limelight_targeting;
+  //} else {
+  //  m_autonomous_command = &m_auto_line_sensor;
+  //}
 
   //m_autonomous_command = m_chooser.GetSelected();
-
-m_autonomous_command = &m_auto_line_sensor;
 
   if (m_autonomous_command != nullptr) {
     m_autonomous_command->Start();

@@ -17,12 +17,13 @@
 #include "subsystems/HatchStick.h"
 #include "subsystems/BallClaw.h"
 #include "subsystems/BallRoller.h"
-#include "subsystems/SparkMax.h"
+#include "subsystems/Elevator.h"
 #include "subsystems/Limelight.h"
 
 #include "commands/ExampleCommand.h"
 #include "commands/MyAutoCommand.h"
 #include "commands/AutoLineSensor.h"
+#include "commands/AutoLimelightTargeting.h"
 
 class Robot : public frc::TimedRobot {
   private:
@@ -32,6 +33,7 @@ class Robot : public frc::TimedRobot {
     ExampleCommand m_defaultAuto;
     MyAutoCommand m_myAuto;
     AutoLineSensor m_auto_line_sensor;
+    AutoLimelightTargeting m_auto_limelight_targeting;
 
     frc::SendableChooser<frc::Command*> m_chooser;
 
@@ -43,7 +45,7 @@ class Robot : public frc::TimedRobot {
     static HatchStick m_hatch_stick;
     static BallRoller m_ball_roller;
     static BallClaw m_ball_claw;
-    static SparkMax m_spark_max;
+    static Elevator m_elevator;
     static Limelight m_limelight;
 
     void RobotInit() override;

@@ -16,9 +16,12 @@ constexpr int y_axis_right = 5;
 
 //DriveTrain
 constexpr int left_front_drive = 1;           //Talon
-constexpr int left_back_drive = 2;            //Talon
-constexpr int right_front_drive = 3;          //Talon
-constexpr int right_back_drive = 4;           //Talon
+constexpr int left_middle_drive = 2;          //Talon
+constexpr int left_back_drive = 3;            //Talon
+constexpr int right_front_drive = 4;          //Talon
+constexpr int right_middle_drive = 5;         //Talon
+constexpr int right_back_drive = 6;           //Talon
+
 
 constexpr int invert_driving_button = 8;      //Start
 
@@ -46,5 +49,6 @@ constexpr int ball_claw_outtake_button = 2;   //B
 constexpr int ball_roller_intake_button = 3;  //X
 constexpr int ball_roller_outtake_button = 4; //Y
 
-//Spark Maxes
-constexpr int spark_max_test = 9;             //Spark Max
+//Elevator
+constexpr int elevator_left_motor = 9;        //Spark Max
+constexpr int elevator_right_motor = 10;      //Spark Max

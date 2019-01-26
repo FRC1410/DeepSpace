@@ -2,11 +2,11 @@
 
 #include <frc/commands/Command.h>
 
-class SparkMaxRun : public frc::Command {
+class ElevatorRun : public frc::Command {
   private:
-    double stick_input;
+    double operator_left_stick_input;
   public:
-    SparkMaxRun();
+    ElevatorRun();
     void Initialize() override;
     void Execute() override;
     bool IsFinished() override;

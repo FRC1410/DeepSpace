@@ -86,7 +86,12 @@ void Drive::Execute() {
     Robot::m_oi.SetOperatorRumbleRight(0);
   }
 
+  frc::SmartDashboard::PutNumber("Target Found", Robot::m_limelight.GetTarget());
   frc::SmartDashboard::PutNumber("Target X", Robot::m_limelight.GetTargetX());
+  frc::SmartDashboard::PutNumber("Target Y", Robot::m_limelight.GetTargetY());
+  frc::SmartDashboard::PutNumber("Target Area", Robot::m_limelight.GetTargetArea());
+  frc::SmartDashboard::PutNumber("Target Skewness", Robot::m_limelight.GetTargetSkew());
+  frc::SmartDashboard::PutNumber("Latency", Robot::m_limelight.GetCameraLatency());
 
   if (Robot::m_oi.GetOperatorButton(1)) {
     Robot::m_limelight.TurnOffLights();
