@@ -26,6 +26,7 @@
 #include "commands/MyAutoCommand.h"
 #include "commands/AutoLineSensor.h"
 #include "commands/AutoLimelightTargeting.h"
+#include "commands/AutoElevatorAccelerate.h"
 
 class Robot : public frc::TimedRobot {
   private:
@@ -36,10 +37,13 @@ class Robot : public frc::TimedRobot {
     MyAutoCommand m_myAuto;
     AutoLineSensor m_auto_line_sensor;
     AutoLimelightTargeting m_auto_limelight_targeting;
+    AutoElevatorAccelerate m_auto_elevator_accelerate;
 
     frc::SendableChooser<frc::Command*> m_chooser;
 
   public:
+    bool auto_running = false;
+
     static OI m_oi;
     static ExampleSubsystem m_subsystem;
     static MacroSuperstructure m_macro_superstructure;

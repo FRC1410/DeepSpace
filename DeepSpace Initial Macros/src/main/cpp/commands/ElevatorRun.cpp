@@ -10,15 +10,18 @@ void ElevatorRun::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void ElevatorRun::Execute() {
-  elevator_input = -Robot::m_oi.GetOperatorAxis(elevator_axis, default_operator_deadzone);
-  if (abs(elevator_input) > 0) {
-    Robot::m_elevator.RunElevator(elevator_input);
+  if (Robot::m_macro_superstructure.GetAuto() == false) {
+    elevator_input = -Robot::m_oi.GetOperatorAxis(elevator_axis, default_operator_deadzone);
+    if (abs(elevator_input) > 0) {
+      Robot::m_elevator.RunElevator(elevator_input);
+    } else {
+      Robot::m_elevator.RunElevator(0);
+    }
+
+    frc::SmartDashboard::PutNumber("Elevator Left Revolutions", Robot::m_elevator.GetLeftRevolutions());
+    frc::SmartDashboard::PutNumber("Elevator Right Revolutions", Robot::m_elevator.GetRightRevolutions());
+    frc::SmartDashboard::PutNumber("Elevator Input", elevator_input);
   }
-
-  frc::SmartDashboard::PutNumber("Elevator Left Revolutions", Robot::m_elevator.GetLeftRevolutions());
-  frc::SmartDashboard::PutNumber("Elevator Right Revolutions", Robot::m_elevator.GetRightRevolutions());
-  frc::SmartDashboard::PutNumber("Elevator Input", elevator_input);
-
   frc::SmartDashboard::PutNumber("Left NEO Temperature", Robot::m_elevator.GetLeftTemperature());
   frc::SmartDashboard::PutNumber("Right NEO Temperature", Robot::m_elevator.GetRightTemperature());
 }

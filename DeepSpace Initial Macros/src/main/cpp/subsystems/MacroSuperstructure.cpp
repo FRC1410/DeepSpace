@@ -37,3 +37,11 @@ int MacroSuperstructure::GetProfile() {
 void MacroSuperstructure::RunLEDs(double value) {
   LEDs.Set(value);  
 }
+
+void MacroSuperstructure::SetAuto(bool auto_data) {
+  running_auto = auto_data;
+}
+
+bool MacroSuperstructure::GetAuto() {
+  return running_auto;
+}

@@ -8,6 +8,8 @@
 #include "Robot.h"
 #include <frc/commands/Scheduler.h>
 #include <frc/smartdashboard/SmartDashboard.h>
+#include <cameraserver/CameraServer.h>
+#include <wpi/raw_ostream.h>
 
 OI Robot::m_oi;
 ExampleSubsystem Robot::m_subsystem;
@@ -22,10 +24,13 @@ Climber Robot::m_climber;
 Limelight Robot::m_limelight;
 
 void Robot::RobotInit() {
-  m_chooser.SetDefaultOption("Default Auto", &m_defaultAuto);
-  m_chooser.AddOption("My Auto", &m_myAuto);
-  frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
+  m_chooser.SetDefaultOption("Line Sensor", &m_auto_line_sensor);
+  m_chooser.AddOption("Limelight", &m_auto_limelight_targeting);
+  m_chooser.AddOption("Elevator", &m_auto_elevator_accelerate);
+  frc::SmartDashboard::PutData("Auto", &m_chooser);
   Robot::m_limelight.TurnOffLights();
+  frc::CameraServer::GetInstance()->StartAutomaticCapture();
+  //frc::SmartDashboard::PutNumber("Elevator Height", 0);
 }
 
 /*
@@ -64,21 +69,26 @@ void Robot::DisabledPeriodic() {
  * the if-else structure below with additional strings & commands.
  */
 void Robot::AutonomousInit() {
-  //std::string auto_selected = frc::SmartDashboard::GetString("Auto Selector", "Default");
-  //if (auto_selected == "Limelight") {
+  std::string auto_selected = frc::SmartDashboard::GetString("Auto", "Default");
+  if (auto_selected == "Limelight") {
     m_autonomous_command = &m_auto_limelight_targeting;
-  //} else {
-  //  m_autonomous_command = &m_auto_line_sensor;
-  //}
+  } else if (auto_selected == "Elevator") {
+    m_autonomous_command = &m_auto_elevator_accelerate;
+  } else {
+    m_autonomous_command = &m_auto_line_sensor;
+  }
 
-  //m_autonomous_command = m_chooser.GetSelected();
+  m_autonomous_command = m_chooser.GetSelected();
 
   if (m_autonomous_command != nullptr) {
     m_autonomous_command->Start();
   }
 }
 
-void Robot::AutonomousPeriodic() { frc::Scheduler::GetInstance()->Run(); }
+void Robot::AutonomousPeriodic() { 
+  Robot::m_macro_superstructure.SetAuto(true);
+  frc::Scheduler::GetInstance()->Run(); 
+}
 
 void Robot::TeleopInit() {
   // This makes sure that the autonomous stops running when
@@ -92,6 +102,7 @@ void Robot::TeleopInit() {
 }
 
 void Robot::TeleopPeriodic() {
+  Robot::m_macro_superstructure.SetAuto(false);
   frc::Scheduler::GetInstance()->Run();
 }
 

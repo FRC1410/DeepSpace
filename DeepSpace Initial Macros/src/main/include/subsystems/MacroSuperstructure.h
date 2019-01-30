@@ -12,6 +12,8 @@ class MacroSuperstructure : public frc::Subsystem {
 
     frc::Spark LEDs{LED_controller_port};
 
+    bool running_auto;
+
   public:
     MacroSuperstructure();
     void InitDefaultCommand() override;
@@ -19,4 +21,6 @@ class MacroSuperstructure : public frc::Subsystem {
     int GetProfile();
     bool GetReset();
     void RunLEDs(double value);
+    void SetAuto(bool auto_input);
+    bool GetAuto();
 };

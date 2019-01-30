@@ -18,7 +18,7 @@ void DriveTrain::ResetNavX() {
 }
 
 double DriveTrain::GetAngle() {
-  return NavX->GetRoll();
+  return NavX->GetAngle();
 }
 
 bool DriveTrain::GetLeftSensor() {

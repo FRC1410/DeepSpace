@@ -8,16 +8,16 @@ void Elevator::InitDefaultCommand() {
 }
 
 void Elevator::RunElevator(double speed) {
-  m_elevator_left.Set(speed);
-  m_elevator_right.Set(-speed);
+  m_elevator_left.Set(-speed);
+  m_elevator_right.Set(speed);
 }
 
 double Elevator::GetLeftRevolutions() {
-  return m_left_encoder.GetPosition();
+  return -m_left_encoder.GetPosition();
 }
 
 double Elevator::GetRightRevolutions() {
-  return -m_right_encoder.GetPosition();
+  return m_right_encoder.GetPosition();
 }
 
 double Elevator::GetAverageRevolutions() {

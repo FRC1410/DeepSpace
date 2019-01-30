@@ -61,6 +61,9 @@ constexpr int elevator_mid_low_position = 3;      //X
 constexpr int elevator_mid_position = 2;          //B
 constexpr int elevator_high_position = 4;         //Y
 
+constexpr int elevator_max_height = 78;
+//constexpr int elevator_max_revolutions = 
+
 //Climber
 constexpr int climber_front_port_start = 4;       //Double Solenoid
 constexpr int climber_front_port_end = 5;         //Double Solenoid

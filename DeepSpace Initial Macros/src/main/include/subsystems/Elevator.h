@@ -22,4 +22,6 @@ class Elevator : public frc::Subsystem {
     double GetAverageRevolutions();
     double GetLeftTemperature();
     double GetRightTemperature();
+    void SetAuto(bool auto_input);
+    bool GetAuto();
 };
