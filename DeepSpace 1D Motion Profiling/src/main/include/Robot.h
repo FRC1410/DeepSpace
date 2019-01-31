@@ -42,8 +42,6 @@ class Robot : public frc::TimedRobot {
     frc::SendableChooser<frc::Command*> m_chooser;
 
   public:
-    bool auto_running = false;
-
     static OI m_oi;
     static ExampleSubsystem m_subsystem;
     static MacroSuperstructure m_macro_superstructure;

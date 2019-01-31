@@ -8,25 +8,25 @@ void AutoLineSensor::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void AutoLineSensor::Execute() {
-  if (Robot::m_drivetrain.GetMiddleSensor() == true) {
-    if (Robot::m_drivetrain.GetLeftSensor() == true) {
-      if (Robot::m_drivetrain.GetRightSensor() == true) {
+  if (Robot::m_drivetrain.GetMiddleSensor() == !false) {
+    if (Robot::m_drivetrain.GetLeftSensor() == !false) {
+      if (Robot::m_drivetrain.GetRightSensor() == !false) {
         Robot::m_drivetrain.TankDrive(0.5, 0.5);
       } else {
         Robot::m_drivetrain.TankDrive(0.4, 0.5);
       }
-    } else if (Robot::m_drivetrain.GetRightSensor() == true) {
+    } else if (Robot::m_drivetrain.GetRightSensor() == !false) {
       Robot::m_drivetrain.TankDrive(0.5, 0.4);
     } else {
       Robot::m_drivetrain.TankDrive(0.5, 0.5);
     }
-  } else if (Robot::m_drivetrain.GetLeftSensor() == true) {
-    if (Robot::m_drivetrain.GetRightSensor() == true) {
+  } else if (Robot::m_drivetrain.GetLeftSensor() == !false) {
+    if (Robot::m_drivetrain.GetRightSensor() == !false) {
       Robot::m_drivetrain.TankDrive(0.5, 0.5);
     } else {
       Robot::m_drivetrain.TankDrive(0.3, 0.5);
     }
-  } else if (Robot::m_drivetrain.GetRightSensor() == true) {
+  } else if (Robot::m_drivetrain.GetRightSensor() == !false) {
     Robot::m_drivetrain.TankDrive(0.5, 0.3);
   } else {
     Robot::m_drivetrain.TankDrive(0, 0);

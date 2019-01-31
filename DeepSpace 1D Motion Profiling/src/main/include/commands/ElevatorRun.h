@@ -13,4 +13,7 @@ class ElevatorRun : public frc::Command {
     bool IsFinished() override;
     void End() override;
     void Interrupted() override;
+
+    double starting_revs_left;
+    double starting_revs_right;
 };

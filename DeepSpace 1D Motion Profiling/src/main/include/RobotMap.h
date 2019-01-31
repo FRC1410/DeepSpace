@@ -61,8 +61,14 @@ constexpr int elevator_mid_low_position = 3;      //X
 constexpr int elevator_mid_position = 2;          //B
 constexpr int elevator_high_position = 4;         //Y
 
-constexpr int elevator_max_height = 78;
-//constexpr int elevator_max_revolutions = 
+constexpr double elevator_max_height = 83.5;
+constexpr double elevator_min_height = 9;
+constexpr double elevator_max_revolutions = 43;
+constexpr double elevator_accleration_time = 0.5;
+constexpr double elevator_weak_gravity = 0.03;
+constexpr double elevator_strong_gravity = 0.06;
+
+constexpr double safety_multiplier = 0.3;
 
 //Climber
 constexpr int climber_front_port_start = 4;       //Double Solenoid

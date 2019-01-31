@@ -8,8 +8,13 @@ void Elevator::InitDefaultCommand() {
 }
 
 void Elevator::RunElevator(double speed) {
-  m_elevator_left.Set(-speed);
-  m_elevator_right.Set(speed);
+  if (abs(speed) < 1) {
+    m_elevator_left.Set(-safety_multiplier * speed);
+    m_elevator_right.Set(safety_multiplier * speed);
+  } else {
+    m_elevator_left.Set(-safety_multiplier);
+    m_elevator_right.Set(safety_multiplier);
+  }
 }
 
 double Elevator::GetLeftRevolutions() {
@@ -28,6 +33,10 @@ double Elevator::GetAverageRevolutions() {
   } else {
     return (GetLeftRevolutions() + GetRightRevolutions()) / 2;
   }
+}
+
+double Elevator::GetHeight() {
+  return (GetAverageRevolutions() / elevator_max_revolutions) * (elevator_max_height - elevator_min_height) + elevator_min_height;
 }
 
 double Elevator::GetLeftTemperature() {

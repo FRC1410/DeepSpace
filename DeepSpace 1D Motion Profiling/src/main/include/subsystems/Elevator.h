@@ -17,9 +17,11 @@ class Elevator : public frc::Subsystem {
     Elevator();
     void InitDefaultCommand() override;
     void RunElevator(double speed);
+    void ResetEncoders();
     double GetLeftRevolutions();
     double GetRightRevolutions();
     double GetAverageRevolutions();
+    double GetHeight();
     double GetLeftTemperature();
     double GetRightTemperature();
     void SetAuto(bool auto_input);

@@ -6,7 +6,10 @@ ElevatorRun::ElevatorRun() {
 }
 
 // Called just before this Command runs the first time
-void ElevatorRun::Initialize() {}
+void ElevatorRun::Initialize() {
+  starting_revs_left = Robot::m_elevator.GetLeftRevolutions();
+  starting_revs_right = Robot::m_elevator.GetRightRevolutions();
+}
 
 // Called repeatedly when this Command is scheduled to run
 void ElevatorRun::Execute() {
@@ -18,8 +21,8 @@ void ElevatorRun::Execute() {
       Robot::m_elevator.RunElevator(0);
     }
 
-    frc::SmartDashboard::PutNumber("Elevator Left Revolutions", Robot::m_elevator.GetLeftRevolutions());
-    frc::SmartDashboard::PutNumber("Elevator Right Revolutions", Robot::m_elevator.GetRightRevolutions());
+    frc::SmartDashboard::PutNumber("Elevator Left Revolutions", Robot::m_elevator.GetLeftRevolutions() - starting_revs_left);
+    frc::SmartDashboard::PutNumber("Elevator Right Revolutions", Robot::m_elevator.GetRightRevolutions() - starting_revs_right);
     frc::SmartDashboard::PutNumber("Elevator Input", elevator_input);
   }
   frc::SmartDashboard::PutNumber("Left NEO Temperature", Robot::m_elevator.GetLeftTemperature());

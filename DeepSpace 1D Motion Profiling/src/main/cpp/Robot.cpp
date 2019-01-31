@@ -30,7 +30,7 @@ void Robot::RobotInit() {
   frc::SmartDashboard::PutData("Auto", &m_chooser);
   Robot::m_limelight.TurnOffLights();
   frc::CameraServer::GetInstance()->StartAutomaticCapture();
-  //frc::SmartDashboard::PutNumber("Elevator Height", 0);
+  frc::SmartDashboard::PutNumber("Elevator Height", 0);
 }
 
 /*
@@ -69,6 +69,11 @@ void Robot::DisabledPeriodic() {
  * the if-else structure below with additional strings & commands.
  */
 void Robot::AutonomousInit() {
+  if (m_autonomous_command != nullptr) {
+    m_autonomous_command->Cancel();
+    m_autonomous_command = nullptr;
+  }
+
   std::string auto_selected = frc::SmartDashboard::GetString("Auto", "Default");
   if (auto_selected == "Limelight") {
     m_autonomous_command = &m_auto_limelight_targeting;
