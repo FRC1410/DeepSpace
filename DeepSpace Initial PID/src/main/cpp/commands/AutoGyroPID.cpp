@@ -7,19 +7,19 @@ AutoGyroPID::AutoGyroPID() {}
 void AutoGyroPID::Initialize() {
   timer.Start();
   timer.Reset();
+  Robot::m_drivetrain.ResetNavX();
+  Robot::m_drivetrain.ResetGyroIntegral();
 }
 
 // Called repeatedly when this Command is scheduled to run
 void AutoGyroPID::Execute() {
+  frc::SmartDashboard::PutNumber("NavX Value", Robot::m_drivetrain.GetAngle());
+  PID = Robot::m_drivetrain.GetGyroPID(previous_angle, 0, timer.Get() - previous_timer);
   if (timer.Get() < 0.5) {
-    Robot::m_drivetrain.TankDrive(timer.Get(), timer.Get());
-    Robot::m_drivetrain.ResetNavX();
-    Robot::m_drivetrain.ResetGyroIntegral();
+    Robot::m_drivetrain.Accelerate(1 + PID, 1 - PID);
   } else {
-    frc::SmartDashboard::PutNumber("NavX Value", Robot::m_drivetrain.GetAngle());
-    PID = Robot::m_drivetrain.GetGyroPID(Robot::m_drivetrain.GetAngle() - previous_angle, 0, timer.Get() - previous_timer);
     frc::SmartDashboard::PutNumber("PID", PID);
-    Robot::m_drivetrain.TankDrive(0.5 + PID, 0.5 - PID);
+    Robot::m_drivetrain.SetSpeed(1 + PID, 1 - PID);
   }
   previous_timer = timer.Get();
   previous_angle = Robot::m_drivetrain.GetAngle();

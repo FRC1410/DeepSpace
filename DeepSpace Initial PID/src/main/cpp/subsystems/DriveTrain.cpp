@@ -1,5 +1,6 @@
 #include "subsystems/DriveTrain.h"
 #include "commands/Drive.h"
+#include "Robot.h"
 
 DriveTrain::DriveTrain() : Subsystem("DriveTrain") {}
 
@@ -7,10 +8,59 @@ void DriveTrain::InitDefaultCommand() {
   SetDefaultCommand(new Drive());
 }
 
-void DriveTrain::TankDrive(double left, double right) {
-  m_front.TankDrive(0.9 * left, right);
-  m_middle.TankDrive(0.9 * left, right);
-  m_back.TankDrive(0.9 * left, right);
+void DriveTrain::SetSpeed(double left, double right) {
+  if (abs(left) > 1) {
+    current_left_vel = abs(left)/left;
+  } else {
+    current_left_vel = left;
+  }
+
+  if (abs(right) > 1) {
+    current_right_vel = abs(right)/right;
+  } else {
+    current_right_vel = right;
+  }
+
+  m_front.TankDrive(current_left_vel, current_right_vel);
+  m_middle.TankDrive(current_left_vel, current_right_vel);
+  m_back.TankDrive(current_left_vel, current_right_vel);
+}
+
+void DriveTrain::Accelerate(double left, double right) {
+  left_vel_difference = left - current_left_vel;            //Sets difference for both of the sides of the drivetrain
+  right_vel_difference = right - current_right_vel;
+  if (abs(left) < 0.3) {
+    left_vel_difference = 0;                                //Deadzone
+  }
+  if (abs(right) < 0.3) {
+    right_vel_difference = 0;
+  }
+
+  if(abs(left_vel_difference) <= 1 / (50 * drivetrain_acceleration_time) && abs(right_vel_difference) <= 1 / (50 * drivetrain_acceleration_time)) {           //If its close enough, it just sets it.
+    SetSpeed(left, right);
+  } else if(abs(left_vel_difference) <= 1 / (50 * drivetrain_acceleration_time) && abs(right_vel_difference) > 1 / (50 * drivetrain_acceleration_time)) {   //All this shit is if it doesn't
+    if(right_vel_difference > 0) {
+      SetSpeed(left, current_right_vel + (1 / (50 * drivetrain_acceleration_time)));
+    } else {
+      SetSpeed(left, current_right_vel - (1 / (50 * drivetrain_acceleration_time)));
+    }
+  } else if(abs(left_vel_difference) > 1 / (50 * drivetrain_acceleration_time) && abs(right_vel_difference) <= 1 / (50 * drivetrain_acceleration_time)) {
+    if(left_vel_difference > 0) {
+      SetSpeed(current_left_vel + (1 / (50 * drivetrain_acceleration_time)), right);
+    } else {
+      SetSpeed(current_left_vel - (1 / (50 * drivetrain_acceleration_time)), right);
+    }
+  } else {
+    if(left_vel_difference > 0 && right_vel_difference > 0) {
+      SetSpeed(current_left_vel + (1 / (50 * drivetrain_acceleration_time)), current_right_vel + (1 / (50 * drivetrain_acceleration_time)));
+    } else if(left_vel_difference > 0 && right_vel_difference < 0) {
+      SetSpeed(current_left_vel + (1 / (50 * drivetrain_acceleration_time)), current_right_vel - (1 / (50 * drivetrain_acceleration_time)));
+    } else if(left_vel_difference < 0 && right_vel_difference > 0) {
+      SetSpeed(current_left_vel - (1 / (50 * drivetrain_acceleration_time)), current_right_vel + (1 / (50 * drivetrain_acceleration_time)));
+    } else {
+      SetSpeed(current_left_vel - (1 / (50 * drivetrain_acceleration_time)), current_right_vel - (1 / (50 * drivetrain_acceleration_time)));
+    }
+  }
 }
 
 void DriveTrain::ResetEncoders() {
@@ -21,17 +71,17 @@ void DriveTrain::ResetEncoders() {
 }
 
 double DriveTrain::GetDistance() {
-	average_distance = ((m_left_middle.GetSensorCollection().GetQuadraturePosition() +  m_right_middle.GetSensorCollection().GetQuadraturePosition()) / 2) * (18.849556 / 4096);
+	average_distance = ((m_left_middle.GetSensorCollection().GetQuadraturePosition() +  m_right_middle.GetSensorCollection().GetQuadraturePosition()) / 2) * (6 * pi / 4096);
 	SmartDashboard::PutNumber("Drivetrain Distance", average_distance);
 	return average_distance;
 }
 
-double DriveTrain::GetRightDistance(){
+double DriveTrain::GetRightDistance() {
   return m_right_middle.GetSensorCollection().GetQuadraturePosition();
 }
 
-double DriveTrain::GetLeftDistance(){
-  return  m_left_middle.GetSensorCollection().GetQuadraturePosition();
+double DriveTrain::GetLeftDistance() {
+  return m_left_middle.GetSensorCollection().GetQuadraturePosition();
 }
 
 void DriveTrain::ResetNavX() {

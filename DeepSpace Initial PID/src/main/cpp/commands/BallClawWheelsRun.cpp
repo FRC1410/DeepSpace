@@ -11,11 +11,11 @@ void BallClawWheelsRun::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void BallClawWheelsRun::Execute() {
   if (Robot::m_macro_superstructure.GetProfile() == 1) {
-    if (Robot::m_elevator.GetAverageRevolutions() > 20) {
+    if (Robot::m_elevator.GetHeight() > 20) {
       Robot::m_ball_claw.RunLeftWheels(-Robot::m_oi.GetOperatorAxis(ball_claw_left_outtake_axis, 0));
       Robot::m_ball_claw.RunRightWheels(-Robot::m_oi.GetOperatorAxis(ball_claw_right_outtake_axis, 0));
     } else {
-      if (Robot::m_ball_claw.GetLimitSwitch() == true)  {
+      if (Robot::m_ball_claw.GetLimitSwitch() == false)  {
         Robot::m_ball_claw.RunWheels(Robot::m_oi.GetOperatorAxis(ball_both_intakes_axis, 0) - Robot::m_oi.GetOperatorAxis(ball_both_outtakes_axis, 0));
       } else {
         Robot::m_ball_claw.RunWheels(-Robot::m_oi.GetOperatorAxis(ball_both_outtakes_axis, 0));

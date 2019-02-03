@@ -38,7 +38,8 @@ class DriveTrain : public frc::Subsystem {
   public:
     DriveTrain();
     void InitDefaultCommand() override;
-    void TankDrive(double left, double right);
+    void SetSpeed(double left, double right);
+    void Accelerate(double left, double right);
     void ResetEncoders();
     double GetDistance();
     void ResetNavX();
@@ -52,4 +53,10 @@ class DriveTrain : public frc::Subsystem {
     void ResetGyroIntegral();
     double GetRightDistance();
     double GetLeftDistance();
+
+    double current_left_vel;
+    double current_right_vel;
+
+    double left_vel_difference;
+    double right_vel_difference;
 };

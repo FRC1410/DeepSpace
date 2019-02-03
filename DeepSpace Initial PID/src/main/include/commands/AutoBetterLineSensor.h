@@ -1,6 +1,7 @@
 #pragma once
 
 #include <frc/commands/Command.h>
+#include <frc/Timer.h>
 
 class AutoBetterLineSensor : public frc::Command {
  public:
@@ -10,4 +11,7 @@ class AutoBetterLineSensor : public frc::Command {
   bool IsFinished() override;
   void End() override;
   void Interrupted() override;
+
+ private:
+  frc::Timer timer;
 };

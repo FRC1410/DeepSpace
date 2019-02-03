@@ -10,11 +10,24 @@ void Elevator::InitDefaultCommand() {
 
 void Elevator::RunElevator(double speed) {
   if (abs(speed) < 1) {
-    m_elevator_left.Set(-safety_multiplier * speed);
-    m_elevator_right.Set(safety_multiplier * speed);
+    m_elevator_left.Set(-speed);
+    m_elevator_right.Set(speed);
   } else {
-    m_elevator_left.Set(-safety_multiplier);
-    m_elevator_right.Set(safety_multiplier);
+    m_elevator_left.Set(-abs(speed)/speed);
+    m_elevator_right.Set(abs(speed)/speed);
+  }
+}
+
+void Elevator::Accelerate(double speed) {
+  vel_difference = speed - current_vel;
+  if(abs(vel_difference) <= 1 / (50 * elevator_accleration_time)) {
+    RunElevator(speed);
+  } else {
+    if(vel_difference > 0) {
+      RunElevator(speed + (1 / (50 * elevator_accleration_time)));
+    } else {
+      RunElevator(speed - (1 / (50 * elevator_accleration_time)));
+    }
   }
 }
 

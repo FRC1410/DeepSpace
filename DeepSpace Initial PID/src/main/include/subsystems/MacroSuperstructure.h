@@ -15,7 +15,7 @@ class MacroSuperstructure : public frc::Subsystem {
 
     bool running_auto;
 
-    //Compressor * compress = new Compressor(0);
+    frc::Compressor compressor;
 
   public:
     MacroSuperstructure();

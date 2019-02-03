@@ -11,25 +11,25 @@ void AutoLineSensor::Execute() {
   if (Robot::m_drivetrain.GetMiddleSensor() == true) {
     if (Robot::m_drivetrain.GetLeftSensor() == true) {
       if (Robot::m_drivetrain.GetRightSensor() == true) {
-        Robot::m_drivetrain.TankDrive(0.5, 0.5);
+        Robot::m_drivetrain.SetSpeed(-0.5, -0.5);
       } else {
-        Robot::m_drivetrain.TankDrive(0.4, 0.5);
+        Robot::m_drivetrain.SetSpeed(-0.4, -0.5);
       }
     } else if (Robot::m_drivetrain.GetRightSensor() == true) {
-      Robot::m_drivetrain.TankDrive(0.5, 0.4);
+      Robot::m_drivetrain.SetSpeed(-0.5, -0.4);
     } else {
-      Robot::m_drivetrain.TankDrive(0.5, 0.5);
+      Robot::m_drivetrain.SetSpeed(-0.5, -0.5);
     }
   } else if (Robot::m_drivetrain.GetLeftSensor() == true) {
     if (Robot::m_drivetrain.GetRightSensor() == true) {
-      Robot::m_drivetrain.TankDrive(0.5, 0.5);
+      Robot::m_drivetrain.SetSpeed(-0.5, -0.5);
     } else {
-      Robot::m_drivetrain.TankDrive(0.3, 0.5);
+      Robot::m_drivetrain.SetSpeed(-0.3, -0.5);
     }
   } else if (Robot::m_drivetrain.GetRightSensor() == true) {
-    Robot::m_drivetrain.TankDrive(0.5, 0.3);
+    Robot::m_drivetrain.SetSpeed(-0.5, -0.3);
   } else {
-    Robot::m_drivetrain.TankDrive(0, 0);
+    Robot::m_drivetrain.SetSpeed(-0, -0);
   }
 }
 

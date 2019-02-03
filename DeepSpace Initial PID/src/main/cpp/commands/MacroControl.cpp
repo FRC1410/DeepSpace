@@ -26,6 +26,21 @@ void MacroControl::Execute() {
   } else {
     Robot::m_macro_superstructure.RunLEDs(reset_mechanisms_color);
   }
+
+  if (Robot::m_oi.GetDriverButton(6) == true) {
+    if (button_was_pressed == false) {
+  	  if (compressing == false) {
+        Robot::m_macro_superstructure.StartCompressor();
+        compressing = true;
+  	  } else {
+        Robot::m_macro_superstructure.StopCompressor();
+        compressing = false;
+  	  }
+    }
+  	button_was_pressed = true;
+  } else {  
+    button_was_pressed = false;
+  }
   
   frc::SmartDashboard::PutNumber("Operator Profile", Robot::m_macro_superstructure.GetProfile());
 }

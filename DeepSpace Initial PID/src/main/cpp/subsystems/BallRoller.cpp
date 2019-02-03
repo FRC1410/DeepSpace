@@ -8,7 +8,7 @@ void BallRoller::InitDefaultCommand() {
 }
 
 void BallRoller::RunIntake(double speed) {
-  m_ball_roller.Set(-0.7 * speed);
+  m_ball_roller.Set(-speed);
 }
 
 void BallRoller::RollerDown() {

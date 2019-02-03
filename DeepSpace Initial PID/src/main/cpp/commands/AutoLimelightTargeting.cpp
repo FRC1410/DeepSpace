@@ -11,9 +11,9 @@ void AutoLimelightTargeting::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void AutoLimelightTargeting::Execute() {
   if (Robot::m_limelight.GetTarget() == true) {
-    Robot::m_drivetrain.TankDrive(Robot::m_limelight.GetTargetX()/50 + (Robot::m_limelight.GetTargetArea() - 1) / 2, -Robot::m_limelight.GetTargetX()/50 + (Robot::m_limelight.GetTargetArea() - 1) / 2);
+    Robot::m_drivetrain.SetSpeed(Robot::m_limelight.GetTargetX()/50 + (Robot::m_limelight.GetTargetArea() - 1) / 2, -Robot::m_limelight.GetTargetX()/50 + (Robot::m_limelight.GetTargetArea() - 1) / 2);
   } else {
-    Robot::m_drivetrain.TankDrive(0, 0);
+    Robot::m_drivetrain.SetSpeed(0, 0);
   }
 }
 

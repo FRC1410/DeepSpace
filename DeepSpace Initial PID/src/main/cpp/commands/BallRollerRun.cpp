@@ -12,8 +12,12 @@ void BallRollerRun::Initialize() {}
 void BallRollerRun::Execute() {
   if (Robot::m_macro_superstructure.GetReset() == false) {
     if (Robot::m_macro_superstructure.GetProfile() == ball_profile_number) {
-      if (Robot::m_elevator.GetAverageRevolutions() <= 20 && Robot::m_ball_claw.GetLimitSwitch() == true) {
-        Robot::m_ball_roller.RunIntake(Robot::m_oi.GetOperatorAxis(ball_both_intakes_axis, 0) - Robot::m_oi.GetOperatorAxis(ball_both_outtakes_axis, 0));
+      if (Robot::m_elevator.GetHeight() <= 20) {
+        if (Robot::m_ball_claw.GetLimitSwitch() == true) {
+          Robot::m_ball_roller.RunIntake(Robot::m_oi.GetOperatorAxis(ball_both_intakes_axis, 0) - Robot::m_oi.GetOperatorAxis(ball_both_outtakes_axis, 0));
+        } else {
+          Robot::m_ball_roller.RunIntake(0);
+        }
       }
       if (Robot::m_oi.GetOperatorButton(ball_roller_rotator_button) == true) {
     		if (button_was_pressed == false) {

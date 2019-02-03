@@ -101,6 +101,9 @@ void Robot::TeleopInit() {
     m_autonomous_command->Cancel();
     m_autonomous_command = nullptr;
   }
+  Robot::m_drivetrain.SetSpeed(0, 0);
+  Robot::m_elevator.ResetHeight();
+  Robot::m_macro_superstructure.StartCompressor();
 }
 
 void Robot::TeleopPeriodic() {

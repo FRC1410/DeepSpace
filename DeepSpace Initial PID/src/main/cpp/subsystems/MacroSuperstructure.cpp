@@ -46,10 +46,10 @@ bool MacroSuperstructure::GetAuto() {
   return running_auto;
 }
 
-/*void MacroSuperstructure::StartCompressor() {
-  compress->SetClosedLoopControl(true);
+void MacroSuperstructure::StartCompressor() {
+  compressor.SetClosedLoopControl(true);
 }
 
 void MacroSuperstructure::StopCompressor() {
-  compress->SetClosedLoopControl(false);
-}*/
+  compressor.SetClosedLoopControl(false);
+}

@@ -15,6 +15,7 @@ class Elevator : public frc::Subsystem {
     
     double error, P, D;
     double I = 0;
+    double previous_speed;
 
     double initial_height;
 
@@ -22,6 +23,7 @@ class Elevator : public frc::Subsystem {
     Elevator();
     void InitDefaultCommand() override;
     void RunElevator(double speed);
+    void Accelerate(double speed);
     void ResetEncoders();
     double GetLeftRevolutions();
     double GetRightRevolutions();
@@ -33,5 +35,8 @@ class Elevator : public frc::Subsystem {
     void SetAuto(bool auto_input);
     bool GetAuto();
     double GetPID(double previous_error, double target, double time_difference);
-    void ResetIntegral();  
+    void ResetIntegral(); 
+
+  double current_vel;
+  double vel_difference;
 };

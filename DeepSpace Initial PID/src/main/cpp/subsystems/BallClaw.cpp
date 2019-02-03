@@ -21,5 +21,5 @@ void BallClaw::RunRightWheels(double speed) {
 }
 
 bool BallClaw::GetLimitSwitch() {
-  return ball_limit_switch->Get();
+  return !(ball_limit_switch->Get());
 }
