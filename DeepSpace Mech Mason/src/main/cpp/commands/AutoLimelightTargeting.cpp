@@ -1,0 +1,34 @@
+#include "commands/AutoLimelightTargeting.h"
+#include "Robot.h"
+
+AutoLimelightTargeting::AutoLimelightTargeting() {}
+
+// Called just before this Command runs the first time
+void AutoLimelightTargeting::Initialize() {
+  Robot::m_limelight.TurnOnLights();
+}
+
+// Called repeatedly when this Command is scheduled to run
+void AutoLimelightTargeting::Execute() {
+  if (Robot::m_limelight.GetTarget() == true) {
+    Robot::m_drivetrain.SetSpeed(Robot::m_limelight.GetTargetX()/50 + (Robot::m_limelight.GetTargetArea() - 1) / 2, -Robot::m_limelight.GetTargetX()/50 + (Robot::m_limelight.GetTargetArea() - 1) / 2);
+  } else {
+    Robot::m_drivetrain.SetSpeed(0, 0);
+  }
+}
+
+// Make this return true when this Command no longer needs to run execute()
+bool AutoLimelightTargeting::IsFinished() {
+  if (Robot::m_macro_superstructure.GetAuto() == true) {
+    return false; 
+  } else {
+    return true;
+  }
+}
+
+// Called once after isFinished returns true
+void AutoLimelightTargeting::End() {}
+
+// Called when another command which requires one or more of the same
+// subsystems is scheduled to run
+void AutoLimelightTargeting::Interrupted() {}
