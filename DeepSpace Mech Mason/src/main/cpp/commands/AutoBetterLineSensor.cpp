@@ -29,7 +29,7 @@ void AutoBetterLineSensor::Execute() {
     }
   } else if (Robot::m_drivetrain.GetRightSensor() == true) {
     Robot::m_drivetrain.SetSpeed(-0.4, -0.5);
-    if(Robot::m_drivetrain.GetRightSensor() == false) {
+    if (Robot::m_drivetrain.GetRightSensor() == false) {
       Robot::m_drivetrain.SetSpeed(0.4, 0.5);
       if (Robot::m_drivetrain.GetRightSensor() == true) {
         Robot::m_drivetrain.SetSpeed(-0.5, -0.2);

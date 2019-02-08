@@ -14,24 +14,24 @@ OI::OI() {}
 
 double OI::ApplyDeadzone(int controller, int axis, double axis_value, double deadzone) {
   if (axis == 1 || axis == 5) {
-	  raw_magnitude = sqrt(pow(frc::Joystick{controller}.GetRawAxis(axis), 2) + pow(frc::Joystick{controller}.GetRawAxis(axis - 1), 2));
-	  if (raw_magnitude <= deadzone) {
-	    return 0;
-	  } else {
+    raw_magnitude = sqrt(pow(frc::Joystick{controller}.GetRawAxis(axis), 2) + pow(frc::Joystick{controller}.GetRawAxis(axis - 1), 2));
+    if (raw_magnitude <= deadzone) {
+      return 0;
+    } else {
       return ((raw_magnitude - deadzone)/(1 - deadzone)) * (axis_value/raw_magnitude);
-	  }
+    }
   } else if (axis == 0 || axis == 4) {
-	  raw_magnitude = sqrt(pow(frc::Joystick{controller}.GetRawAxis(axis), 2) + pow(frc::Joystick{controller}.GetRawAxis(axis + 1), 2));
-	  if (raw_magnitude <= deadzone) {
-	    return 0;
-	  } else {
-	    return ((raw_magnitude - deadzone)/(1 - deadzone)) * (axis_value/raw_magnitude);
-	  }
+    raw_magnitude = sqrt(pow(frc::Joystick{controller}.GetRawAxis(axis), 2) + pow(frc::Joystick{controller}.GetRawAxis(axis + 1), 2));
+    if (raw_magnitude <= deadzone) {
+      return 0;
+    } else {
+      return ((raw_magnitude - deadzone)/(1 - deadzone)) * (axis_value/raw_magnitude);
+    }
   } else {
-	  if (axis_value <= deadzone) {
-	    return 0;
-	  } else {
-	    return (axis_value - deadzone)/(1 - deadzone);
+    if (axis_value <= deadzone) {
+      return 0;
+    } else {
+      return (axis_value - deadzone)/(1 - deadzone);
     }
   }
 }
@@ -45,7 +45,7 @@ bool OI::GetDriverButton(int button) {
 }
 
 int OI::GetDriverDPad() {
-	return driver_controller.GetPOV();
+  return driver_controller.GetPOV();
 }
 
 double OI::GetOperatorAxis(int axis, double deadzone) {
@@ -57,7 +57,7 @@ bool OI::GetOperatorButton(int button) {
 }
 
 int OI::GetOperatorDPad() {
-	return operator_controller.GetPOV();
+  return operator_controller.GetPOV();
 }
 
 void OI::SetDriverRumbleLeft(double value) {

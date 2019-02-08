@@ -14,7 +14,7 @@ frc::SmartDashboard::PutNumber("Rotator Speed", speed);
 }
 
 void HatchPickup::ResetEncoder() {
-	m_rotator.ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Absolute, 0, 0);
+  m_rotator.ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Absolute, 0, 0);
   m_rotator.GetSensorCollection().SetQuadraturePosition(0, 0);
 }
 

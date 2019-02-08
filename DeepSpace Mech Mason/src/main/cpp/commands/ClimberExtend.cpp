@@ -19,11 +19,11 @@ void ClimberExtend::Execute() {
           if (front_extended == false) {
       	    Robot::m_climber.ExtendFront();
             front_extended = true;
-  		    } else {
+          } else {
             Robot::m_climber.RetractFront();
             front_extended = false;
-  	   	  }
-  		  }
+          }
+        }
   	    front_button_was_pressed = true;
   	  } else {  
   	    front_button_was_pressed = false;
@@ -38,9 +38,9 @@ void ClimberExtend::Execute() {
             back_extended = false;
           }
         }
-  	  	back_button_was_pressed = true;
+        back_button_was_pressed = true;
       } else {  
-  	  	back_button_was_pressed = false;
+        back_button_was_pressed = false;
       }
     }
   } else {

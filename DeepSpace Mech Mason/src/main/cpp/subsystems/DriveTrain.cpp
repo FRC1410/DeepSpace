@@ -64,16 +64,16 @@ void DriveTrain::Accelerate(double left, double right) {
 }
 
 void DriveTrain::ResetEncoders() {
-	m_left_middle.ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Absolute, 0, 0);
+  m_left_middle.ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Absolute, 0, 0);
   m_right_middle.ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Absolute, 0, 0);
   m_left_middle.GetSensorCollection().SetQuadraturePosition(0, 0);
   m_right_middle.GetSensorCollection().SetQuadraturePosition(0, 0);
 }
 
 double DriveTrain::GetDistance() {
-	average_distance = ((m_left_middle.GetSensorCollection().GetQuadraturePosition() +  m_right_middle.GetSensorCollection().GetQuadraturePosition()) / 2) * (6 * pi / 4096);
-	SmartDashboard::PutNumber("Drivetrain Distance", average_distance);
-	return average_distance;
+  average_distance = ((m_left_middle.GetSensorCollection().GetQuadraturePosition() +  m_right_middle.GetSensorCollection().GetQuadraturePosition()) / 2) * (6 * pi / 4096);
+  SmartDashboard::PutNumber("Drivetrain Distance", average_distance);
+  return average_distance;
 }
 
 double DriveTrain::GetRightDistance() {

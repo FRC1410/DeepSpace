@@ -27,15 +27,15 @@ void MacroControl::Execute() {
     Robot::m_macro_superstructure.RunLEDs(reset_mechanisms_color);
   }
 
-  if (Robot::m_oi.GetOperatorButton(7) == true) {
+  if (Robot::m_oi.GetOperatorButton(toggle_compressor_button) == true) {
     if (button_was_pressed == false) {
-  	  if (compressing == false) {
+      if (compressing == false) {
         Robot::m_macro_superstructure.StartCompressor();
         compressing = true;
-  	  } else {
+      } else {
         Robot::m_macro_superstructure.StopCompressor();
         compressing = false;
-  	  }
+      }
     }
   	button_was_pressed = true;
   } else {  

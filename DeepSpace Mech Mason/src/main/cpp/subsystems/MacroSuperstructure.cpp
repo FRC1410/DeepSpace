@@ -64,5 +64,5 @@ void MacroSuperstructure::StopCompressor() {
 
 double MacroSuperstructure::GetPressure() {
   return 50 * pressure_input.GetVoltage() - 25;
-	frc::SmartDashboard::PutNumber("Pressure", 50 * pressure_input.GetVoltage() - 25);
+  frc::SmartDashboard::PutNumber("Pressure", 50 * pressure_input.GetVoltage() - 25);
 }

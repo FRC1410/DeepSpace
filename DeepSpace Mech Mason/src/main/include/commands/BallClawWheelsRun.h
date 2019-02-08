@@ -5,8 +5,8 @@
 
 class BallClawWheelsRun : public frc::Command {
   private:
-  bool switch_was_true = false;
-  frc::Timer rumble_timer;
+    bool switch_was_true = false;
+    frc::Timer rumble_timer;
   public:
     BallClawWheelsRun();
     void Initialize() override;

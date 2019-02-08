@@ -4,10 +4,6 @@
 #include <ctre/Phoenix.h>
 
 #include "RobotMap.h"
-#include "subsystems/HatchPickup.h"
-#include "commands/HatchPickupRotate.h"
-#include "RobotMap.h"
-
 
 class HatchPickup : public frc::Subsystem {
   private:

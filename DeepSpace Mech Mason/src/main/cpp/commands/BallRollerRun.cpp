@@ -20,19 +20,19 @@ void BallRollerRun::Execute() {
         }
       }
       if (Robot::m_oi.GetOperatorButton(ball_roller_rotator_button) == true) {
-    		if (button_was_pressed == false) {
-    			if (roller_extended == false) {
+        if (button_was_pressed == false) {
+          if (roller_extended == false) {
             Robot::m_ball_roller.RollerDown();
             roller_extended = true;
-  			  } else {
+          } else {
             Robot::m_ball_roller.RollerUp();
             roller_extended = false;
-  			  }
-  		  }
+          }
+        }
   	    button_was_pressed = true;
-  	  } else {
-  	    button_was_pressed = false;
-  	  }
+      } else {
+        button_was_pressed = false;
+      }
     }
   } else {
     Robot::m_ball_roller.RollerUp();

@@ -2,7 +2,7 @@
 #include "Robot.h"
 
 Drive::Drive() {
-	Requires(&Robot::m_drivetrain);
+  Requires(&Robot::m_drivetrain);
 }
 
 // Called just before this Command runs the first time
@@ -23,19 +23,19 @@ void Drive::Initialize() {
 void Drive::Execute() {
   if (Robot::m_macro_superstructure.GetAuto() == false) {
     if (Robot::m_oi.GetDriverButton(invert_driving_button) == true) {
-  	  if (invert_button_was_pressed == false) {
+      if (invert_button_was_pressed == false) {
         rumble_timer.Reset();
-  	    if (invert_driving == false) {
-  	      invert_driving = true;
-  	      frc::SmartDashboard::PutString("Inverted Driving", "Yes");
+        if (invert_driving == false) {
+          invert_driving = true;
+          frc::SmartDashboard::PutString("Inverted Driving", "Yes");
         } else {
-  	      invert_driving = false;
-  	      frc::SmartDashboard::PutString("Inverted Driving", "No");
+          invert_driving = false;
+          frc::SmartDashboard::PutString("Inverted Driving", "No");
   	    }
       }
-  	  invert_button_was_pressed = true;
+      invert_button_was_pressed = true;
     } else {
-  	  invert_button_was_pressed = false;
+      invert_button_was_pressed = false;
     }
 
     left_stick_amount = -Robot::m_oi.GetDriverAxis(1, driver_deadzone);
