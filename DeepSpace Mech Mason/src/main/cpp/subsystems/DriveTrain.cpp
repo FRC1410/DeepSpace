@@ -24,6 +24,9 @@ void DriveTrain::SetSpeed(double left, double right) {
   m_front.TankDrive(current_left_vel, current_right_vel);
   m_middle.TankDrive(current_left_vel, current_right_vel);
   m_back.TankDrive(current_left_vel, current_right_vel);
+
+  frc::SmartDashboard::PutNumber("Left Drivetrain Power", current_left_vel);
+  frc::SmartDashboard::PutNumber("Right Drivetrain Power", current_right_vel);
 }
 
 void DriveTrain::Accelerate(double left, double right) {
@@ -93,15 +96,15 @@ double DriveTrain::GetAngle() {
 }
 
 bool DriveTrain::GetLeftSensor() {
-  return !(left_tape_sensor->Get());
+  return (left_tape_sensor->Get());
 }
 
 bool DriveTrain::GetMiddleSensor() {
-  return !(middle_tape_sensor->Get());
+  return (middle_tape_sensor->Get());
 }
 
 bool DriveTrain::GetRightSensor() {
-  return !(right_tape_sensor->Get());
+  return (right_tape_sensor->Get());
 }
 
 double DriveTrain::GetDistancePID(double target, double time_difference) {

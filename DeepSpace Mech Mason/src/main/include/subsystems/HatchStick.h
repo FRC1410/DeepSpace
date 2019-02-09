@@ -8,6 +8,7 @@
 class HatchStick : public frc::Subsystem {
   private:
     frc::DoubleSolenoid stick_solenoid {hatch_stick_port_start, hatch_stick_port_end};
+    bool extended;
 
   public:
     HatchStick();
@@ -15,7 +16,5 @@ class HatchStick : public frc::Subsystem {
     void ExtendStick();
     void RetractStick();
     void StickOff();
-    bool ReturnState();
-
-    bool extended;
+    bool GetState();
 };

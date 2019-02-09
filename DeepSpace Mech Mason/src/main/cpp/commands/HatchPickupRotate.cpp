@@ -10,13 +10,11 @@ void HatchPickupRotate::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void HatchPickupRotate::Execute() {
-  if (Robot::m_macro_superstructure.GetProfile() == hatch_profile_number) {
-    hatch_rotator_input = -Robot::m_oi.GetOperatorAxis(hatch_pickup_rotator_axis, operator_deadzone);
-    if (abs(hatch_rotator_input) > 0) {
-      Robot::m_hatch_pickup.RotatePickup(hatch_rotator_input);
-    } else {
-      Robot::m_hatch_pickup.RotatePickup(0);
-    }
+  hatch_rotator_input = -Robot::m_oi.GetOperatorAxis(hatch_pickup_rotator_axis, operator_deadzone);
+  if (abs(hatch_rotator_input) > 0) {
+    Robot::m_hatch_pickup.RotatePickup(hatch_rotator_input);
+  } else {
+    Robot::m_hatch_pickup.RotatePickup(0);
   }
 
   frc::SmartDashboard::PutNumber("Rotator input amount", hatch_rotator_input);

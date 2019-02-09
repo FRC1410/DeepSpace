@@ -26,6 +26,6 @@ void HatchStick::StickOff() {
   frc::SmartDashboard::PutBoolean("Hatch Stick State", false);
 }
 
-bool HatchStick::ReturnState() {
+bool HatchStick::GetState() {
   return extended;
 }

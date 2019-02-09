@@ -21,12 +21,10 @@ void BallRollerRun::Execute() {
       }
       if (Robot::m_oi.GetOperatorButton(ball_roller_rotator_button) == true) {
         if (button_was_pressed == false) {
-          if (roller_extended == false) {
+          if (Robot::m_ball_roller.GetState() == false) {
             Robot::m_ball_roller.RollerDown();
-            roller_extended = true;
           } else {
             Robot::m_ball_roller.RollerUp();
-            roller_extended = false;
           }
         }
   	    button_was_pressed = true;
@@ -36,9 +34,7 @@ void BallRollerRun::Execute() {
     }
   } else {
     Robot::m_ball_roller.RollerUp();
-    roller_extended = false;
   }
-  frc::SmartDashboard::PutBoolean("Roller State", roller_extended);
 }
 
 // Make this return true when this Command no longer needs to run execute()

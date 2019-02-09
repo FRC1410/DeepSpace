@@ -81,37 +81,37 @@ constexpr int elevator_loading_station_button = 3;      //X
 constexpr double elevator_ball_displacement = -1.75;    //Center of Ball
 constexpr double elevator_hatch_displacement = 7;       //Center of Hatch
 
-constexpr double elevator_low_hatch_height = 20 - elevator_hatch_displacement;
+constexpr double elevator_low_hatch_height = 19.5 - elevator_hatch_displacement;
 constexpr double elevator_mid_hatch_height = 47 - elevator_hatch_displacement;
 constexpr double elevator_high_hatch_height = 75 - elevator_hatch_displacement;
 
-constexpr double elevator_loading_station_displacement = 3.5;
+constexpr double elevator_loading_station_displacement = 3.25;
 
 constexpr double elevator_low_ball_height = 27.5 - elevator_ball_displacement;
 constexpr double elevator_mid_ball_height = 55.5 - elevator_ball_displacement;
 constexpr double elevator_high_ball_height = 82 - elevator_ball_displacement;
 constexpr double elevator_cargo_ship_height = 39 - elevator_ball_displacement;
 
-constexpr double elevator_calibration_height = 81.5;    //Height Calibration, top of carriage
-constexpr double elevator_calibration_revolutions = 40; //Height Calibration
+constexpr double elevator_calibration_height = 67.5;    //Height Calibration, top of carriage
+constexpr double elevator_calibration_revolutions = 32; //Height Calibration
 constexpr double elevator_min_height = 9.25;            //Top of Carriage
-constexpr double elevator_max_velocity = 200;           //Inches per second up, no game piece
+constexpr double elevator_max_velocity = 118.7;         //Inches per second up, no game piece
 
-constexpr double elevator_acceleration_time = 0.5;      //Stationary to max speed
-constexpr double elevator_deceleration_time = 0.75;     //Stationary to max speed
-constexpr double elevator_weak_gravity = 0.03;          //Power required to keep carriage stable
-constexpr double elevator_strong_gravity = 0.06;        //Power required to move carriage up
+constexpr double elevator_acceleration_time = 1;        //Stationary to max speed
+constexpr double elevator_deceleration_time = 1.5;      //Stationary to max speed
+constexpr double elevator_weak_gravity = 0.045;         //Power required to keep carriage stable
+constexpr double elevator_strong_gravity = 0.045;       //Power required to move carriage up
 
 constexpr double elevator_acceleration_rate = ((1 - elevator_strong_gravity) / (elevator_acceleration_time + 0.02)) / 50;
 constexpr double elevator_deceleration_rate = (-(1 + elevator_weak_gravity) / (elevator_deceleration_time + 0.02)) / 50;
 
-constexpr double elevator_deceleration_buffer = 0.1;    //PID range
-constexpr double elevator_acceleration_buffer = 0.1;    //PID range
-constexpr double elevator_bottom_buffer = 1;            //Inches to bottom, no power inputted
+constexpr double elevator_deceleration_buffer = 0.25;    //PID range
+constexpr double elevator_acceleration_buffer = 0.2;    //PID range
+constexpr double elevator_bottom_buffer = 2.5;            //Inches to bottom, no power inputted
 
 constexpr double elevator_kP = 0;                       //PID Tuning
-constexpr double elevator_kI = 0;                       //PID Tuning
-constexpr double elevator_kD = 0;                       //PID Tuning
+constexpr double elevator_kI = 0.3;                       //PID Tuning
+constexpr double elevator_kD = 0;                       //PID Tuning  
 
 //Climber
 constexpr int climber_front_port_start = 1;             //Double Solenoid

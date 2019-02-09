@@ -9,25 +9,25 @@ void Climber::InitDefaultCommand() {
 }
 
 void Climber::ExtendFront(){
-  climber_front_solenoid.Set(frc::DoubleSolenoid::kForward);
+  climber_front_solenoid.Set(frc::DoubleSolenoid::kReverse);
   front_extended = true;
   frc::SmartDashboard::PutBoolean("Climber Front State", true);
 }
 
 void Climber::ExtendBack(){
-  climber_back_solenoid.Set(frc::DoubleSolenoid::kReverse);
+  climber_back_solenoid.Set(frc::DoubleSolenoid::kForward);
   back_extended = true;
   frc::SmartDashboard::PutBoolean("Climber Back State", true);
 }
 
 void Climber::RetractFront(){
-  climber_front_solenoid.Set(frc::DoubleSolenoid::kReverse);
+  climber_front_solenoid.Set(frc::DoubleSolenoid::kForward);
   front_extended = false;
   frc::SmartDashboard::PutBoolean("Climber Front State", false);
 }
 
 void Climber::RetractBack(){
-  climber_back_solenoid.Set(frc::DoubleSolenoid::kForward);
+  climber_back_solenoid.Set(frc::DoubleSolenoid::kReverse);
   back_extended = false;
   frc::SmartDashboard::PutBoolean("Climber Back State", false);
 }
@@ -44,10 +44,10 @@ void Climber::BackOff(){
   frc::SmartDashboard::PutBoolean("Climber Back State", false);
 }
 
-bool Climber::ReturnFrontState() {
+bool Climber::GetFrontState() {
   return front_extended;
 }
 
-bool Climber::ReturnBackState() {
+bool Climber::GetBackState() {
   return back_extended;
 }

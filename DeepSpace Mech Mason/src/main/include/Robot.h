@@ -24,6 +24,8 @@
 #include "commands/AutoLineSensor.h"
 #include "commands/AutoLimelightTargeting.h"
 #include "commands/AutoGyroPID.h"
+#include "commands/AutoElevatorCalibrate.h"
+#include "commands/AutoBetterLineSensor.h"
 
 class Robot : public frc::TimedRobot {
   private:
@@ -33,6 +35,8 @@ class Robot : public frc::TimedRobot {
     AutoLineSensor m_auto_line_sensor;
     AutoLimelightTargeting m_auto_limelight_targeting;
     AutoGyroPID m_auto_gyro_pid;
+    AutoElevatorCalibrate m_elevator_calibrate;
+    AutoBetterLineSensor m_better_line_sensor;
 
     frc::SendableChooser<frc::Command*> m_chooser;
 

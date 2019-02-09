@@ -6,6 +6,8 @@
 class AutoBetterLineSensor : public frc::Command {
   private:
     frc::Timer timer;
+    int step;
+    
   public:
     AutoBetterLineSensor();
     void Initialize() override;

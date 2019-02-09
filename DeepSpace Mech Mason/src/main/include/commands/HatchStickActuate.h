@@ -5,7 +5,6 @@
 class HatchStickActuate : public frc::Command {
   private:
     bool button_was_pressed = false;
-    bool stick_extended = false;
     
   public:
     HatchStickActuate();

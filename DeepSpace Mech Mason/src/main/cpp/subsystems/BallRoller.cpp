@@ -30,3 +30,7 @@ void BallRoller::RollerOff() {
   extended = false;
   frc::SmartDashboard::PutBoolean("Ball Intake State", false);
 }
+
+bool BallRoller::GetState() {
+  return extended;
+}

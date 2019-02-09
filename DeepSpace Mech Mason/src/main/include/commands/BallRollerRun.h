@@ -5,7 +5,6 @@
 class BallRollerRun : public frc::Command {
   private:
     bool button_was_pressed = false;
-    bool roller_extended = true;
     
   public:
     BallRollerRun();

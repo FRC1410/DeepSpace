@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 #include "Robot.h"
 #include <frc/commands/Scheduler.h>
 #include <frc/smartdashboard/SmartDashboard.h>
@@ -26,11 +19,19 @@ void Robot::RobotInit() {
   m_chooser.SetDefaultOption("Line Sensor", &m_auto_line_sensor);
   m_chooser.AddOption("Limelight", &m_auto_limelight_targeting);
   m_chooser.AddOption("Gyro PID", &m_auto_gyro_pid);
+  m_chooser.AddOption("Calibrate Elevator", &m_elevator_calibrate);
+  m_chooser.AddOption("Better Line Sensor", &m_better_line_sensor);
   frc::SmartDashboard::PutData("Auto", &m_chooser);
   Robot::m_limelight.TurnOffLights();
   frc::CameraServer::GetInstance()->StartAutomaticCapture();
   frc::SmartDashboard::PutNumber("Elevator Height", elevator_min_height);
+
   Robot::m_elevator.ResetEncoders();
+  Robot::m_elevator.ResetIntegral();
+  Robot::m_climber.RetractFront();
+  Robot::m_climber.RetractBack();
+  Robot::m_hatch_stick.RetractStick();
+  Robot::m_ball_roller.RollerUp();
 }
 
 /*
@@ -48,13 +49,16 @@ void Robot::RobotPeriodic() {}
  * can use it to reset any subsystem information you want to clear when the
  * robot is disabled.
  */
-void Robot::DisabledInit() {}
+void Robot::DisabledInit() {
+  Robot::m_oi.SetDriverRumbleLeft(0);
+  Robot::m_oi.SetDriverRumbleRight(0);
+  Robot::m_oi.SetOperatorRumbleLeft(0);
+  Robot::m_oi.SetOperatorRumbleRight(0);
+  Robot::m_limelight.TurnOffLights();
+}
 
 void Robot::DisabledPeriodic() { 
   frc::Scheduler::GetInstance()->Run(); 
-  Robot::m_oi.SetDriverRumbleLeft(0);
-  Robot::m_oi.SetDriverRumbleRight(0);
-  Robot::m_limelight.TurnOffLights();
 }
 
 /**
@@ -74,6 +78,10 @@ void Robot::AutonomousInit() {
     m_autonomous_command = &m_auto_limelight_targeting;
   } else if (auto_selected == "Gyro PID") {
     m_autonomous_command = &m_auto_gyro_pid;
+  } else if (auto_selected == "Calibrate Elevator") {
+    m_autonomous_command = &m_elevator_calibrate;
+  } else if (auto_selected == "Better Line Sensor") {
+    m_autonomous_command = &m_better_line_sensor;
   } else {
     m_autonomous_command = &m_auto_line_sensor;
   }
@@ -101,8 +109,11 @@ void Robot::TeleopInit() {
     m_autonomous_command = nullptr;
   }
   Robot::m_drivetrain.SetSpeed(0, 0);
+  Robot::m_elevator.RunElevator(0, 0);
   Robot::m_elevator.ResetEncoders();
   Robot::m_macro_superstructure.StartCompressor();
+  Robot::m_limelight.TurnOnLights();
+  Robot::m_elevator.ResetIntegral();
 }
 
 void Robot::TeleopPeriodic() {

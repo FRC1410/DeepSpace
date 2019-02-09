@@ -6,8 +6,6 @@ class ClimberExtend : public frc::Command {
   private:
     bool front_button_was_pressed = false;
     bool back_button_was_pressed = false;
-    bool front_extended = false;
-    bool back_extended = false;
     
   public:
     ClimberExtend();

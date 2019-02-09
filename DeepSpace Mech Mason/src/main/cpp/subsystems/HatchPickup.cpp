@@ -10,7 +10,7 @@ void HatchPickup::InitDefaultCommand() {
 
 void HatchPickup::RotatePickup(double speed) {
   m_rotator.Set(speed);
-frc::SmartDashboard::PutNumber("Rotator Speed", speed);
+  frc::SmartDashboard::PutNumber("Rotator Speed", speed);
 }
 
 void HatchPickup::ResetEncoder() {

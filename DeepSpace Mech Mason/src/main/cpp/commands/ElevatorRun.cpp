@@ -8,7 +8,10 @@ ElevatorRun::ElevatorRun() {
 // Called just before this Command runs the first time
 void ElevatorRun::Initialize() {
   timer.Start();
+  timer.Reset();
   previous_height = Robot::m_elevator.GetHeight();
+  Robot::m_elevator.ResetIntegral();
+  height = elevator_min_height;
 }
 
 // Called repeatedly when this Command is scheduled to run

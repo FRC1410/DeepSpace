@@ -21,6 +21,6 @@ class BallRoller : public frc::Subsystem {
     void RollerDown();
     void RollerUp();
     void RollerOff();
-    bool ReturnState();
+    bool GetState();
     
 };

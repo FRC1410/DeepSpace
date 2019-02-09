@@ -23,7 +23,6 @@ class Climber : public frc::Subsystem {
     void RetractBack();
     void FrontOff();
     void BackOff();
-
-    bool ReturnFrontState();
-    bool ReturnBackState();
+    bool GetFrontState();
+    bool GetBackState();
 };

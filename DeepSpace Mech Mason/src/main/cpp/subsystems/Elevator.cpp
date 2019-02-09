@@ -13,6 +13,7 @@ void Elevator::RunElevator(double speed, double PID) {
   current_vel = Robot::m_macro_superstructure.CapValue(speed);
   m_elevator_left.Set(-current_vel - PID);
   m_elevator_right.Set(current_vel + PID);
+  frc::SmartDashboard::PutNumber("Elevator Power", current_vel + PID);
 }
 
 void Elevator::Accelerate(double speed, double PID) {
@@ -136,6 +137,7 @@ double Elevator::GetHeight() {
 
 double Elevator::GetPID(double target, double time_difference) {
   error = target - GetHeight();
+  frc::SmartDashboard::PutNumber("Elevator PID Error", error);
   P = elevator_kP * error;
   I += elevator_kI * error * time_difference;
   D = elevator_kD * (error - previous_error) * time_difference;
