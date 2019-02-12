@@ -1,0 +1,50 @@
+See file:///C:/Users/randy/Documents/Visual%20Studio%20Code/DeepSpace%20Mech%20Mason/build/tmp/compileFrcUserProgramDebugExecutableFrcUserProgramCpp/output.txt for all output for compileFrcUserProgramDebugExecutableFrcUserProgramCpp.
+compiling ElevatorRun.cpp successful.
+
+compiling AutoLineSensor.cpp successful.
+
+compiling ClimberExtend.cpp successful.
+
+compiling BallRollerRun.cpp successful.
+
+compiling AutoDistancePID.cpp successful.
+
+compiling AutoBetterLineSensor.cpp successful.
+
+compiling AutoLimelightTargeting.cpp successful.
+
+compiling AutoGyroPID.cpp successful.
+
+compiling BallClawWheelsRun.cpp successful.
+
+compiling Drive.cpp successful.
+
+compiling AutoElevatorCalibrate.cpp successful.
+
+compiling OI.cpp successful.
+
+compiling MacroSuperstructure.cpp successful.
+
+compiling BallClaw.cpp successful.
+
+compiling BallRoller.cpp successful.
+
+compiling Climber.cpp successful.
+
+compiling HatchPickup.cpp successful.
+
+compiling HatchStick.cpp successful.
+
+compiling MacroControl.cpp successful.
+
+compiling DriveTrain.cpp successful.
+
+compiling Elevator.cpp successful.
+
+compiling Robot.cpp successful.
+
+compiling HatchStickActuate.cpp successful.
+
+compiling HatchPickupRotate.cpp successful.
+
+Finished compileFrcUserProgramDebugExecutableFrcUserProgramCpp, see full log file:///C:/Users/randy/Documents/Visual%20Studio%20Code/DeepSpace%20Mech%20Mason/build/tmp/compileFrcUserProgramDebugExecutableFrcUserProgramCpp/output.txt.
