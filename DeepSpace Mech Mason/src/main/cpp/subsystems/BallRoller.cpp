@@ -14,13 +14,13 @@ void BallRoller::RunIntake(double speed) {
 }
 
 void BallRoller::RollerDown() {
-  ball_solenoid.Set(frc::DoubleSolenoid::kForward);
+  ball_solenoid.Set(frc::DoubleSolenoid::kReverse);
   extended = true;
   frc::SmartDashboard::PutBoolean("Ball Intake State", true);
 }
 
 void BallRoller::RollerUp() {
-  ball_solenoid.Set(frc::DoubleSolenoid::kReverse);
+  ball_solenoid.Set(frc::DoubleSolenoid::kForward);
   extended = false;
   frc::SmartDashboard::PutBoolean("Ball Intake State", false);
 }

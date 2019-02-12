@@ -12,10 +12,12 @@ class MacroSuperstructure : public frc::Subsystem {
     int profile = 0;
     bool reset = false;
 
-    frc::Spark LEDs{LED_controller_port};
+    frc::Spark left_LEDs{left_LED_controller_port};
+    frc::Spark right_LEDs{right_LED_controller_port};
 
     bool running_auto;
-
+    int handoff_state;
+   
     frc::Compressor compressor;
 
     AnalogInput pressure_input{pressure_sensor};
@@ -27,10 +29,13 @@ class MacroSuperstructure : public frc::Subsystem {
     void SetProfile(int direction);
     int GetProfile();
     bool GetReset();
-    void RunLEDs(double value);
+    void SetLeftLEDs(double value);
+    void SetRightLEDs(double value);
     void SetAuto(bool auto_input);
     bool GetAuto();
     void StartCompressor();
     void StopCompressor();    
     double GetPressure();
+    int GetHandoffState();
+    int SetHandoffState(int state);
 };

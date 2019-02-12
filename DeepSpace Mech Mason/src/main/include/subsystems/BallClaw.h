@@ -14,20 +14,9 @@ class BallClaw : public frc::Subsystem {
 
     DigitalInput * ball_limit_switch = new DigitalInput(claw_limit_switch);
 
-    double left_speed;
-    double right_speed;
-    
-    bool hooking_left; //TBA
-    bool hooking_right; //TBA
-
   public:
     BallClaw();
     void InitDefaultCommand() override;
-    void RunWheels(double speed);
+    void RunWheels(double left, double right);
     bool GetLimitSwitch();
-    void RunLeftWheels(double speed);
-    void RunRightWheels(double speed);
-    void RunWheelsIndividual(double left, double right); //for hooking it left/right
-    //i realized i broke my elevator theory wait up
-  
 };

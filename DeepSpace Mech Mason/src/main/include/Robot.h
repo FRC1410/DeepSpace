@@ -21,22 +21,18 @@
 #include "subsystems/MacroSuperstructure.h"
 #include "subsystems/Climber.h"
 
-#include "commands/AutoLineSensor.h"
 #include "commands/AutoLimelightTargeting.h"
 #include "commands/AutoGyroPID.h"
 #include "commands/AutoElevatorCalibrate.h"
-#include "commands/AutoBetterLineSensor.h"
 
 class Robot : public frc::TimedRobot {
   private:
     // Have it null by default so that if testing teleop it
     // doesn't have undefined behavior and potentially crash.
     frc::Command* m_autonomous_command = nullptr;
-    AutoLineSensor m_auto_line_sensor;
     AutoLimelightTargeting m_auto_limelight_targeting;
     AutoGyroPID m_auto_gyro_pid;
     AutoElevatorCalibrate m_elevator_calibrate;
-    AutoBetterLineSensor m_better_line_sensor;
 
     frc::SendableChooser<frc::Command*> m_chooser;
 

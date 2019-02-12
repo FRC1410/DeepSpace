@@ -6,7 +6,7 @@ constexpr double pi = 3.14159265358979324;
 constexpr int driver_port = 0;                          //Driver Station
 constexpr int operator_port = 1;                        //Driver Station
 
-constexpr double driver_deadzone = 0.1;                 //Joystick Deadzone
+constexpr double driver_deadzone = 0;                   //Joystick Deadzone
 constexpr double operator_deadzone = 0.2;               //Joystick Deadzone
 
 //DriveTrain
@@ -25,6 +25,8 @@ constexpr int line_sensor_left = 2;                     //Digital Input (DIO)
 constexpr int line_sensor_middle = 1;                   //Digital Input (DIO)
 constexpr int line_sensor_right = 0;                    //Digital Input (DIO)
 
+constexpr int line_align_button = 6;                    //Line Align Macro Command
+
 constexpr double drivetrain_distance_kP = 0;            //PID Tuning
 constexpr double drivetrain_distance_kI = 0;            //PID Tuning
 constexpr double drivetrain_distance_kD = 0;            //PID Tuning
@@ -33,8 +35,8 @@ constexpr double drivetrain_gyro_kP = 0.015;            //PID Tuning
 constexpr double drivetrain_gyro_kI = 0.01;             //PID Tuning
 constexpr double drivetrain_gyro_kD = 0;                //PID Tuning
 
-constexpr double drivetrain_acceleration_time = 1;
-constexpr double mechanical_deadzone = 0.3;
+constexpr double drivetrain_acceleration_time = 1;      //0 to max speed
+constexpr double mechanical_deadzone = 0;               //Force required to overcome friction
 
 //Ball Roller and Claw
 constexpr int ball_claw_left = 7;                       //Talon
@@ -63,6 +65,12 @@ constexpr int pressure_sensor = 0;                      //Analog Input
 constexpr int hatch_pickup_rotator_axis = 5;            //Right Stick Y-Axis
 constexpr int hatch_pickup_rotator_button = 6;          //R
 constexpr int hatch_stick_button = 5;                   //L
+constexpr int hatch_pickup_toggle_button = 6;           //Hatch handoff button
+
+constexpr double hatch_pickup_up_position = 0.05;       //Encoder when raised
+constexpr double hatch_pickup_down_position = 0.2;      //Encoder when lowered
+
+constexpr double hatch_handoff_time = 0.3;              //Time rotator spends pushing on stick
 
 constexpr double hatch_pickup_kP = 0;                   //PID Tuning
 constexpr double hatch_pickup_kI = 0;                   //PID Tuning
@@ -85,6 +93,9 @@ constexpr double elevator_low_hatch_height = 19.5 - elevator_hatch_displacement;
 constexpr double elevator_mid_hatch_height = 47 - elevator_hatch_displacement;
 constexpr double elevator_high_hatch_height = 75 - elevator_hatch_displacement;
 
+constexpr double elevator_handoff_height = 23 - elevator_hatch_displacement;
+constexpr double elevator_handoff_raise = 12;
+
 constexpr double elevator_loading_station_displacement = 3.25;
 
 constexpr double elevator_low_ball_height = 27.5 - elevator_ball_displacement;
@@ -95,23 +106,28 @@ constexpr double elevator_cargo_ship_height = 39 - elevator_ball_displacement;
 constexpr double elevator_calibration_height = 67.5;    //Height Calibration, top of carriage
 constexpr double elevator_calibration_revolutions = 32; //Height Calibration
 constexpr double elevator_min_height = 9.25;            //Top of Carriage
-constexpr double elevator_max_velocity = 118.7;         //Inches per second up, no game piece
 
-constexpr double elevator_acceleration_time = 1;        //Stationary to max speed
-constexpr double elevator_deceleration_time = 1.5;      //Stationary to max speed
+constexpr double lower_intake_intersect_height = 15;    //Height at which the top of the ball claw hits the bottom of the intake if retracted
+constexpr double upper_intake_intersect_height = 20;    //Height at which the bottom of the ball claw hits the top of the intake if retracted
+
+constexpr double elevator_acceleration_time = 1.4;      //Stationary to max speed
+constexpr double elevator_deceleration_time = 1.8;      //Stationary to max speed
 constexpr double elevator_weak_gravity = 0.045;         //Power required to keep carriage stable
 constexpr double elevator_strong_gravity = 0.045;       //Power required to move carriage up
+
+constexpr double elevator_max_velocity = 118.7;         //Inches per second up without game piece
 
 constexpr double elevator_acceleration_rate = ((1 - elevator_strong_gravity) / (elevator_acceleration_time + 0.02)) / 50;
 constexpr double elevator_deceleration_rate = (-(1 + elevator_weak_gravity) / (elevator_deceleration_time + 0.02)) / 50;
 
-constexpr double elevator_deceleration_buffer = 0.25;    //PID range
+constexpr double elevator_deceleration_buffer = 0.2;    //PID range
 constexpr double elevator_acceleration_buffer = 0.2;    //PID range
-constexpr double elevator_bottom_buffer = 2.5;            //Inches to bottom, no power inputted
+constexpr double elevator_bottom_buffer = 2.5;          //Inches to bottom, no power inputted
+constexpr double elevator_deadband = 1;                 //Range of stalling, inches
 
-constexpr double elevator_kP = 0;                       //PID Tuning
-constexpr double elevator_kI = 0.3;                       //PID Tuning
-constexpr double elevator_kD = 0;                       //PID Tuning  
+constexpr double elevator_kP = 0.0;                     //PID Tuning
+constexpr double elevator_kI = 0.0;                     //PID Tuning
+constexpr double elevator_kD = 0.0;                     //PID Tuning  
 
 //Climber
 constexpr int climber_front_port_start = 1;             //Double Solenoid
@@ -123,12 +139,13 @@ constexpr int climber_front_button = 1;                 //A
 constexpr int climber_back_button = 4;                  //Y
 
 //LEDs
-constexpr int LED_controller_port = 0;                  //PWM
+constexpr int left_LED_controller_port = 0;             //PWM
+constexpr int right_LED_controller_port = 0;            //PWM
 
-constexpr double ball_color = 0.63;                     //LEDs
-constexpr double hatch_color = 0.69;                    //LEDs
-constexpr double climber_color = 0.89;                  //LEDs
-constexpr double reset_mechanisms_color = 0.75;         //LEDs
+constexpr double ball_color = 0.63;                     //LED colors
+constexpr double hatch_color = 0.69;                    //LED colors
+constexpr double climber_color = 0.89;                  //LED colors
+constexpr double reset_mechanisms_color = 0.75;         //LED colors
 
 //Profile Changes
 constexpr int ball_profile_direction = 0;               //D-Pad Up
@@ -140,6 +157,6 @@ constexpr int hatch_profile_number = 0;                 //Operator Profiles
 constexpr int ball_profile_number = 1;                  //Operator Profiles
 constexpr int climber_profile_number = 2;               //Operator Profiles
 
-//Macros
+//Safety
 constexpr int operator_macro_override_button = 7;       //Back
 constexpr int toggle_compressor_button = 8;             //Start

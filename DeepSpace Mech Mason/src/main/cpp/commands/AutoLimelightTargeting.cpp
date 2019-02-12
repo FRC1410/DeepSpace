@@ -20,7 +20,7 @@ void AutoLimelightTargeting::Execute() {
 // Make this return true when this Command no longer needs to run execute()
 bool AutoLimelightTargeting::IsFinished() {
   if (Robot::m_macro_superstructure.GetAuto() == true) {
-    return false; 
+    return false;
   } else {
     return true;
   }

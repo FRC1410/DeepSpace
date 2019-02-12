@@ -66,40 +66,54 @@ void Elevator::Accelerate(double speed, double PID) {
 }
 
 void Elevator::Goto(double target_location, double previous_height, double time_difference) {
-  if (current_vel > elevator_strong_gravity) {
-    PID_value = GetPID(previous_height + ((current_vel - elevator_strong_gravity) / (1 - elevator_strong_gravity)) * elevator_max_velocity * time_difference, time_difference);
-  } else if (current_vel < elevator_weak_gravity) {
-    PID_value = GetPID(previous_height + ((current_vel - elevator_weak_gravity) / (1 - elevator_strong_gravity)) * elevator_max_velocity * time_difference, time_difference);
-  } else {
-    PID_value = GetPID(previous_height, time_difference);
+  if ((GetHeight() < lower_intake_intersect_height && target_location > lower_intake_intersect_height) || (target_location < upper_intake_intersect_height && GetHeight() > upper_intake_intersect_height)) {
+    Robot::m_ball_roller.RollerDown();
   }
-  if (target_location > GetHeight()) {
-    if (target_location > elevator_min_height + elevator_bottom_buffer) {
-      if (target_location - GetHeight() < 0.5 * (1 + elevator_deceleration_buffer) * pow((Robot::m_macro_superstructure.CapValue(current_vel + elevator_acceleration_rate) - elevator_strong_gravity) / (1 - elevator_strong_gravity), 2) * elevator_deceleration_time * elevator_max_velocity) {
-        if (target_location - GetHeight() < 0.5 * pow((current_vel - elevator_strong_gravity) / (1 - elevator_strong_gravity), 2) * elevator_deceleration_time * elevator_max_velocity) {
-          Accelerate(elevator_weak_gravity, PID_value);
-        } else {
-          RunElevator(sqrt(2 * (target_location - GetHeight()) / (elevator_deceleration_time * elevator_max_velocity)) + elevator_strong_gravity, PID_value);
-        }
-      } else {
-        Accelerate(1, PID_value);
-      }
-    } else {
-      Accelerate(0, 0);
-    }
+  if (abs(target_location - GetHeight()) < elevator_deadband && GetHeight() > elevator_min_height + elevator_bottom_buffer) {
+    Accelerate(elevator_weak_gravity, 0);
   } else {
-    if (target_location > elevator_min_height + elevator_bottom_buffer || GetHeight() > elevator_min_height + elevator_bottom_buffer) {
-      if (GetHeight() - target_location < 0.5 * (1 + elevator_deceleration_buffer) * pow((elevator_weak_gravity - Robot::m_macro_superstructure.CapValue(current_vel + elevator_deceleration_rate)) / (1 + elevator_weak_gravity), 2) * elevator_deceleration_time * elevator_max_velocity) {
-        if (GetHeight() - target_location < 0.5 * pow((elevator_weak_gravity - current_vel) / (1 + elevator_weak_gravity), 2) * elevator_deceleration_time * elevator_max_velocity) {
-          Accelerate(elevator_weak_gravity, PID_value);
+    if (target_location > GetHeight()) {
+      if (target_location > elevator_min_height + elevator_bottom_buffer) {
+        if (target_location - GetHeight() < 0.5 * (1 + elevator_deceleration_buffer) * abs(Robot::m_macro_superstructure.CapValue(current_vel + elevator_acceleration_rate) - elevator_strong_gravity) / (1 - elevator_strong_gravity) * (Robot::m_macro_superstructure.CapValue(current_vel + elevator_acceleration_rate) - elevator_strong_gravity) / (1 - elevator_strong_gravity) * elevator_deceleration_time * elevator_max_velocity) {
+          if (target_location - GetHeight() < 0.5 * pow((current_vel - elevator_strong_gravity) / (1 - elevator_strong_gravity), 2) * elevator_deceleration_time * elevator_max_velocity) {
+            Accelerate(elevator_weak_gravity, 0);
+          } else {
+            if (current_vel > elevator_strong_gravity) {
+              PID_value = GetPID(previous_height + ((current_vel - elevator_strong_gravity) / (1 - elevator_strong_gravity)) * elevator_max_velocity * time_difference, time_difference);
+            } else if (current_vel < elevator_weak_gravity) {
+              PID_value = GetPID(previous_height + ((current_vel - elevator_weak_gravity) / (1 - elevator_strong_gravity)) * elevator_max_velocity * time_difference, time_difference);
+            } else {
+              PID_value = GetPID(previous_height, time_difference);
+            }
+            RunElevator(sqrt(2 * (target_location - GetHeight()) / (elevator_deceleration_time * elevator_max_velocity)) + elevator_strong_gravity, PID_value);
+          }
         } else {
-          RunElevator(-sqrt(2 * (GetHeight() - target_location) / (elevator_deceleration_time * elevator_max_velocity * ((1 + elevator_weak_gravity) / (1 - elevator_strong_gravity)))) + elevator_weak_gravity, PID_value);
+          Accelerate(1, 0);
         }
       } else {
-        Accelerate(-1, PID_value);
+        Accelerate(0, 0);
       }
     } else {
-      Accelerate(0, 0);
+      if (target_location > elevator_min_height + elevator_bottom_buffer || GetHeight() > elevator_min_height + elevator_bottom_buffer) {
+        if (GetHeight() - target_location < 0.5 * (1 + elevator_acceleration_buffer) * abs((elevator_weak_gravity - Robot::m_macro_superstructure.CapValue(current_vel + elevator_acceleration_rate)) / (1 + elevator_weak_gravity)) * ((elevator_weak_gravity - Robot::m_macro_superstructure.CapValue(current_vel + elevator_acceleration_rate)) / (1 + elevator_weak_gravity)) * elevator_acceleration_time * elevator_max_velocity) {
+          if (GetHeight() - target_location < 0.5 * abs((elevator_weak_gravity - current_vel) / (1 + elevator_weak_gravity)) * ((elevator_weak_gravity - current_vel) / (1 + elevator_weak_gravity)) * elevator_acceleration_time * elevator_max_velocity) {
+            Accelerate(elevator_weak_gravity, 0);
+          } else {
+            if (current_vel > elevator_strong_gravity) {
+              PID_value = GetPID(previous_height + ((current_vel - elevator_strong_gravity) / (1 - elevator_strong_gravity)) * elevator_max_velocity * time_difference, time_difference);
+            } else if (current_vel < elevator_weak_gravity) {
+              PID_value = GetPID(previous_height + ((current_vel - elevator_weak_gravity) / (1 - elevator_strong_gravity)) * elevator_max_velocity * time_difference, time_difference);
+            } else {
+              PID_value = GetPID(previous_height, time_difference);
+            }
+            RunElevator(-sqrt(2 * (GetHeight() - target_location) / (elevator_acceleration_time * elevator_max_velocity * ((1 + elevator_weak_gravity) / (1 - elevator_strong_gravity)))) + elevator_weak_gravity, PID_value);
+          }
+        } else {
+          Accelerate(-1, 0);
+        }
+      } else {
+        Accelerate(0, 0);
+      }
     }
   }
 }

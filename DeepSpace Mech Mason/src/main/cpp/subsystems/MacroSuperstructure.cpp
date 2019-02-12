@@ -28,7 +28,7 @@ void MacroSuperstructure::SetProfile(int direction) {
       break;
     case reset_mechanisms_direction:
       reset = true;
-      break;
+      SetHandoffState(0);
     default:
       reset = false;
   }
@@ -42,8 +42,12 @@ int MacroSuperstructure::GetProfile() {
   return profile;
 }
 
-void MacroSuperstructure::RunLEDs(double value) {
-  LEDs.Set(value);  
+void MacroSuperstructure::SetLeftLEDs(double value) {
+  left_LEDs.Set(value);  
+}
+
+void MacroSuperstructure::SetRightLEDs(double value) {
+  right_LEDs.Set(value);  
 }
 
 void MacroSuperstructure::SetAuto(bool auto_data) {
@@ -65,4 +69,12 @@ void MacroSuperstructure::StopCompressor() {
 double MacroSuperstructure::GetPressure() {
   return 50 * pressure_input.GetVoltage() - 25;
   frc::SmartDashboard::PutNumber("Pressure", 50 * pressure_input.GetVoltage() - 25);
+}
+
+int MacroSuperstructure::SetHandoffState(int state) {
+  handoff_state = state;
+}
+
+int MacroSuperstructure::GetHandoffState() {
+  return handoff_state;
 }

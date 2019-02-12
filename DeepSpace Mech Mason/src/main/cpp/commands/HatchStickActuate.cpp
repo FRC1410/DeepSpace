@@ -10,7 +10,7 @@ void HatchStickActuate::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void HatchStickActuate::Execute() {
-  if (Robot::m_macro_superstructure.GetReset() == false) {
+  if (Robot::m_macro_superstructure.GetAuto() == false) {
     if (Robot::m_macro_superstructure.GetProfile() == hatch_profile_number) {
       if (Robot::m_oi.GetOperatorButton(hatch_stick_button) == true) {
         if (button_was_pressed == false) {
@@ -18,20 +18,30 @@ void HatchStickActuate::Execute() {
             Robot::m_hatch_stick.ExtendStick();
           } else {
             Robot::m_hatch_stick.RetractStick();
-     	    }
+          }
         }
         button_was_pressed = true;
       } else {  
         button_was_pressed = false;
       }
     }
-  } else {
-    Robot::m_hatch_stick.RetractStick();
+    if (Robot::m_macro_superstructure.GetHandoffState() == 2) {
+      Robot::m_hatch_stick.RetractStick();
+      Robot::m_macro_superstructure.SetHandoffState(3);
+    } else if (Robot::m_macro_superstructure.GetHandoffState() == 6) {
+      Robot::m_hatch_stick.ExtendStick();
+      Robot::m_macro_superstructure.SetHandoffState(0);
+    }
+    if (Robot::m_macro_superstructure.GetReset() == true) {
+      Robot::m_hatch_stick.RetractStick();
+    }
   }
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool HatchStickActuate::IsFinished() { return false; }
+bool HatchStickActuate::IsFinished() {
+  return false;
+}
 
 // Called once after isFinished returns true
 void HatchStickActuate::End() {}

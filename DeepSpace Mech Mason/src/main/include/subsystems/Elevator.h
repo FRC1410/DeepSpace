@@ -20,8 +20,6 @@ class Elevator : public frc::Subsystem {
     double I = 0;
     double previous_error = 0;
 
-    void CapValue(double value);
-
   public:
     Elevator();
     void InitDefaultCommand() override;

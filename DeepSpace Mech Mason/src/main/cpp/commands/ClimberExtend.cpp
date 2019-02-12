@@ -9,7 +9,7 @@ void ClimberExtend::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void ClimberExtend::Execute() {
-  if (Robot::m_macro_superstructure.GetReset() == false) {
+  if (Robot::m_macro_superstructure.GetAuto() == false) {
     if (Robot::m_macro_superstructure.GetProfile() == climber_profile_number) {
       if (Robot::m_oi.GetOperatorButton(climber_front_button) == true) {
       	if (front_button_was_pressed == false) {
@@ -36,15 +36,16 @@ void ClimberExtend::Execute() {
         back_button_was_pressed = false;
       }
     }
-  } else {
-    Robot::m_climber.RetractFront();
-    Robot::m_climber.RetractBack();
+    if (Robot::m_macro_superstructure.GetReset() == true) {
+      Robot::m_climber.RetractFront();
+      Robot::m_climber.RetractBack();
+    }
   }
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool ClimberExtend::IsFinished() { 
-  return false; 
+bool ClimberExtend::IsFinished() {
+  return false;
 }
 
 // Called once after isFinished returns true

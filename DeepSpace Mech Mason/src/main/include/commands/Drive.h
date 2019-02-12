@@ -8,8 +8,7 @@ class Drive : public frc::Command {
     double left_stick_amount, right_stick_amount;
     bool invert_driving = false;
     bool invert_button_was_pressed = false;
-    double x_position, y_position;
-    double previous_timer, previous_left_speed, previous_right_speed, previous_distance;
+    double x_position, y_position, previous_distance;
     
     frc::Timer rumble_timer;
     frc::Timer timer;

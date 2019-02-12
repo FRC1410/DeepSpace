@@ -12,9 +12,9 @@ void BallRollerRun::Initialize() {}
 void BallRollerRun::Execute() {
   if (Robot::m_macro_superstructure.GetReset() == false) {
     if (Robot::m_macro_superstructure.GetProfile() == ball_profile_number) {
-      if (Robot::m_elevator.GetHeight() <= 20) {
+      if (Robot::m_elevator.GetHeight() < elevator_low_ball_height - elevator_deadband) {
         if (Robot::m_ball_claw.GetLimitSwitch() == false) {
-          Robot::m_ball_roller.RunIntake(Robot::m_oi.GetOperatorAxis(ball_both_intakes_axis, 0) - Robot::m_oi.GetOperatorAxis(ball_both_outtakes_axis, 0));
+          Robot::m_ball_roller.RunIntake(Robot::m_oi.GetOperatorAxis(ball_both_intakes_axis) - Robot::m_oi.GetOperatorAxis(ball_both_outtakes_axis));
         } else {
           Robot::m_ball_roller.RunIntake(0);
         }
@@ -33,13 +33,13 @@ void BallRollerRun::Execute() {
       }
     }
   } else {
-    Robot::m_ball_roller.RollerUp();
+    Robot::m_ball_roller.RollerDown();
   }
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool BallRollerRun::IsFinished() { 
-  return false; 
+bool BallRollerRun::IsFinished() {
+  return false;
 }
 
 // Called once after isFinished returns true

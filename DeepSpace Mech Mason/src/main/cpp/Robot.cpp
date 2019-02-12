@@ -1,8 +1,6 @@
 #include "Robot.h"
 #include <frc/commands/Scheduler.h>
 #include <frc/smartdashboard/SmartDashboard.h>
-#include <cameraserver/CameraServer.h>
-#include <wpi/raw_ostream.h>
 
 OI Robot::m_oi;
 MacroSuperstructure Robot::m_macro_superstructure;
@@ -16,22 +14,22 @@ Climber Robot::m_climber;
 Limelight Robot::m_limelight;
 
 void Robot::RobotInit() {
-  m_chooser.SetDefaultOption("Line Sensor", &m_auto_line_sensor);
+  m_chooser.SetDefaultOption("Do Nothing", nullptr);
   m_chooser.AddOption("Limelight", &m_auto_limelight_targeting);
   m_chooser.AddOption("Gyro PID", &m_auto_gyro_pid);
   m_chooser.AddOption("Calibrate Elevator", &m_elevator_calibrate);
-  m_chooser.AddOption("Better Line Sensor", &m_better_line_sensor);
   frc::SmartDashboard::PutData("Auto", &m_chooser);
   Robot::m_limelight.TurnOffLights();
-  frc::CameraServer::GetInstance()->StartAutomaticCapture();
+
   frc::SmartDashboard::PutNumber("Elevator Height", elevator_min_height);
 
   Robot::m_elevator.ResetEncoders();
   Robot::m_elevator.ResetIntegral();
+
   Robot::m_climber.RetractFront();
-  Robot::m_climber.RetractBack();
   Robot::m_hatch_stick.RetractStick();
   Robot::m_ball_roller.RollerUp();
+  Robot::m_hatch_pickup.SetState(true);
 }
 
 /*
@@ -80,10 +78,8 @@ void Robot::AutonomousInit() {
     m_autonomous_command = &m_auto_gyro_pid;
   } else if (auto_selected == "Calibrate Elevator") {
     m_autonomous_command = &m_elevator_calibrate;
-  } else if (auto_selected == "Better Line Sensor") {
-    m_autonomous_command = &m_better_line_sensor;
   } else {
-    m_autonomous_command = &m_auto_line_sensor;
+    m_autonomous_command = nullptr;
   }
 
   m_autonomous_command = m_chooser.GetSelected();

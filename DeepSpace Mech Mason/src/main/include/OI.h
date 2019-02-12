@@ -16,12 +16,13 @@ class OI {
   public:
     OI();
     double ApplyDeadzone(int controller, int axis, double userValue, double deadzone);
-	  double GetDriverAxis(int axis, double deadzone);
+	  double GetDriverAxis(int axis);
     bool GetDriverButton(int button);
     int GetDriverDPad();
-	  double GetOperatorAxis(int axis, double deadzone);
+	  double GetOperatorAxis(int axis);
     bool GetOperatorButton(int button);
     int GetOperatorDPad();
+    double GetAverageDriverInput();
     void SetDriverRumbleLeft(double value);
     void SetDriverRumbleRight(double value);
     void SetOperatorRumbleLeft(double value);

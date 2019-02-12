@@ -12,12 +12,13 @@ void ElevatorRun::Initialize() {
   previous_height = Robot::m_elevator.GetHeight();
   Robot::m_elevator.ResetIntegral();
   height = elevator_min_height;
+  manual_control = false;
 }
 
 // Called repeatedly when this Command is scheduled to run
 void ElevatorRun::Execute() {
   if (Robot::m_macro_superstructure.GetAuto() == false) {
-    elevator_input = -Robot::m_oi.GetOperatorAxis(elevator_axis, operator_deadzone);
+    elevator_input = -Robot::m_oi.GetOperatorAxis(elevator_axis);
     if (abs(elevator_input) > 0) {
       manual_control = true;
       if (acceleration_complete == false) {
@@ -28,6 +29,7 @@ void ElevatorRun::Execute() {
       } else {
         Robot::m_elevator.RunElevator(elevator_input, 0);
       }
+      Robot::m_macro_superstructure.SetHandoffState(0);
     } else {
       if (manual_control == true) {
         height = Robot::m_elevator.GetHeight();
@@ -38,7 +40,7 @@ void ElevatorRun::Execute() {
         if (loading_station_button_was_pressed == false) {
           if (Robot::m_macro_superstructure.GetProfile() == 0) {
             if (height > elevator_min_height + elevator_loading_station_displacement) {
-              height -= 3.5;
+              height -= elevator_loading_station_displacement;
             } else {
               height = elevator_min_height;
             }
@@ -46,9 +48,9 @@ void ElevatorRun::Execute() {
             height = elevator_cargo_ship_height;
           }
         }
-        loading_station_button_was_pressed == true;
+        loading_station_button_was_pressed = true;
       } else {
-        loading_station_button_was_pressed == false;
+        loading_station_button_was_pressed = false;
       }
       if (Robot::m_oi.GetOperatorButton(elevator_high_position_button) == true) {
         if (high_button_was_pressed == false) {
@@ -58,9 +60,9 @@ void ElevatorRun::Execute() {
             height = elevator_high_ball_height;
           }
         }
-        high_button_was_pressed == true;
+        high_button_was_pressed = true;
       } else {
-        high_button_was_pressed == false;
+        high_button_was_pressed = false;
       }
       if (Robot::m_oi.GetOperatorButton(elevator_mid_position_button) == true) {
         if (mid_button_was_pressed == false) {
@@ -70,9 +72,9 @@ void ElevatorRun::Execute() {
             height = elevator_mid_ball_height;
           }
         }
-        mid_button_was_pressed == true;
+        mid_button_was_pressed = true;
       } else {
-        mid_button_was_pressed == false;
+        mid_button_was_pressed = false;
       }
       if (Robot::m_oi.GetOperatorButton(elevator_low_position_button) == true) {
         if (low_button_was_pressed == false) {
@@ -82,9 +84,20 @@ void ElevatorRun::Execute() {
             height = elevator_low_ball_height;
           }
         }
-        low_button_was_pressed == true;
+        low_button_was_pressed = true;
       } else {
-        low_button_was_pressed == false;
+        low_button_was_pressed = false;
+      }
+      if (Robot::m_macro_superstructure.GetHandoffState() == 3) {
+        height = elevator_handoff_height;
+        if (abs(height - Robot::m_elevator.GetHeight()) < elevator_deadband) {
+          Robot::m_macro_superstructure.SetHandoffState(4);
+        }
+      } else if (Robot::m_macro_superstructure.GetHandoffState() == 5) {
+        height += elevator_handoff_raise;
+        if (abs(height - Robot::m_elevator.GetHeight()) < elevator_deadband) {
+          Robot::m_macro_superstructure.SetHandoffState(6);
+        }
       }
       if (Robot::m_macro_superstructure.GetReset() == true) {
         if (reset_button_was_pressed == false) {
@@ -107,8 +120,8 @@ void ElevatorRun::Execute() {
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool ElevatorRun::IsFinished() { 
-  return false; 
+bool ElevatorRun::IsFinished() {
+  return false;
 }
 
 // Called once after isFinished returns true

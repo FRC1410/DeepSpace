@@ -14,17 +14,17 @@ void MacroControl::Execute() {
   if (Robot::m_macro_superstructure.GetReset() == false) {
     switch (Robot::m_macro_superstructure.GetProfile()) {
       case hatch_profile_number:
-        Robot::m_macro_superstructure.RunLEDs(hatch_color);
+        Robot::m_macro_superstructure.SetLeftLEDs(hatch_color);
         break;
       case ball_profile_number:
-        Robot::m_macro_superstructure.RunLEDs(ball_color);
+        Robot::m_macro_superstructure.SetLeftLEDs(ball_color);
         break;
       case climber_profile_number:
-        Robot::m_macro_superstructure.RunLEDs(climber_color);
+        Robot::m_macro_superstructure.SetLeftLEDs(climber_color);
         break;
     }
   } else {
-    Robot::m_macro_superstructure.RunLEDs(reset_mechanisms_color);
+    Robot::m_macro_superstructure.SetLeftLEDs(reset_mechanisms_color);
   }
 
   if (Robot::m_oi.GetOperatorButton(toggle_compressor_button) == true) {
@@ -48,7 +48,7 @@ void MacroControl::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool MacroControl::IsFinished() {
-  return false; 
+  return false;
 }
 
 // Called once after isFinished returns true

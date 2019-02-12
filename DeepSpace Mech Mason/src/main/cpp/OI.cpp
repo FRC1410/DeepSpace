@@ -28,16 +28,12 @@ double OI::ApplyDeadzone(int controller, int axis, double axis_value, double dea
       return ((raw_magnitude - deadzone)/(1 - deadzone)) * (axis_value/raw_magnitude);
     }
   } else {
-    if (axis_value <= deadzone) {
-      return 0;
-    } else {
-      return (axis_value - deadzone)/(1 - deadzone);
-    }
+    return axis_value;
   }
 }
 
-double OI::GetDriverAxis(int axis, double deadzone) {
-  return ApplyDeadzone(driver_port, axis, driver_controller.GetRawAxis(axis), deadzone);
+double OI::GetDriverAxis(int axis) {
+  return ApplyDeadzone(driver_port, axis, driver_controller.GetRawAxis(axis), driver_deadzone);
 }
 
 bool OI::GetDriverButton(int button) {
@@ -48,8 +44,8 @@ int OI::GetDriverDPad() {
   return driver_controller.GetPOV();
 }
 
-double OI::GetOperatorAxis(int axis, double deadzone) {
-  return ApplyDeadzone(operator_port, axis, operator_controller.GetRawAxis(axis), deadzone);
+double OI::GetOperatorAxis(int axis) {
+  return ApplyDeadzone(operator_port, axis, operator_controller.GetRawAxis(axis), operator_deadzone);
 }
 
 bool OI::GetOperatorButton(int button) {
@@ -58,6 +54,10 @@ bool OI::GetOperatorButton(int button) {
 
 int OI::GetOperatorDPad() {
   return operator_controller.GetPOV();
+}
+
+double OI::GetAverageDriverInput() {
+  return (GetDriverAxis(drivetrain_left_axis) + GetDriverAxis(drivetrain_right_axis)) / 2;
 }
 
 void OI::SetDriverRumbleLeft(double value) {
