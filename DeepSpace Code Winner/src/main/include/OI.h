@@ -37,4 +37,5 @@ class OI {
     void SetDriverRumbleRight(double value);
     void SetOperatorRumbleLeft(double value);
     void SetOperatorRumbleRight(double value);
+    double CalculateAntiAntiFriction();
 };

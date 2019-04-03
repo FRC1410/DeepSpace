@@ -11,11 +11,5 @@
     ".classpath": true,
     ".project": true
   },
-  "C_Cpp.default.configurationProvider": "vscode-wpilib",
-  "files.associations": {
-    "cmath": "cpp",
-    "cstdlib": "cpp",
-    "vector": "cpp"
-  },
-  "C_Cpp.configurationWarnings": "Disabled"
+  "C_Cpp.default.configurationProvider": "vscode-wpilib"
 }

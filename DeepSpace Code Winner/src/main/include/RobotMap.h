@@ -198,3 +198,6 @@ constexpr bool debugging = false;                       //Shuffleboard
 
 constexpr double compressor_low_thresh = 40;            //Sets the compressor autotrigger threshold
 constexpr double compressor_high_thresh = 80;           //Sets the compressor autotrigger off threshold
+
+constexpr double auto_align_friction = 0.4;
+constexpr double auto_align_d = 0.1;

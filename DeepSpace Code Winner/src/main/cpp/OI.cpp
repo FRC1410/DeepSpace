@@ -10,6 +10,8 @@
 
 #include "OI.h"
 
+#include <math.h>
+
 OI::OI() {}
 
 double OI::ApplyDeadzone(int controller, int axis, double axis_value, double deadzone) {
@@ -83,4 +85,17 @@ void OI::SetOperatorRumbleLeft(double value) {
 
 void OI::SetOperatorRumbleRight(double value) {
   operator_controller.SetRumble(frc::GenericHID::RumbleType::kRightRumble, value);
+}
+
+double OI::CalculateAntiAntiFriction() {
+  double f = auto_align_friction;
+  double d = auto_align_d;
+  
+  double x = GetAverageDriverInput();
+  if (x <= f){
+    return (abs(x) * x * d)/pow(f,2);
+  } else {
+    return (((1 - d) * (x - ((abs(x)/x) * f))) / (1 - f)) + ((abs(x) / x) * d);
+  }
+ 
 }
