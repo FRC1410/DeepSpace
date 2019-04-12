@@ -10,12 +10,23 @@
 #include <frc/commands/Subsystem.h>
 #include <frc/Spark.h>
 #include <frc/WPILib.h>
+#include <frc/shuffleboard/Shuffleboard.h>
 #include <AHRS.h>
 
 #include "RobotMap.h"
 
 class MacroSuperstructure : public frc::Subsystem {
   private:
+    /*nt::NetworkTableEntry shuffleboard_hatch = frc::Shuffleboard::GetTab("Drivers").Add("Hatch", false).WithWidget("Boolean Box").WithPosition(0, 0).WithSize(1, 1).GetEntry();
+    nt::NetworkTableEntry shuffleboard_cargo = frc::Shuffleboard::GetTab("Drivers").Add("Cargo", false).WithWidget("Boolean Box").WithPosition(0, 1).WithSize(1, 1).GetEntry();
+    nt::NetworkTableEntry shuffleboard_climber = frc::Shuffleboard::GetTab("Drivers").Add("Climber", false).WithWidget("Boolean Box").WithPosition(0, 2).WithSize(1, 1).GetEntry();
+    nt::NetworkTableEntry shuffleboard_voltage = frc::Shuffleboard::GetTab("Drivers").Add("Voltage", 0).WithWidget("Voltage View").WithPosition(0, 0).WithSize(1, 1).GetEntry();
+    nt::NetworkTableEntry shuffleboard_time = frc::Shuffleboard::GetTab("Drivers").Add("Time", 0).WithWidget("Number Bar").WithPosition(0, 0).WithSize(1, 1).GetEntry();
+    nt::NetworkTableEntry shuffleboard_warnings = frc::Shuffleboard::GetTab("Drivers").Add("Warnings", 0).WithWidget("Boolean Box").WithPosition(0, 0).WithSize(1, 1).GetEntry();
+    nt::NetworkTableEntry shuffleboard_auto_inverter = frc::Shuffleboard::GetTab("Drivers").Add("Auto Inverter", 0).WithWidget("Toggle Button").WithPosition(0, 0).WithSize(1, 1).GetEntry();
+    nt::NetworkTableEntry shuffleboard_pressure = frc::Shuffleboard::GetTab("Drivers").Add("Pressure", 0).WithWidget("Toggle Button").WithPosition(0, 0).WithSize(1, 1).GetEntry();
+    nt::NetworkTableEntry shuffleboard_pressure = frc::Shuffleboard::GetTab("Drivers").Add("", 0).WithWidget("Toggle Button").WithPosition(0, 0).WithSize(1, 1).GetEntry();*/
+
     bool running_auto;
     bool inverted_auto;
     bool FMS_auto;
@@ -46,9 +57,6 @@ class MacroSuperstructure : public frc::Subsystem {
 
     void SetInvertedAuto(bool input);
     int GetInvertedAuto();
-
-    void SetHandoffStage(int state);
-    int GetHandoffStage();
 
     void SetVisionTargeting(bool targeting);
     int GetVisionTargeting();

@@ -12,6 +12,7 @@
 #include <frc/drive/DifferentialDrive.h>
 #include <ctre/Phoenix.h>
 #include <AHRS.h>
+#include <frc/shuffleboard/Shuffleboard.h>
 
 #include "RobotMap.h"
 
@@ -55,6 +56,9 @@ class DriveTrain : public frc::Subsystem {
     bool inverted_velocity, inverted_direction, stable_inverted_velocity, stable_inverted_direction;
     double distance_reference, angle_reference, distance, direction;
     double distance_PID, gyro_PID;
+
+    nt::NetworkTableEntry shuffleboard_left_speed = frc::Shuffleboard::GetTab("Debugging").Add("Left Drivetrain", 0).WithWidget("Text View").GetEntry();
+    nt::NetworkTableEntry shuffleboard_right_speed = frc::Shuffleboard::GetTab("Debugging").Add("Right Drivetrain", 0).WithWidget("Text View").GetEntry();
 
   public:
     DriveTrain();

@@ -32,6 +32,8 @@ void Drive::Initialize() {
     Robot::m_limelight.SetPipeline(0);
     Robot::m_limelight.TurnOffLights();
   }
+
+  target_found = false;
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -64,22 +66,35 @@ void Drive::Execute() {
       if (Robot::m_limelight.GetTarget() == false) {
         Robot::m_oi.SetDriverRumbleLeft(0.5);
         Robot::m_oi.SetDriverRumbleRight(0.5);
-        goto manual_control;
-      } else {
-        PID_value = Robot::m_limelight.GetPID(limelight_target_offset, m_timer.Get() - previous_timer);
         if (invert_driving == true) {
-          Robot::m_drivetrain.CurvedAccelerate(Robot::m_drivetrain.GetCurvedSpeed(Robot::m_oi.GetAverageDriverInput()) + PID_value, Robot::m_drivetrain.GetCurvedSpeed(Robot::m_oi.GetAverageDriverInput()) - PID_value, m_timer.Get() - previous_timer);
+          Robot::m_drivetrain.SetSpeed(Robot::m_oi.GetAverageDriverInput(), Robot::m_oi.GetAverageDriverInput());
         } else {
-          Robot::m_drivetrain.CurvedAccelerate(-Robot::m_drivetrain.GetCurvedSpeed(Robot::m_oi.GetAverageDriverInput()) + PID_value, -Robot::m_drivetrain.GetCurvedSpeed(Robot::m_oi.GetAverageDriverInput()) - PID_value, m_timer.Get() - previous_timer);
+          Robot::m_drivetrain.SetSpeed(-Robot::m_oi.GetAverageDriverInput(), -Robot::m_oi.GetAverageDriverInput());
+        }
+      } else {
+        target_found = true;
+        Robot::m_oi.SetDriverRumbleLeft(0);
+        Robot::m_oi.SetDriverRumbleRight(0);
+        if (Robot::m_limelight.GetTargetArea() < limelight_large_area) {
+          PID_value = Robot::m_limelight.GetPID(limelight_target_offset + (3 - sqrt(abs(Robot::m_limelight.GetTargetArea()))) * limelight_area_P, m_timer.Get() - previous_timer);
+          frc::SmartDashboard::PutNumber("Target Angle", limelight_target_offset + (3 - sqrt(abs(Robot::m_limelight.GetTargetArea()))) * limelight_area_P);
+        } else {
+          PID_value = 0;
+        }
+        if (invert_driving == true) {
+          Robot::m_drivetrain.SetCurvedSpeed(Robot::m_drivetrain.GetCurvedSpeed(Robot::m_oi.GetAverageDriverInput()) + PID_value, Robot::m_drivetrain.GetCurvedSpeed(Robot::m_oi.GetAverageDriverInput()) - PID_value);
+        } else {
+          Robot::m_drivetrain.SetCurvedSpeed(-Robot::m_drivetrain.GetCurvedSpeed(Robot::m_oi.GetAverageDriverInput()) + PID_value, -Robot::m_drivetrain.GetCurvedSpeed(Robot::m_oi.GetAverageDriverInput()) - PID_value);
         }
       }
     } else {
+      target_found = false;
       Robot::m_limelight.SetPipeline(0);
       Robot::m_limelight.TurnOffLights();
-      
+
       vision_button_was_pressed = false;
       Robot::m_macro_superstructure.SetVisionTargeting(false);
-      
+
       Robot::m_oi.SetDriverRumbleLeft(0);
       Robot::m_oi.SetDriverRumbleRight(0);
 
@@ -87,21 +102,23 @@ void Drive::Execute() {
         left_stick_amount = -Robot::m_oi.GetDriverAxis(drivetrain_left_axis);
         right_stick_amount = -Robot::m_oi.GetDriverAxis(drivetrain_right_axis);
 
-        if (invert_driving == false) {
-          if ((m_timer.Get() - invert_timer) < single_rumble_time && Robot::m_macro_superstructure.GetVisionTargeting() == false) {
-            Robot::m_oi.SetDriverRumbleLeft(1);
-            Robot::m_oi.SetDriverRumbleRight(1);
+        if (Robot::m_macro_superstructure.GetVisionTargeting() == false) {
+          if (invert_driving == false) {
+            if ((m_timer.Get() - invert_timer) < single_rumble_time && Robot::m_macro_superstructure.GetVisionTargeting() == false) {
+              Robot::m_oi.SetDriverRumbleLeft(1);
+              Robot::m_oi.SetDriverRumbleRight(1);
+            } else {
+              Robot::m_oi.SetDriverRumbleLeft(0);
+              Robot::m_oi.SetDriverRumbleRight(0);
+            }
           } else {
-            Robot::m_oi.SetDriverRumbleLeft(0);
-            Robot::m_oi.SetDriverRumbleRight(0);
-          }
-        } else {
-          if ((m_timer.Get() - invert_timer) < double_rumble_time || ((m_timer.Get() - invert_timer) > (2 * double_rumble_time) && (m_timer.Get() - invert_timer) < (3 * double_rumble_time)) && Robot::m_macro_superstructure.GetVisionTargeting() == false) {
-            Robot::m_oi.SetDriverRumbleLeft(1);
-            Robot::m_oi.SetDriverRumbleRight(1);
-          } else {
-            Robot::m_oi.SetDriverRumbleLeft(0);
-            Robot::m_oi.SetDriverRumbleRight(0);
+            if ((m_timer.Get() - invert_timer) < double_rumble_time || ((m_timer.Get() - invert_timer) > (2 * double_rumble_time) && (m_timer.Get() - invert_timer) < (3 * double_rumble_time)) && Robot::m_macro_superstructure.GetVisionTargeting() == false) {
+              Robot::m_oi.SetDriverRumbleLeft(1);
+              Robot::m_oi.SetDriverRumbleRight(1);
+            } else {
+              Robot::m_oi.SetDriverRumbleLeft(0);
+              Robot::m_oi.SetDriverRumbleRight(0);
+            }
           }
         }
 

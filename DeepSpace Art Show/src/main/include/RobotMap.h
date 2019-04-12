@@ -41,7 +41,7 @@ constexpr double drivetrain_gyro_kD = 0;                //PID Tuning
 constexpr double drivetrain_gyro_deadband = 2;          //Auto staging
 
 constexpr double drivetrain_acceleration_time = 1;      //0 to max speed
-constexpr double drivetrain_friction = 0.4;             //Power required to move robot
+constexpr double drivetrain_friction = 0.35;             //Power required to move robot
 constexpr double drivetrain_friction_deadband = 0.1;    //Jumper Size
 
 constexpr double drivetrain_max_speed = 200;            //Inches per second
@@ -188,11 +188,13 @@ constexpr double limelight_x_offset = 17.5;//9.5;              //9.5 //Right of 
 constexpr double limelight_y_offset = 3.5;              //32  
 constexpr double limelight_z_offset = -1;//1;                //1  //behind center of rotation
 constexpr double limelight_angle_offset = 14;           //14 //Tilted Left
-constexpr double limelight_target_offset = -14.5;
+constexpr double limelight_target_offset = -4.4;//-11.5;
+constexpr double limelight_large_area = 7;
 
-constexpr double limelight_kP = 0;//1.0;                    //PID for desired angle
-constexpr double limelight_kI = 0;                      //PID for desired angle
-constexpr double limelight_kD = 0;                      //PID for desired angle
+constexpr double limelight_kP = 0.02;//1.0;                    //PID for desired angle
+constexpr double limelight_kI = 0.0;                      //PID for desired angle
+constexpr double limelight_kD = 0.0;                      //PID for desired angle
+constexpr double limelight_area_P = 2.5;
 
 //Safety
 constexpr int operator_macro_override_button = 7;       //Back
@@ -206,8 +208,6 @@ constexpr double long_rumble_time = 1;                //Rumble Timings
 constexpr double rumble_time_alert = 25;
 constexpr double dashboard_early_time_alert = 20;
 constexpr double dashboard_late_time_alert = 7;
-
-constexpr bool debugging = false;                       //Shuffleboard
 
 constexpr double compressor_low_thresh = 40;            //Sets the compressor autotrigger threshold
 constexpr double compressor_high_thresh = 80;           //Sets the compressor autotrigger off threshold

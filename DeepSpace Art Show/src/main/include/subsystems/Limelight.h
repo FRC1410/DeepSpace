@@ -8,13 +8,15 @@
 #pragma once
 
 #include <frc/commands/Subsystem.h>
+#include <frc/shuffleboard/Shuffleboard.h>
 #include <networktables/NetworkTable.h>
 #include <networktables/NetworkTableInstance.h>
 
 class Limelight : public frc::Subsystem {
   private:
     std::shared_ptr<NetworkTable> limelight_table = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
-
+    nt::NetworkTableEntry shuffleboard_limelight = frc::Shuffleboard::GetTab("Limelight").Add("Error", 0).WithWidget("Text View").GetEntry();
+    
     double error, P, D;
     double I = 0;
     double previous_error = 0;

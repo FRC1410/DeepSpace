@@ -20,7 +20,6 @@
 #include "OI.h"
 
 #include "subsystems/DriveTrain.h"
-#include "subsystems/HatchPickup.h"
 #include "subsystems/HatchStick.h"
 #include "subsystems/BallClaw.h"
 #include "subsystems/BallRoller.h"
@@ -61,7 +60,6 @@ class Robot : public frc::TimedRobot {
  	  static DriveTrain m_drivetrain;
     static BallClaw m_ball_claw;
     static BallRoller m_ball_roller;
-    static HatchPickup m_hatch_pickup;
     static HatchStick m_hatch_stick;
     static Elevator m_elevator;
     static Climber m_climber;

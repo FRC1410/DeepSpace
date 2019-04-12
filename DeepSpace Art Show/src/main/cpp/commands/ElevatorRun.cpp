@@ -65,7 +65,6 @@ void ElevatorRun::Execute() {
       if (Robot::m_macro_superstructure.GetEncoderFailure() == false) {
         Robot::m_elevator.RunElevator(elevator_input + elevator_gravity);
       }
-      Robot::m_macro_superstructure.SetHandoffStage(0);
     } else {
       if (Robot::m_oi.GetOperatorButton(elevator_loading_station_button) == true) {
         if (loading_station_button_was_pressed == false) {

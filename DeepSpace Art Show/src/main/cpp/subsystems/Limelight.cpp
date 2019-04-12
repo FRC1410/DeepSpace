@@ -44,6 +44,8 @@ int Limelight::GetPipeline() {
 
 double Limelight::GetPID(double position, double time_difference) {
   error = GetTargetX() - position;
+  frc::SmartDashboard::PutNumber("Error", error);
+  shuffleboard_limelight.SetDouble(error);
   P = limelight_kP * error;
   I += limelight_kI * error * time_difference;
   D = limelight_kD * (error - previous_error) * time_difference;

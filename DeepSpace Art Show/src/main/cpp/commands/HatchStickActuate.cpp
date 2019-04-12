@@ -32,11 +32,6 @@ void HatchStickActuate::Execute() {
         button_was_pressed = false;
       }
     }
-
-    if (Robot::m_macro_superstructure.GetHandoffStage() == 2) {
-      Robot::m_hatch_stick.RetractStick();
-      Robot::m_macro_superstructure.SetHandoffStage(3);
-    }
     
     if (Robot::m_macro_superstructure.GetReset() == true) {
       Robot::m_hatch_stick.RetractStick();

@@ -8,13 +8,11 @@
 #include "Robot.h"
 #include <frc/commands/Scheduler.h>
 
-
 OI Robot::m_oi;
 MacroSuperstructure Robot::m_macro_superstructure;
 DriveTrain Robot::m_drivetrain;
 BallClaw Robot::m_ball_claw;
 BallRoller Robot::m_ball_roller;
-HatchPickup Robot::m_hatch_pickup;
 HatchStick Robot::m_hatch_stick;
 Elevator Robot::m_elevator;
 Climber Robot::m_climber;
@@ -38,15 +36,6 @@ void Robot::RobotInit() {
   frc::SmartDashboard::PutData("Auto", &m_chooser);
 
   frc::SmartDashboard::PutBoolean("Auto Inverter", false);
-
-  nt::NetworkTableEntry shuffleboard_hatch = frc::Shuffleboard::GetTab("Drivers").Add("Hatch", false).WithWidget("Boolean Box").GetEntry();
-  nt::NetworkTableEntry shuffleboard_cargo = frc::Shuffleboard::GetTab("Drivers").Add("Cargo", false).WithWidget("Boolean Box").GetEntry();
-  nt::NetworkTableEntry shuffleboard_climber = frc::Shuffleboard::GetTab("Drivers").Add("Climber", false).WithWidget("Boolean Box").GetEntry();
-  nt::NetworkTableEntry shuffleboard_voltage = frc::Shuffleboard::GetTab("Drivers").Add("Voltage", 0).WithWidget("Voltage View").GetEntry();
-  nt::NetworkTableEntry shuffleboard_time = frc::Shuffleboard::GetTab("Drivers").Add("Time", 0).WithWidget("Number Bar").GetEntry();
-  nt::NetworkTableEntry shuffleboard_warnings = frc::Shuffleboard::GetTab("Drivers").Add("Warnings", 0).WithWidget("Boolean Box").GetEntry();
-  nt::NetworkTableEntry shuffleboard_auto_inverter = frc::Shuffleboard::GetTab("Drivers").Add("Auto Inverter", 0).WithWidget("Toggle Button").GetEntry();
-  nt::NetworkTableEntry shuffleboard_pressure = frc::Shuffleboard::GetTab("Drivers").Add("Pressure", 0).WithWidget("Toggle Button").GetEntry();
 }
 
 void Robot::RobotPeriodic() {}
@@ -72,7 +61,6 @@ void Robot::AutonomousInit() {
 
   m_drivetrain.ResetEncoders();
   m_elevator.ResetEncoders();
-  m_hatch_pickup.ResetEncoder();
   m_drivetrain.ResetNavX(0);
   
   m_drivetrain.SetX(-47 * Robot::m_macro_superstructure.GetInvertedAuto());
@@ -88,8 +76,6 @@ void Robot::AutonomousInit() {
   m_limelight.TurnOnLights();
   m_limelight.SetPipeline(2);
   
-  m_macro_superstructure.SetHandoffStage(0);
-
   std::string auto_selected = frc::SmartDashboard::GetString("Auto", "Default");
   if (auto_selected == "Calibrate Elevator") {
     m_autonomous_command = &m_elevator_calibrate;

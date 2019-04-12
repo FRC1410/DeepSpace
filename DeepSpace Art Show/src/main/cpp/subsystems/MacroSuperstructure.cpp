@@ -7,19 +7,13 @@
 
 #include "subsystems/MacroSuperstructure.h"
 #include "commands/MacroControl.h"
+#include <frc/shuffleboard/Shuffleboard.h>
+#include <frc/shuffleboard/ShuffleboardTab.h>
 
 MacroSuperstructure::MacroSuperstructure() : Subsystem("ExampleSubsystem") {}
 
 void MacroSuperstructure::InitDefaultCommand() {
   SetDefaultCommand(new MacroControl());
-}
-
-void MacroSuperstructure::SetAuto(bool auto_data) {
-  running_auto = auto_data;
-}
-
-bool MacroSuperstructure::GetAuto() {
-  return running_auto;
 }
 
 void MacroSuperstructure::SetFMSAuto(bool auto_data) {
@@ -28,6 +22,14 @@ void MacroSuperstructure::SetFMSAuto(bool auto_data) {
 
 bool MacroSuperstructure::GetFMSAuto() {
   return FMS_auto;
+}
+
+void MacroSuperstructure::SetAuto(bool auto_data) {
+  running_auto = auto_data;
+}
+
+bool MacroSuperstructure::GetAuto() {
+  return running_auto;
 }
 
 void MacroSuperstructure::SetInvertedAuto(bool input) {
@@ -40,14 +42,6 @@ void MacroSuperstructure::SetInvertedAuto(bool input) {
 
 int MacroSuperstructure::GetInvertedAuto() {
   return inverted_auto;
-}
-
-void MacroSuperstructure::SetHandoffStage(int stage) {
-  handoff_stage = stage;
-}
-
-int MacroSuperstructure::GetHandoffStage() {
-  return handoff_stage;
 }
 
 void MacroSuperstructure::SetVisionTargeting(bool targeting) {
@@ -71,7 +65,6 @@ void MacroSuperstructure::SetProfile(int direction) {
       break;
     case reset_mechanisms_direction:
       reset = true;
-      SetHandoffStage(0);
       break;
     default:
       reset = false;

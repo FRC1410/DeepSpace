@@ -64,7 +64,7 @@ void AutoTwoHatchFarRocket::Execute() {
       break;
     case 2:
       if (Robot::m_drivetrain.GetDistance() > stage_distance - 45) {
-        if (/*Robot::m_limelight.GetTargetXTrans()*/ 0 == 0) {
+        /*if (Robot::m_limelight.GetTargetXTrans() 0 == 0) {
           if (target_found == false) {
             distance_PID_value = Robot::m_drivetrain.GetDistancePID(stage_distance - 47, m_timer.Get() - previous_timer);
             gyro_PID_value = Robot::m_drivetrain.GetGyroPID(28.75 * Robot::m_macro_superstructure.GetInvertedAuto(), m_timer.Get() - previous_timer);
@@ -107,7 +107,7 @@ void AutoTwoHatchFarRocket::Execute() {
         limelight_PID_value = Robot::m_limelight.GetPID(limelight_x, m_timer.Get() - previous_timer);
         gyro_PID_value = Robot::m_drivetrain.GetGyroPID(Robot::m_drivetrain.GetAngle() - limelight_angle + limelight_PID_value, m_timer.Get() - previous_timer);
         distance_PID_value = Robot::m_drivetrain.GetDistancePID(Robot::m_drivetrain.GetDistance() - limelight_z, m_timer.Get() - previous_timer);
-        Robot::m_drivetrain.CurvedAccelerate(distance_PID_value + gyro_PID_value, distance_PID_value - gyro_PID_value, m_timer.Get() - previous_timer);
+        Robot::m_drivetrain.CurvedAccelerate(distance_PID_value + gyro_PID_value, distance_PID_value - gyro_PID_value, m_timer.Get() - previous_timer);*/
       } else {
         Robot::m_drivetrain.SetSpeed(0, 0);
         Robot::m_hatch_stick.ExtendStick();
@@ -217,7 +217,7 @@ void AutoTwoHatchFarRocket::Execute() {
       break;
     case 12:
       if (Robot::m_drivetrain.GetDistance() > stage_distance - 45) {
-        if (/*Robot::m_limelight.GetTargetXTrans()*/0 == 0) {
+        /*if (Robot::m_limelight.GetTargetXTrans()0 == 0) {
           if (target_found == false) {
             distance_PID_value = Robot::m_drivetrain.GetDistancePID(stage_distance - 47, m_timer.Get() - previous_timer);
             gyro_PID_value = Robot::m_drivetrain.GetGyroPID(28.75 * Robot::m_macro_superstructure.GetInvertedAuto(), m_timer.Get() - previous_timer);
@@ -260,7 +260,7 @@ void AutoTwoHatchFarRocket::Execute() {
         limelight_PID_value = Robot::m_limelight.GetPID(limelight_x, m_timer.Get() - previous_timer);
         gyro_PID_value = Robot::m_drivetrain.GetGyroPID(Robot::m_drivetrain.GetAngle() - limelight_angle + limelight_PID_value, m_timer.Get() - previous_timer);
         distance_PID_value = Robot::m_drivetrain.GetDistancePID(Robot::m_drivetrain.GetDistance() - limelight_z, m_timer.Get() - previous_timer);
-        Robot::m_drivetrain.CurvedAccelerate(distance_PID_value + gyro_PID_value, distance_PID_value - gyro_PID_value, m_timer.Get() - previous_timer);
+        Robot::m_drivetrain.CurvedAccelerate(distance_PID_value + gyro_PID_value, distance_PID_value - gyro_PID_value, m_timer.Get() - previous_timer);*/
       } else {
         Robot::m_drivetrain.SetSpeed(0, 0);
         Robot::m_hatch_stick.ExtendStick();
