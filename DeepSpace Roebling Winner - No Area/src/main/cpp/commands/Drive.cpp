@@ -30,6 +30,9 @@ void Drive::Initialize() {
   invert_driving = true;
   invert_button_was_pressed = false;
   invert_timer = 0;
+
+  dpad_left_was_pressed = false;
+  dpad_right_was_pressed = false;
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -53,9 +56,9 @@ void Drive::Execute() {
 
     //if (Robot::m_oi.GetDriverAxis(vision_align_axis) >= trigger_threshold) {
     if (Robot::m_oi.GetDriverButton(vision_align_button) == true) {
-      if (Robot::m_limelight.GetTargetFound() == false) {
+      //if (Robot::m_limelight.GetTargetFound() == false) {
         Robot::m_limelight.SetPipeline(limelight_vision_pipeline);
-      }
+      //}
 
       if (vision_button_was_pressed == false) {
         Robot::m_limelight.ResetAngleIntegral();
@@ -77,15 +80,15 @@ void Drive::Execute() {
         Robot::m_oi.SetDriverRumble(0, 0);
 
         if (Robot::m_limelight.GetTargetArea() < limelight_large_area) {
-          PID_value = Robot::m_limelight.GetAnglePID(limelight_target_offset + Robot::m_limelight.GetAreaPID(limelight_large_area, m_timer.Get() - previous_timer), m_timer.Get() - previous_timer);
+          PID_value = Robot::m_limelight.GetAnglePID(limelight_target_offset_offset + Robot::m_limelight.GetAreaPID(limelight_large_area, m_timer.Get() - previous_timer), m_timer.Get() - previous_timer);
         } else {
-          Robot::m_limelight.SetTargetFound(true);
+        //  Robot::m_limelight.SetTargetFound(true);
           PID_value = 0;
         }
 
-        if (Robot::m_limelight.GetTargetFound() == true) {
+        /*if (Robot::m_limelight.GetTargetFound() == true) {
           Robot::m_limelight.SetPipeline(limelight_driver_pipeline);
-        }
+        }*/
 
         //if (Robot::m_oi.GetDriverAxis(invert_driving_axis) > trigger_threshold) {
         if (invert_driving == true) {
@@ -160,6 +163,32 @@ void Drive::Execute() {
   previous_distance = Robot::m_drivetrain.GetDistance();
   previous_angle = Robot::m_drivetrain.GetAngle();
   previous_timer = m_timer.Get();
+
+  /*if (Robot::m_oi.GetOperatorAxis(limelight_offset_increase_trigger) >= trigger_threshold){
+    limelight_target_offset_offset += 0.0254;  
+  } else if (Robot::m_oi.GetOperatorAxis(limelight_offset_decrease_trigger) >= trigger_threshold) {
+    limelight_target_offset_offset -= 0.0254;
+  }
+
+  if (Robot::m_oi.GetDriverDPad() == 90) {
+    if (dpad_left_was_pressed == false) {
+      limelight_target_offset_offset += 0.148;
+    }
+    dpad_left_was_pressed = true;
+  } else {
+    dpad_left_was_pressed = false;
+  }
+
+  if (Robot::m_oi.GetDriverDPad() == 270) {
+    if (dpad_right_was_pressed == false) {
+      limelight_target_offset_offset -= 0.148;
+    }
+    dpad_right_was_pressed = true;
+  } else {
+    dpad_right_was_pressed = false;
+  }*/
+  
+  frc::SmartDashboard::PutNumber("target offset offset" , limelight_target_offset_offset);
 }
 
 // Make this return true when this Command no longer needs to run execute()

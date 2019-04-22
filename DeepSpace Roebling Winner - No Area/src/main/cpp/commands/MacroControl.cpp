@@ -53,6 +53,7 @@ void MacroControl::Execute() {
         } else {
           Robot::m_macro_superstructure.SetLEDs(ball_color);
         }
+
       }
     } else {
       Robot::m_macro_superstructure.SetLEDs(vision_targeting_color);
@@ -125,8 +126,11 @@ void MacroControl::Execute() {
   }
 
   if (Robot::m_limelight.GetTargetFound() == true) {
-    Robot::m_oi.SetOperatorRumble(0.5, 0.5);
+    //Robot::m_oi.SetOperatorRumble(0.5, 0.5);
   }
+
+  Robot::m_macro_superstructure.GetPressure();
+  Robot::m_macro_superstructure.GetBatteryVoltage();
 }
 
 // Make this return true when this Command no longer needs to run execute()

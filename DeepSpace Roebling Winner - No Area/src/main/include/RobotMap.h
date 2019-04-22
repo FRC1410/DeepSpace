@@ -15,7 +15,7 @@ constexpr int operator_port = 1;                        //Driver Station
 constexpr int human_player_port = 2;                    //Driver Station
 
 constexpr double driver_deadzone = 0.1;                 //Joystick Deadzone
-constexpr double operator_deadzone = 0.15;              //Joystick Deadzone
+constexpr double operator_deadzone = 0.2;              //Joystick Deadzone
 constexpr double trigger_threshold = 0.2;               //Minimum Trigger Value
 
 //DriveTrain
@@ -49,7 +49,7 @@ constexpr double drivetrain_gyro_deadband = 2;          //Auto Staging
 constexpr double drivetrain_distance_deadband = 2;      //Auto Staging
 
 constexpr double drivetrain_acceleration_time = 1;      //0 to max speed
-constexpr double drivetrain_friction = 0.35;            //Power required to move robot
+constexpr double drivetrain_friction = 0.4;             //Power required to move robot
 constexpr double drivetrain_friction_deadband = 0.1;    //Jumper Size
 
 constexpr double drivetrain_max_speed = 200;            //Inches per second
@@ -80,7 +80,7 @@ constexpr int hatch_stick_wheels = 10;                  //Talon
 constexpr int hatch_stick_port_start = 0;               //Double Solenoid
 constexpr int hatch_stick_port_end = 7;                 //Double Solenoid
 
-constexpr double hatch_stick_limiter = 0.65;            //Max Power
+constexpr double hatch_stick_limiter = 1;              //Max Power
 
 constexpr int hatch_intake_axis = 3;                    //Right Trigger
 constexpr int hatch_outtake_axis = 2;                   //Left Trigger
@@ -113,7 +113,7 @@ constexpr double elevator_cargo_ship_height = 42 - elevator_ball_displacement;
 constexpr double elevator_calibration_height = 67.5;    //Height Calibration, top of carriage
 constexpr double elevator_calibration_revolutions = 32; //Height Calibration
 constexpr double elevator_min_height = 9.25;            //Top of Carriage
-constexpr double elevator_max_height = 86;              //Max Height
+constexpr double elevator_max_height = 1410;              //Max Height
 
 constexpr double lower_intake_intersect_height = 15;    //Intersection between ball claw and roller
 constexpr double upper_intake_intersect_height = 20;    //Intersection between ball claw and roller
@@ -159,7 +159,7 @@ constexpr int ball_profile_number = 1;                  //Operator Profiles
 constexpr double limelight_driver_pipeline = 0;         //Pipelines
 constexpr double limelight_vision_pipeline = 1;         //Pipelines
 
-constexpr double limelight_target_offset = -4.4;        //PID Target
+constexpr double limelight_target_offset = -12;      //PID Target
 constexpr double limelight_large_area = 9;              //PID Threshold
 
 constexpr double limelight_angle_kP = 0.02;             //PID for desired angle
@@ -167,12 +167,15 @@ constexpr double limelight_angle_kI = 0.0;              //PID for desired angle
 constexpr double limelight_angle_kD = 0.0;              //PID for desired angle
 
 constexpr double limelight_area_kP = 2.5;               //PID for overshoot
-constexpr double limelight_area_kI = 0;                 //PID for overshoot
+constexpr double limelight_area_kI = 0;                 //PID for overshootxz
 constexpr double limelight_area_kD = 0;                 //PID for overshoot
 
 constexpr double limelight_distance_kP = 0.2;           //PID for driving forward
 constexpr double limelight_distance_kI = 0;             //PID for driving forward
 constexpr double limelight_distance_kD = 0;             //PID for driving forward
+
+constexpr double limelight_offset_decrease_trigger = 2;    //Trigger to lower offset value
+constexpr double limelight_offset_increase_trigger = 3;
 
 //Safety
 constexpr int pressure_sensor = 0;                      //Analog Input
@@ -194,4 +197,3 @@ constexpr double dashboard_late_time_alert = 7;         //Match Time
 
 constexpr double dashboard_slow_blink_time = 0.4;       //Dashboard Warning
 constexpr double dashboard_fast_blink_time = 0.15;      //Dashboard Warning
-

@@ -106,14 +106,18 @@ void ElevatorRun::Execute() {
         if (reset_button_was_pressed == false) {
           manual_control = false;
           Robot::m_elevator.ResetIntegral();
-          height = elevator_min_height;
         }
+        height = elevator_min_height;
         reset_button_was_pressed = true;
       } else {
         reset_button_was_pressed = false;
       }
       
-      Robot::m_elevator.Goto(height, m_timer.Get() - previous_timer);
+      if (manual_control == false) {
+        Robot::m_elevator.Goto(height, m_timer.Get() - previous_timer);
+      } else {
+        Robot::m_elevator.RunElevator(elevator_gravity);
+      }
     }
   }
   

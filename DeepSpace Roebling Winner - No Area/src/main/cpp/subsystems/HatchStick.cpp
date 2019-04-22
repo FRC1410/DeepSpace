@@ -16,7 +16,7 @@ void HatchStick::InitDefaultCommand() {
 
 void HatchStick::RunWheels(double speed) {
   speed = Robot::m_macro_superstructure.CapValue(speed, hatch_stick_limiter);
-  m_wheels.Set(speed);
+  //m_wheels.Set(speed);
   shuffleboard_flex_power.SetDouble(speed);
 }
 

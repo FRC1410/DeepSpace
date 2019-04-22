@@ -28,21 +28,21 @@ void BallRollerRun::Execute() {
       } else {
         Robot::m_ball_roller.RunIntake(0);
       }
-
-      if (Robot::m_oi.GetOperatorButton(ball_roller_rotator_button) == true) {
-        if (button_was_pressed == false) {
-          if (Robot::m_ball_roller.GetState() == false) {
-            Robot::m_ball_roller.RollerDown();
-          } else {
-            Robot::m_ball_roller.RollerUp();
-          }
-        }
-  	    button_was_pressed = true;
-      } else {
-        button_was_pressed = false;
-      }
     } else {
       Robot::m_ball_roller.RunIntake(0);
+    }
+
+    if (Robot::m_oi.GetOperatorButton(ball_roller_rotator_button) == true) {
+      if (button_was_pressed == false) {
+        if (Robot::m_ball_roller.GetState() == false) {
+          Robot::m_ball_roller.RollerDown();
+        } else {
+          Robot::m_ball_roller.RollerUp();
+        }
+      }
+      button_was_pressed = true;
+    } else {
+      button_was_pressed = false;
     }
 
     if (Robot::m_macro_superstructure.GetReset() == true) {

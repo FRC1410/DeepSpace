@@ -9,6 +9,7 @@
 
 #include <frc/commands/Command.h>
 #include <frc/Timer.h>
+#include "RobotMap.h"
 
 class Drive : public frc::Command {
   private:
@@ -23,8 +24,12 @@ class Drive : public frc::Command {
     bool turn_right_was_pressed, turn_left_was_pressed;
     double reference_angle;
 
+    double limelight_target_offset_offset = limelight_target_offset;
+    
     double previous_distance, previous_angle, previous_timer;
     frc::Timer m_timer;
+
+    bool dpad_left_was_pressed, dpad_right_was_pressed;
 
   public:
     Drive();

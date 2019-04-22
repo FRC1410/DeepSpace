@@ -15,8 +15,8 @@ void Elevator::InitDefaultCommand() {
 }
 
 void Elevator::RunElevator(double speed) {
-  if (GetHeight() > elevator_max_height && speed > elevator_gravity) {
-    current_velocity = elevator_gravity;
+  if (GetHeight() > elevator_max_height && speed > 0) {
+    current_velocity = 0;
   } else {
     current_velocity = Robot::m_macro_superstructure.CapValue(speed, elevator_limiter);
   }
