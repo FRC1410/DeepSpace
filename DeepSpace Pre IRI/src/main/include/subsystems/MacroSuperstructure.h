@@ -23,6 +23,8 @@ class MacroSuperstructure : public frc::Subsystem {
     int profile = 0;
     bool reset = false;
 
+    bool alliance_bool;
+
     frc::Compressor m_compressor;
     AnalogInput pressure_input{pressure_sensor};
 
@@ -39,7 +41,10 @@ class MacroSuperstructure : public frc::Subsystem {
     nt::NetworkTableEntry shuffleboard_pressure = frc::Shuffleboard::GetTab("Drivers").Add("Pressure", 0).WithWidget(frc::BuiltInWidgets::kDial).WithPosition(5, 1).WithSize(2, 2).GetEntry();
     nt::NetworkTableEntry shuffleboard_LEDs = frc::Shuffleboard::GetTab("Mechanisms").Add("LED Color", 0).WithWidget(frc::BuiltInWidgets::kNumberBar).WithPosition(0, 2).WithSize(1, 1).GetEntry();
     nt::NetworkTableEntry shuffleboard_compressor = frc::Shuffleboard::GetTab("Mechanisms").Add("Compressor", false).WithWidget(frc::BuiltInWidgets::kBooleanBox).WithPosition(5, 2).WithSize(1, 1).GetEntry();
-    nt::NetworkTableEntry shuffleboard_stage = frc::Shuffleboard::GetTab("Auto").Add("Stage", 0).WithWidget(frc::BuiltInWidgets::kTextView).WithPosition(6, 2).WithSize(1, 1).GetEntry();
+    nt::NetworkTableEntry shuffleboard_stage = frc::Shuffleboard::GetTab("Auto").Add("Stage", 0).WithWidget(frc::BuiltInWidgets::kTextView).WithPosition(6, 2).WithSize(1, 1).GetEntry();   
+
+    frc::SendableChooser<std::string> m_chooser;
+
    
   public:
     MacroSuperstructure();
@@ -65,6 +70,8 @@ class MacroSuperstructure : public frc::Subsystem {
     void SetLEDs(double value);
     void SetWarnings(bool warnings, double time);
     void SetStage(double stage);
+
+    bool GetAlliance();
 
     double CapValue(double value, double cap);
     double GetDirection(double x, double y);

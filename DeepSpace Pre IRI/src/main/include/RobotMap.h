@@ -101,7 +101,7 @@ constexpr double elevator_hatch_displacement = 7;       //Center of Hatch
 
 constexpr double elevator_low_hatch_height = 24.5 - elevator_hatch_displacement;
 constexpr double elevator_mid_hatch_height = 51 - elevator_hatch_displacement;
-constexpr double elevator_high_hatch_height = 75 - elevator_hatch_displacement;
+constexpr double elevator_high_hatch_height = 78 - elevator_hatch_displacement;
 
 constexpr double elevator_loading_station_displacement = 7;
 
@@ -147,13 +147,34 @@ constexpr double encoder_fail_color = 0.59;             //Red
 
 constexpr double blinking_LED_time = 0.15;              //Blinks three times
 
+constexpr double medium_fire_preset = -0.59;            //Medium Fire LED Preset
+constexpr double confetti_preset = -0.89;
+constexpr double red_chase_preset = -0.31;
+constexpr double blue_chase_preset = -0.29;
+
+constexpr double red_preset = 0.61;
+constexpr double yellow_preset = 0.69;
+constexpr double green_preset = 0.77;
+
+constexpr double defense_led_min = 0.57;
+constexpr double defense_led_max = 0.91;
+
+constexpr double down_cycle_button = 5;                 //LB
+constexpr double up_cycle_button = 6;                   //RB
+constexpr double penalty_increment_button = 2;          //B
+constexpr double opposite_alliance_button = 1;          //A
+constexpr double fire_preset_button = 3;                //X
+constexpr double penalty_reset_button = 4;              //Y
+
 //Profile Changes
 constexpr int ball_profile_direction = 0;               //D-Pad Up
 constexpr int hatch_profile_direction = 270;            //D-Pad Left
 constexpr int reset_mechanisms_direction = 180;         //D-Pad Down
+constexpr int defense_direction = 90;                   //D-Pad Right
 
 constexpr int hatch_profile_number = 0;                 //Operator Profiles
 constexpr int ball_profile_number = 1;                  //Operator Profiles
+constexpr int defense_profile_number = 2; 
 
 //Limelight
 constexpr double limelight_driver_pipeline = 0;         //Pipelines

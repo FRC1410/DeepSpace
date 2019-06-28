@@ -14,6 +14,14 @@ class MacroControl : public frc::Command {
   private:    
     bool compressor_triggered;
     bool switch_was_true = false;
+    
+    double defense_color;
+    bool down_cycle_pressed = false;
+    bool up_cycle_pressed = false;
+
+    double penalty_color;
+    bool penalty_increment_pressed = false;
+    int penalty_increment = 0;
 
     double color = 0.01;
     bool cycle_negative_was_pressed, cycle_positive_was_pressed;
@@ -21,6 +29,7 @@ class MacroControl : public frc::Command {
     frc::Timer m_timer;
     frc::Timer rumble_timer;
     frc::Timer warning_timer;
+    frc::Timer penalty_cooldown_timer;
   
   public:
     MacroControl();
