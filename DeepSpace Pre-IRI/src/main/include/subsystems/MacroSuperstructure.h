@@ -33,14 +33,17 @@ class MacroSuperstructure : public frc::Subsystem {
 
     frc::SpeedControllerGroup LEDs{left_LEDs, right_LEDs};
 
-    nt::NetworkTableEntry shuffleboard_warnings = frc::Shuffleboard::GetTab("Drivers").Add("Warnings", false).WithWidget(frc::BuiltInWidgets::kBooleanBox).WithPosition(2, 1).WithSize(3, 2).GetEntry();
+    nt::NetworkTableEntry shuffleboard_warnings = frc::Shuffleboard::GetTab("Drivers").Add("Warnings", false).WithWidget(frc::BuiltInWidgets::kBooleanBox).WithPosition(3, 1).WithSize(3, 2).GetEntry();
     nt::NetworkTableEntry shuffleboard_hatch = frc::Shuffleboard::GetTab("Drivers").Add("Hatch", false).WithWidget(frc::BuiltInWidgets::kBooleanBox).WithPosition(0, 0).WithSize(1, 1).GetEntry();
     nt::NetworkTableEntry shuffleboard_cargo = frc::Shuffleboard::GetTab("Drivers").Add("Cargo", false).WithWidget(frc::BuiltInWidgets::kBooleanBox).WithPosition(0, 1).WithSize(1, 1).GetEntry();
+    nt::NetworkTableEntry shuffleboard_defense = frc::Shuffleboard::GetTab("Drivers").Add("Defense", false).WithWidget(frc::BuiltInWidgets::kBooleanBox).WithPosition(0, 2).WithSize(1, 1).GetEntry();
     nt::NetworkTableEntry shuffleboard_voltage = frc::Shuffleboard::GetTab("Drivers").Add("Voltage", 0).WithWidget(frc::BuiltInWidgets::kVoltageView).WithPosition(1, 0).WithSize(2, 1).GetEntry();
-    nt::NetworkTableEntry shuffleboard_time = frc::Shuffleboard::GetTab("Drivers").Add("Time", 0).WithWidget(frc::BuiltInWidgets::kNumberBar).WithPosition(3, 0).WithSize(2, 1).GetEntry();
-    nt::NetworkTableEntry shuffleboard_pressure = frc::Shuffleboard::GetTab("Drivers").Add("Pressure", 0).WithWidget(frc::BuiltInWidgets::kDial).WithPosition(5, 1).WithSize(2, 2).GetEntry();
+    nt::NetworkTableEntry shuffleboard_time = frc::Shuffleboard::GetTab("Drivers").Add("Time", 0).WithWidget(frc::BuiltInWidgets::kNumberBar).WithPosition(3, 0).WithSize(3, 1).GetEntry();
+    nt::NetworkTableEntry shuffleboard_pressure = frc::Shuffleboard::GetTab("Drivers").Add("Pressure", 0).WithWidget(frc::BuiltInWidgets::kDial).WithPosition(6, 1).WithSize(3, 2).GetEntry();
+
     nt::NetworkTableEntry shuffleboard_LEDs = frc::Shuffleboard::GetTab("Mechanisms").Add("LED Color", 0).WithWidget(frc::BuiltInWidgets::kNumberBar).WithPosition(0, 2).WithSize(1, 1).GetEntry();
     nt::NetworkTableEntry shuffleboard_compressor = frc::Shuffleboard::GetTab("Mechanisms").Add("Compressor", false).WithWidget(frc::BuiltInWidgets::kBooleanBox).WithPosition(5, 2).WithSize(1, 1).GetEntry();
+
     nt::NetworkTableEntry shuffleboard_stage = frc::Shuffleboard::GetTab("Auto").Add("Stage", 0).WithWidget(frc::BuiltInWidgets::kTextView).WithPosition(6, 2).WithSize(1, 1).GetEntry();   
 
     frc::SendableChooser<std::string> m_chooser;

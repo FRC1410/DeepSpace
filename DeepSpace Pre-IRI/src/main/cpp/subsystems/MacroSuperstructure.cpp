@@ -13,7 +13,7 @@ MacroSuperstructure::MacroSuperstructure() : Subsystem("ExampleSubsystem") {
   m_chooser.SetDefaultOption("Blue", "blue");
   m_chooser.AddOption("Red", "red");
 
-  frc::Shuffleboard::GetTab("Drivers").Add("Alliance?", m_chooser).WithWidget(frc::BuiltInWidgets::kComboBoxChooser).WithPosition(6, 0).WithSize(1, 1);
+  frc::Shuffleboard::GetTab("Drivers").Add("Alliance?", m_chooser).WithWidget(frc::BuiltInWidgets::kComboBoxChooser).WithPosition(8, 0).WithSize(1, 1);
 }
 
 void MacroSuperstructure::InitDefaultCommand() {
@@ -59,6 +59,7 @@ void MacroSuperstructure::SetProfile(int direction) {
 
       shuffleboard_hatch.SetBoolean(true);
       shuffleboard_cargo.SetBoolean(false);
+      shuffleboard_defense.SetBoolean(false);
 
       profile = hatch_profile_number;
     } else if (direction == ball_profile_direction) {
@@ -67,6 +68,7 @@ void MacroSuperstructure::SetProfile(int direction) {
 
       shuffleboard_hatch.SetBoolean(false);
       shuffleboard_cargo.SetBoolean(true);
+      shuffleboard_defense.SetBoolean(false);
       
       profile = ball_profile_number;
     } else if (direction == defense_direction) {
@@ -79,6 +81,9 @@ void MacroSuperstructure::SetProfile(int direction) {
 
       shuffleboard_hatch.SetBoolean(false);
       shuffleboard_cargo.SetBoolean(false);
+      shuffleboard_defense.SetBoolean(true);
+
+      SetLEDs(lime_preset);
     }
   }
 }

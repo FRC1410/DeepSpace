@@ -9,19 +9,19 @@
 
 #include <frc/commands/Command.h>
 #include <frc/Timer.h>
+#include "RobotMap.h"
 
 class MacroControl : public frc::Command {
   private:    
     bool compressor_triggered;
     bool switch_was_true = false;
     
-    double defense_color;
+    double defense_color = (round((defense_led_max + defense_led_min) * 25) / 50) - 0.01;
     bool down_cycle_pressed = false;
     bool up_cycle_pressed = false;
 
-    double penalty_color;
+    double penalty_color = lime_preset;
     bool penalty_increment_pressed = false;
-    int penalty_increment = 0;
 
     double color = 0.01;
     bool cycle_negative_was_pressed, cycle_positive_was_pressed;

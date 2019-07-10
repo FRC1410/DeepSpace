@@ -58,7 +58,7 @@ class Limelight : public frc::Subsystem {
     nt::NetworkTableEntry shuffleboard_ta = frc::Shuffleboard::GetTab("Limelight").Add("Ta", 0).WithWidget(frc::BuiltInWidgets::kTextView).WithPosition(5, 2).WithSize(1, 1).GetEntry();
     nt::NetworkTableEntry shuffleboard_tv = frc::Shuffleboard::GetTab("Limelight").Add("Tv", 0).WithWidget(frc::BuiltInWidgets::kTextView).WithPosition(6, 2).WithSize(1, 1).GetEntry();
 
-    nt::NetworkTableEntry shuffleboard_vision = frc::Shuffleboard::GetTab("Drivers").Add("Vision Target", false).WithWidget(frc::BuiltInWidgets::kBooleanBox).WithPosition(5, 0).WithSize(1, 1).GetEntry();
+    nt::NetworkTableEntry shuffleboard_vision = frc::Shuffleboard::GetTab("Drivers").Add("Vision Target", false).WithWidget(frc::BuiltInWidgets::kBooleanBox).WithPosition(6, 0).WithSize(2, 1).GetEntry();
 
   public:
     Limelight();

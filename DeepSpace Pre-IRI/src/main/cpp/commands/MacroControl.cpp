@@ -18,7 +18,7 @@ void MacroControl::Initialize() {
   Robot::m_macro_superstructure.SetCompressor(true);
 
   cycle_negative_was_pressed = false;
-  cycle_positive_was_pressed = true;
+  cycle_positive_was_pressed = false;
 
   m_timer.Reset();
   m_timer.Start();
@@ -31,9 +31,6 @@ void MacroControl::Initialize() {
 
   penalty_cooldown_timer.Reset();
   penalty_cooldown_timer.Start();
-
-  penalty_color = 0.81;
-
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -60,12 +57,28 @@ void MacroControl::Execute() {
           Robot::m_macro_superstructure.SetLEDs(ball_color);
         }
       } else {
+        if (Robot::m_oi.GetOperatorButton(penalty_reset_button) == true) {
+          penalty_color = lime_preset;
+          Robot::m_macro_superstructure.SetLEDs(penalty_color);
+          penalty_cooldown_timer.Reset();
+        }
+
+        if (penalty_cooldown_timer.Get() < 1) {
+          Robot::m_macro_superstructure.SetLEDs(violet_preset);
+        } else if (penalty_cooldown_timer.Get() < 2) {
+          Robot::m_macro_superstructure.SetLEDs(blue_preset); 
+        } else if (penalty_cooldown_timer.Get() < 3) {
+          Robot::m_macro_superstructure.SetLEDs(light_blue_preset);
+        } else if (penalty_cooldown_timer.Get() < 3.2) {
+          Robot::m_macro_superstructure.SetLEDs(lime_preset);
+        }
+
         if (Robot::m_oi.GetOperatorButton(down_cycle_button) == true) {
           if (down_cycle_pressed == false) {
             if (defense_color == defense_led_min) {
               defense_color = defense_led_max;
             } else {
-              defense_color = defense_color - 0.02;
+              defense_color -= 0.02;
             }
             Robot::m_macro_superstructure.SetLEDs(defense_color);
           }
@@ -79,7 +92,7 @@ void MacroControl::Execute() {
             if (defense_color == defense_led_max) {
               defense_color = defense_led_min;
             } else {
-              defense_color = defense_color + 0.02;
+              defense_color += 0.02;
             }
             Robot::m_macro_superstructure.SetLEDs(defense_color);
           }
@@ -102,25 +115,12 @@ void MacroControl::Execute() {
 
         if (Robot::m_oi.GetOperatorButton(penalty_increment_button) == true) {
           if (penalty_increment_pressed == false) {
-            penalty_color = penalty_color - 0.04;
+            penalty_color = fmod(penalty_color - lime_preset - 0.04, 0.2) + lime_preset;
             Robot::m_macro_superstructure.SetLEDs(penalty_color);
           }
           penalty_increment_pressed = true;
         } else {
-          penalty_increment = false;
-        }
-
-        if (Robot::m_oi.GetOperatorButton(penalty_reset_button) == true) {
-          //penalty_color = 0.53;
-          penalty_cooldown_timer.Reset();
-        }
-
-        if (penalty_cooldown_timer.Get() < 1) {
-          Robot::m_macro_superstructure.SetLEDs(red_preset);
-        } else if (penalty_cooldown_timer.Get() > 1 && penalty_cooldown_timer.Get() < 2) {
-          Robot::m_macro_superstructure.SetLEDs(yellow_preset);
-        } else if (penalty_cooldown_timer.Get() > 2 && penalty_cooldown_timer.Get() < 3) {
-          Robot::m_macro_superstructure.SetLEDs(green_preset);
+          penalty_increment_pressed = false;
         }
       }
     } else {
