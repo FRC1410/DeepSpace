@@ -64,11 +64,11 @@ void MacroControl::Execute() {
         }
 
         if (penalty_cooldown_timer.Get() < 1) {
-          Robot::m_macro_superstructure.SetLEDs(violet_preset);
+          Robot::m_macro_superstructure.SetLEDs(red_preset);
         } else if (penalty_cooldown_timer.Get() < 2) {
-          Robot::m_macro_superstructure.SetLEDs(blue_preset); 
+          Robot::m_macro_superstructure.SetLEDs(orange_preset); 
         } else if (penalty_cooldown_timer.Get() < 3) {
-          Robot::m_macro_superstructure.SetLEDs(light_blue_preset);
+          Robot::m_macro_superstructure.SetLEDs(yellow_preset);
         } else if (penalty_cooldown_timer.Get() < 3.2) {
           Robot::m_macro_superstructure.SetLEDs(lime_preset);
         }

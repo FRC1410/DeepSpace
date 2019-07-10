@@ -154,9 +154,9 @@ constexpr double confetti_preset = -0.89;
 constexpr double red_chase_preset = -0.31;
 constexpr double blue_chase_preset = -0.29;
 
-constexpr double violet_preset = 0.91;
-constexpr double blue_preset = 0.87;
-constexpr double light_blue_preset = 0.83;
+constexpr double red_preset = 0.61;
+constexpr double orange_preset = 0.65;
+constexpr double yellow_preset = 0.69;
 constexpr double lime_preset = 0.73;
 
 constexpr double defense_led_min = 0.57;
