@@ -33,7 +33,7 @@ void ElevatorRun::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void ElevatorRun::Execute() {
   if (Robot::m_macro_superstructure.GetAuto() == false) {
-    if (elevator_defense_manual_control == true) {
+    if (elevator_defense_manual_control == true || Robot::m_macro_superstructure.GetProfile() != defense_profile_number) {
       elevator_input = -Robot::m_oi.GetOperatorAxis(elevator_axis);
       if (abs(elevator_input) > 0) {
         manual_control = true;
