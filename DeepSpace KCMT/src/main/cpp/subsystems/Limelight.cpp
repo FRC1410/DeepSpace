@@ -48,9 +48,13 @@ bool Limelight::GetTargetFound() {
 
 double Limelight::GetAnglePID(double target, double time_difference) {
   angle_error = target - GetTargetX();
-  angle_P = input_angle_kP * angle_error;
+  /*angle_P = input_angle_kP * angle_error;
   angle_I += input_angle_kI * angle_error * time_difference;
-  angle_D = input_angle_kD * (angle_error - angle_previous_error) * time_difference;
+  angle_D = input_angle_kD * (angle_error - angle_previous_error) * time_difference;*/
+
+  angle_P = limelight_angle_kP * angle_error;
+  angle_I += limelight_angle_kI * angle_error * time_difference;
+  angle_D = limelight_angle_kD * (angle_error - angle_previous_error) * time_difference;
   angle_previous_error = angle_error;
   return angle_P + angle_I + angle_D;
 }

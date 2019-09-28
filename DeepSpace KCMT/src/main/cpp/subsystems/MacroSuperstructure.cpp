@@ -7,8 +7,14 @@
 
 #include "subsystems/MacroSuperstructure.h"
 #include "commands/MacroControl.h"
+#include "Robot.h"
 
-MacroSuperstructure::MacroSuperstructure() : Subsystem("ExampleSubsystem") {}
+MacroSuperstructure::MacroSuperstructure() : Subsystem("ExampleSubsystem") {
+  m_chooser.SetDefaultOption("Blue", "blue");
+  m_chooser.AddOption("Red", "red");
+
+  frc::Shuffleboard::GetTab("Drivers").Add("Alliance?", m_chooser).WithWidget(frc::BuiltInWidgets::kComboBoxChooser).WithPosition(8, 0).WithSize(1, 1);
+}
 
 void MacroSuperstructure::InitDefaultCommand() {
   SetDefaultCommand(new MacroControl());
@@ -53,6 +59,7 @@ void MacroSuperstructure::SetProfile(int direction) {
 
       shuffleboard_hatch.SetBoolean(true);
       shuffleboard_cargo.SetBoolean(false);
+      shuffleboard_defense.SetBoolean(false);
 
       profile = hatch_profile_number;
     } else if (direction == ball_profile_direction) {
@@ -61,8 +68,22 @@ void MacroSuperstructure::SetProfile(int direction) {
 
       shuffleboard_hatch.SetBoolean(false);
       shuffleboard_cargo.SetBoolean(true);
+      shuffleboard_defense.SetBoolean(false);
       
       profile = ball_profile_number;
+    } else if (direction == defense_direction) {
+      Robot::m_ball_roller.RollerUp();
+      Robot::m_hatch_stick.RetractStick();
+      profile = defense_profile_number;
+
+      frc::SmartDashboard::PutBoolean("Hatch", false);
+      frc::SmartDashboard::PutBoolean("Cargo", false);
+
+      shuffleboard_hatch.SetBoolean(false);
+      shuffleboard_cargo.SetBoolean(false);
+      shuffleboard_defense.SetBoolean(true);
+
+      SetLEDs(lime_preset);
     }
   }
 }
@@ -103,6 +124,16 @@ void MacroSuperstructure::SetWarnings(bool warning, double time) {
 
   shuffleboard_warnings.SetBoolean(warning);
   shuffleboard_time.SetDouble(time);
+}
+
+bool MacroSuperstructure::GetAlliance() {
+  if (m_chooser.GetSelected() == "blue") {
+    alliance_bool = 0;
+  } else if (m_chooser.GetSelected() == "red") {
+    alliance_bool = 1;
+  }
+
+  return alliance_bool;
 }
 
 void MacroSuperstructure::SetStage(double stage) {

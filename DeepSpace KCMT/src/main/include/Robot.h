@@ -41,7 +41,7 @@ class Robot : public frc::TimedRobot {
     AutoElevatorCalibrate m_elevator_calibrate;
     AutoDrivetrainCalibrate m_drivetrain_calibrate;
 
-    nt::NetworkTableEntry shuffleboard_auto_inverter = frc::Shuffleboard::GetTab("Drivers").Add("Auto Inverter", false).WithWidget(frc::BuiltInWidgets::kToggleButton).WithPosition(1, 2).WithSize(1, 1).GetEntry();
+    nt::NetworkTableEntry shuffleboard_auto_inverter = frc::Shuffleboard::GetTab("Drivers").Add("Auto Inverter", false).WithWidget(frc::BuiltInWidgets::kToggleButton).WithPosition(2, 2).WithSize(1, 1).GetEntry();
 
   public:
     bool auto_running = false;

@@ -33,9 +33,9 @@ void DriveTrain::SetSpeed(double left, double right) {
 		right_velocity = right;
 	}
 
-	m_tank.TankDrive(left_velocity * 0.97, right_velocity);
+	m_tank.TankDrive(0.97 * left_velocity, right_velocity);
 
-  shuffleboard_left_power.SetDouble(left_velocity);
+  shuffleboard_left_power.SetDouble(0.97 * left_velocity);
   shuffleboard_left_power.SetDouble(right_velocity);
 }
 

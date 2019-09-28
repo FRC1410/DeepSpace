@@ -31,7 +31,7 @@ void Robot::RobotInit() {
   m_chooser.AddOption("Stress Test", &m_stress_test);
   m_chooser.AddOption("Two Hatch Far Rocket", &m_far_rocket);
 
-  frc::Shuffleboard::GetTab("Drivers").Add("Auto", m_chooser).WithWidget(frc::BuiltInWidgets::kComboBoxChooser).WithPosition(1, 1).WithSize(1, 1);
+  frc::Shuffleboard::GetTab("Drivers").Add("Auto", m_chooser).WithWidget(frc::BuiltInWidgets::kComboBoxChooser).WithPosition(2, 1).WithSize(1, 1);
   frc::SmartDashboard::PutData("Auto", &m_chooser);
   frc::SmartDashboard::PutBoolean("Auto Inverter", false);
 }

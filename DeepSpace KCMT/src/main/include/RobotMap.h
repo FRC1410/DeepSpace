@@ -15,7 +15,7 @@ constexpr int operator_port = 1;                        //Driver Station
 constexpr int human_player_port = 2;                    //Driver Station
 
 constexpr double driver_deadzone = 0.1;                 //Joystick Deadzone
-constexpr double operator_deadzone = 0.2;              //Joystick Deadzone
+constexpr double operator_deadzone = 0.2;               //Joystick Deadzone
 constexpr double trigger_threshold = 0.2;               //Minimum Trigger Value
 
 //DriveTrain
@@ -101,19 +101,19 @@ constexpr double elevator_hatch_displacement = 7;       //Center of Hatch
 
 constexpr double elevator_low_hatch_height = 24.5 - elevator_hatch_displacement;
 constexpr double elevator_mid_hatch_height = 51 - elevator_hatch_displacement;
-constexpr double elevator_high_hatch_height = 75 - elevator_hatch_displacement;
+constexpr double elevator_high_hatch_height = 78 - elevator_hatch_displacement;
 
 constexpr double elevator_loading_station_displacement = 7;
 
 constexpr double elevator_low_ball_height = 30 - elevator_ball_displacement;
-constexpr double elevator_mid_ball_height = 54.5 - elevator_ball_displacement;
+constexpr double elevator_mid_ball_height = 55 - elevator_ball_displacement;
 constexpr double elevator_high_ball_height = 72 - elevator_ball_displacement;
 constexpr double elevator_cargo_ship_height = 42 - elevator_ball_displacement;
 
 constexpr double elevator_calibration_height = 67.5;    //Height Calibration, top of carriage
 constexpr double elevator_calibration_revolutions = 32; //Height Calibration
 constexpr double elevator_min_height = 9.25;            //Top of Carriage
-constexpr double elevator_max_height = 86;              //Max Height
+constexpr double elevator_max_height = 1410;            //Max Height
 
 constexpr double lower_intake_intersect_height = 15;    //Intersection between ball claw and roller
 constexpr double upper_intake_intersect_height = 20;    //Intersection between ball claw and roller
@@ -129,7 +129,9 @@ constexpr double elevator_deadband = 1.2;               //Range of stalling, inc
 
 constexpr double elevator_kP = 0.02;                    //PID Tuning
 constexpr double elevator_kI = 0;                       //PID Tuning
-constexpr double elevator_kD = 0;                       //PID Tuning  
+constexpr double elevator_kD = 0;                       //PID Tuning
+
+constexpr bool elevator_defense_manual_control = false;
 
 //LEDs
 constexpr int left_LED_controller_port = 0;             //PWM
@@ -147,19 +149,41 @@ constexpr double encoder_fail_color = 0.59;             //Red
 
 constexpr double blinking_LED_time = 0.15;              //Blinks three times
 
+constexpr double medium_fire_preset = -0.59;            //Medium Fire LED Preset
+constexpr double confetti_preset = -0.89;
+constexpr double red_chase_preset = -0.31;
+constexpr double blue_chase_preset = -0.29;
+
+constexpr double red_preset = 0.61;
+constexpr double orange_preset = 0.65;
+constexpr double yellow_preset = 0.69;
+constexpr double lime_preset = 0.73;
+
+constexpr double defense_led_min = 0.57;
+constexpr double defense_led_max = 0.91;
+
+constexpr int down_cycle_button = 5;                    //Left Bumper
+constexpr int up_cycle_button = 6;                      //Right Bumper
+constexpr int penalty_increment_button = 2;             //B
+constexpr int opposite_alliance_button = 1;             //A
+constexpr int fire_preset_button = 3;                   //X
+constexpr int penalty_reset_button = 4;                 //Y
+
 //Profile Changes
 constexpr int ball_profile_direction = 0;               //D-Pad Up
 constexpr int hatch_profile_direction = 270;            //D-Pad Left
 constexpr int reset_mechanisms_direction = 180;         //D-Pad Down
+constexpr int defense_direction = 90;                   //D-Pad Right
 
 constexpr int hatch_profile_number = 0;                 //Operator Profiles
 constexpr int ball_profile_number = 1;                  //Operator Profiles
+constexpr int defense_profile_number = 2; 
 
 //Limelight
 constexpr double limelight_driver_pipeline = 0;         //Pipelines
 constexpr double limelight_vision_pipeline = 1;         //Pipelines
 
-constexpr double limelight_target_offset = -4.499;      //PID Target
+constexpr double limelight_target_offset = -12;         //PID Target
 constexpr double limelight_large_area = 9;              //PID Threshold
 
 constexpr double limelight_angle_kP = 0.02;             //PID for desired angle
@@ -174,7 +198,7 @@ constexpr double limelight_distance_kP = 0.2;           //PID for driving forwar
 constexpr double limelight_distance_kI = 0;             //PID for driving forward
 constexpr double limelight_distance_kD = 0;             //PID for driving forward
 
-constexpr double limelight_offset_decrease_trigger = 2;    //Trigger to lower offset value
+constexpr double limelight_offset_decrease_trigger = 2; //Trigger to lower offset value
 constexpr double limelight_offset_increase_trigger = 3;
 
 //Safety

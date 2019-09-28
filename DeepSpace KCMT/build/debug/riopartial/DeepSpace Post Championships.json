@@ -1,9 +1,0 @@
-[
-  {
-    "artifact": "frcCpp (in project DeepSpace Post Championships)",
-    "target": "roborio",
-    "component": "frcUserProgram",
-    "debugfile": "frcCpp_roborio.debugconfig",
-    "language": "cpp"
-  }
-]

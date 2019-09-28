@@ -33,91 +33,96 @@ void ElevatorRun::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void ElevatorRun::Execute() {
   if (Robot::m_macro_superstructure.GetAuto() == false) {
-    elevator_input = -pow(Robot::m_oi.GetOperatorAxis(elevator_axis), 3);
-    if (abs(elevator_input) > 0) {
-      manual_control = true;
-      Robot::m_elevator.RunElevator(elevator_input + elevator_gravity);
-    } else {
-      if (Robot::m_oi.GetOperatorButton(elevator_loading_station_button) == true) {
-        if (loading_station_button_was_pressed == false) {
-          manual_control = false;
-          Robot::m_elevator.ResetIntegral();
-          if (Robot::m_macro_superstructure.GetProfile() == hatch_profile_number) {
-            if (height > elevator_min_height + elevator_loading_station_displacement) {
-              height -= elevator_loading_station_displacement;
-            } else {
-              height = elevator_min_height;
+    if (elevator_defense_manual_control == true || Robot::m_macro_superstructure.GetProfile() != defense_profile_number) {
+      elevator_input = -pow(Robot::m_oi.GetOperatorAxis(elevator_axis), 3);
+      if (abs(elevator_input) > 0) {
+        manual_control = true;
+        Robot::m_elevator.RunElevator(elevator_input + elevator_gravity);
+      } else {
+        if (Robot::m_macro_superstructure.GetProfile() != defense_profile_number) {
+          if (Robot::m_oi.GetOperatorButton(elevator_loading_station_button) == true) {
+            if (loading_station_button_was_pressed == false) {
+              manual_control = false;
+              Robot::m_elevator.ResetIntegral();
+              if (Robot::m_macro_superstructure.GetProfile() == hatch_profile_number) {
+                if (height > elevator_min_height + elevator_loading_station_displacement) {
+                  height -= elevator_loading_station_displacement;
+                } else {
+                  height = elevator_min_height;
+                }
+              } else {
+                height = elevator_cargo_ship_height;
+              }
             }
+            loading_station_button_was_pressed = true;
           } else {
-            height = elevator_cargo_ship_height;
+            loading_station_button_was_pressed = false;
+          }
+
+          if (Robot::m_oi.GetOperatorButton(elevator_high_position_button) == true) {
+            if (high_button_was_pressed == false) {
+              manual_control = false;
+              Robot::m_elevator.ResetIntegral();
+              if (Robot::m_macro_superstructure.GetProfile() == hatch_profile_number) {
+                height = elevator_high_hatch_height;
+              } else {
+                height = elevator_high_ball_height;
+              }
+            }
+            high_button_was_pressed = true;
+          } else {
+            high_button_was_pressed = false;
+          }
+
+          if (Robot::m_oi.GetOperatorButton(elevator_mid_position_button) == true) {
+            if (mid_button_was_pressed == false) {
+              manual_control = false;
+              Robot::m_elevator.ResetIntegral();
+              if (Robot::m_macro_superstructure.GetProfile() == hatch_profile_number) {
+                height = elevator_mid_hatch_height;
+              } else {
+                height = elevator_mid_ball_height;
+              }
+            }
+            mid_button_was_pressed = true;
+          } else {
+            mid_button_was_pressed = false;
+          }
+
+          if (Robot::m_oi.GetOperatorButton(elevator_low_position_button) == true) {
+            if (low_button_was_pressed == false) {
+              manual_control = false;
+              Robot::m_elevator.ResetIntegral();
+              if (Robot::m_macro_superstructure.GetProfile() == hatch_profile_number) {
+                height = elevator_low_hatch_height;
+              } else {
+                height = elevator_low_ball_height;
+              }
+            }
+            low_button_was_pressed = true;
+          } else {
+            low_button_was_pressed = false;
+          }
+
+          if (Robot::m_macro_superstructure.GetReset() == true) {
+            if (reset_button_was_pressed == false) {
+              manual_control = false;
+              Robot::m_elevator.ResetIntegral();
+            }
+            height = elevator_min_height;
+            reset_button_was_pressed = true;
+          } else {
+            reset_button_was_pressed = false;
           }
         }
-        loading_station_button_was_pressed = true;
-      } else {
-        loading_station_button_was_pressed = false;
-      }
-
-      if (Robot::m_oi.GetOperatorButton(elevator_high_position_button) == true) {
-        if (high_button_was_pressed == false) {
-          manual_control = false;
-          Robot::m_elevator.ResetIntegral();
-          if (Robot::m_macro_superstructure.GetProfile() == hatch_profile_number) {
-            height = elevator_high_hatch_height;
-          } else {
-            height = elevator_high_ball_height;
-          }
+        if (manual_control == false) {
+          Robot::m_elevator.Goto(height, m_timer.Get() - previous_timer);
+        } else {
+          Robot::m_elevator.RunElevator(elevator_gravity);
         }
-        high_button_was_pressed = true;
-      } else {
-        high_button_was_pressed = false;
       }
-
-      if (Robot::m_oi.GetOperatorButton(elevator_mid_position_button) == true) {
-        if (mid_button_was_pressed == false) {
-          manual_control = false;
-          Robot::m_elevator.ResetIntegral();
-          if (Robot::m_macro_superstructure.GetProfile() == hatch_profile_number) {
-            height = elevator_mid_hatch_height;
-          } else {
-            height = elevator_mid_ball_height;
-          }
-        }
-        mid_button_was_pressed = true;
-      } else {
-        mid_button_was_pressed = false;
-      }
-
-      if (Robot::m_oi.GetOperatorButton(elevator_low_position_button) == true) {
-        if (low_button_was_pressed == false) {
-          manual_control = false;
-          Robot::m_elevator.ResetIntegral();
-          if (Robot::m_macro_superstructure.GetProfile() == hatch_profile_number) {
-            height = elevator_low_hatch_height;
-          } else {
-            height = elevator_low_ball_height;
-          }
-        }
-        low_button_was_pressed = true;
-      } else {
-        low_button_was_pressed = false;
-      }
-
-      if (Robot::m_macro_superstructure.GetReset() == true) {
-        if (reset_button_was_pressed == false) {
-          manual_control = false;
-          Robot::m_elevator.ResetIntegral();
-        }
-        height = elevator_min_height;
-        reset_button_was_pressed = true;
-      } else {
-        reset_button_was_pressed = false;
-      }
-      
-      if (manual_control == false) {
-        Robot::m_elevator.Goto(height, m_timer.Get() - previous_timer);
-      } else {
-        Robot::m_elevator.RunElevator(elevator_gravity);
-      }
+    } else {
+      Robot::m_elevator.RunElevator(0);
     }
   }
   

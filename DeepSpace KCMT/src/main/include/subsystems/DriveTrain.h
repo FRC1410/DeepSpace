@@ -64,7 +64,7 @@ class DriveTrain : public frc::Subsystem {
     double distance_PID, gyro_PID;
 
     frc::SendableChooser<std::string> m_chooser;
-    nt::NetworkTableEntry shuffleboard_inverted_driving = frc::Shuffleboard::GetTab("Drivers").Add("Inverted Driving", false).WithWidget(frc::BuiltInWidgets::kBooleanBox).WithPosition(0, 2).WithSize(1, 1).GetEntry();
+    nt::NetworkTableEntry shuffleboard_inverted_driving = frc::Shuffleboard::GetTab("Drivers").Add("Inverted Driving", false).WithWidget(frc::BuiltInWidgets::kBooleanBox).WithPosition(1, 1).WithSize(1, 2).GetEntry();
 
     nt::NetworkTableEntry shuffleboard_x = frc::Shuffleboard::GetTab("Drivetrain").Add("X", 0).WithWidget(frc::BuiltInWidgets::kTextView).WithPosition(0, 0).WithSize(1, 1).GetEntry();
     nt::NetworkTableEntry shuffleboard_z = frc::Shuffleboard::GetTab("Drivetrain").Add("Z", 0).WithWidget(frc::BuiltInWidgets::kTextView).WithPosition(0, 1).WithSize(1, 1).GetEntry();

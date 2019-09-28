@@ -1,25 +1,25 @@
-See file:///C:/Users/randy/Documents/Visual%20Studio%20Code/DeepSpace%20KCMT/build/tmp/compileFrcUserProgramDebugExecutableFrcUserProgramCpp/output.txt for all output for compileFrcUserProgramDebugExecutableFrcUserProgramCpp.
-compiling AutoGyroPID.cpp successful.
-
-compiling AutoDistancePID.cpp successful.
-
-compiling BallClawWheelsRun.cpp successful.
+See file:///C:/Users/randy/Documents/Visual%20Studio%20Code/DeepSpace%20Pre-IRI/build/tmp/compileFrcUserProgramDebugExecutableFrcUserProgramCpp/output.txt for all output for compileFrcUserProgramDebugExecutableFrcUserProgramCpp.
+compiling AutoStressTest.cpp successful.
 
 compiling AutoDrivetrainCalibrate.cpp successful.
 
+compiling AutoElevatorCalibrate.cpp successful.
+
 compiling AutoHatchNearRocket.cpp successful.
-
-compiling Drive.cpp successful.
-
-compiling AutoStressTest.cpp successful.
 
 compiling BallRollerRun.cpp successful.
 
+compiling AutoTwoHatchFarRocket.cpp successful.
+
+compiling BallClawWheelsRun.cpp successful.
+
+compiling AutoDistancePID.cpp successful.
+
 compiling AutoRocketAdjustment.cpp successful.
 
-compiling AutoElevatorCalibrate.cpp successful.
+compiling AutoGyroPID.cpp successful.
 
-compiling AutoTwoHatchFarRocket.cpp successful.
+compiling Drive.cpp successful.
 
 compiling OI.cpp successful.
 
@@ -31,18 +31,18 @@ compiling BallClaw.cpp successful.
 
 compiling HatchStick.cpp successful.
 
-compiling MacroSuperstructure.cpp successful.
+compiling Elevator.cpp successful.
 
 compiling Limelight.cpp successful.
 
-compiling Elevator.cpp successful.
+compiling ElevatorRun.cpp successful.
+
+compiling MacroSuperstructure.cpp successful.
 
 compiling Robot.cpp successful.
 
-compiling ElevatorRun.cpp successful.
+compiling HatchStickActuate.cpp successful.
 
 compiling DriveTrain.cpp successful.
 
-compiling HatchStickActuate.cpp successful.
-
-Finished compileFrcUserProgramDebugExecutableFrcUserProgramCpp, see full log file:///C:/Users/randy/Documents/Visual%20Studio%20Code/DeepSpace%20KCMT/build/tmp/compileFrcUserProgramDebugExecutableFrcUserProgramCpp/output.txt.
+Finished compileFrcUserProgramDebugExecutableFrcUserProgramCpp, see full log file:///C:/Users/randy/Documents/Visual%20Studio%20Code/DeepSpace%20Pre-IRI/build/tmp/compileFrcUserProgramDebugExecutableFrcUserProgramCpp/output.txt.

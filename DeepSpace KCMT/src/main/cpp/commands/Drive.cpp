@@ -56,9 +56,9 @@ void Drive::Execute() {
 
     //if (Robot::m_oi.GetDriverAxis(vision_align_axis) >= trigger_threshold) {
     if (Robot::m_oi.GetDriverButton(vision_align_button) == true) {
-      if (Robot::m_limelight.GetTargetFound() == false) {
+      //if (Robot::m_limelight.GetTargetFound() == false) {
         Robot::m_limelight.SetPipeline(limelight_vision_pipeline);
-      }
+      //}
 
       if (vision_button_was_pressed == false) {
         Robot::m_limelight.ResetAngleIntegral();
@@ -82,13 +82,13 @@ void Drive::Execute() {
         if (Robot::m_limelight.GetTargetArea() < limelight_large_area) {
           PID_value = Robot::m_limelight.GetAnglePID(limelight_target_offset_offset + Robot::m_limelight.GetAreaPID(limelight_large_area, m_timer.Get() - previous_timer), m_timer.Get() - previous_timer);
         } else {
-          Robot::m_limelight.SetTargetFound(true);
+        //  Robot::m_limelight.SetTargetFound(true);
           PID_value = 0;
         }
 
-        if (Robot::m_limelight.GetTargetFound() == true) {
+        /*if (Robot::m_limelight.GetTargetFound() == true) {
           Robot::m_limelight.SetPipeline(limelight_driver_pipeline);
-        }
+        }*/
 
         //if (Robot::m_oi.GetDriverAxis(invert_driving_axis) > trigger_threshold) {
         if (invert_driving == true) {
@@ -127,13 +127,13 @@ void Drive::Execute() {
       //if (Robot::m_oi.GetDriverAxis(invert_driving_axis) >= trigger_threshold) {
       if (invert_driving == true) {
         if (Robot::m_oi.GetDriverButton(drivetrain_straight_drive_button) == true) {
-          Robot::m_drivetrain.SetCurvedSpeed(Robot::m_oi.GetAverageDriverInput() * 2, Robot::m_oi.GetAverageDriverInput() * 2);
+          Robot::m_drivetrain.SetCurvedSpeed(Robot::m_oi.GetAverageDriverInput(), Robot::m_oi.GetAverageDriverInput());
         } else {
           Robot::m_drivetrain.SetCurvedSpeed(Robot::m_oi.GetDriverAxis(drivetrain_right_axis), Robot::m_oi.GetDriverAxis(drivetrain_left_axis));
         }
       } else {
         if (Robot::m_oi.GetDriverButton(drivetrain_straight_drive_button) == true) {
-          Robot::m_drivetrain.SetCurvedSpeed(-Robot::m_oi.GetAverageDriverInput() * 2, -Robot::m_oi.GetAverageDriverInput() * 2);
+          Robot::m_drivetrain.SetCurvedSpeed(-Robot::m_oi.GetAverageDriverInput(), -Robot::m_oi.GetAverageDriverInput());
         } else {
           Robot::m_drivetrain.SetCurvedSpeed(-Robot::m_oi.GetDriverAxis(drivetrain_left_axis), -Robot::m_oi.GetDriverAxis(drivetrain_right_axis));
         }
@@ -164,7 +164,7 @@ void Drive::Execute() {
   previous_angle = Robot::m_drivetrain.GetAngle();
   previous_timer = m_timer.Get();
 
-  if (Robot::m_oi.GetOperatorAxis(limelight_offset_increase_trigger) >= trigger_threshold){
+  /*if (Robot::m_oi.GetOperatorAxis(limelight_offset_increase_trigger) >= trigger_threshold){
     limelight_target_offset_offset += 0.0254;  
   } else if (Robot::m_oi.GetOperatorAxis(limelight_offset_decrease_trigger) >= trigger_threshold) {
     limelight_target_offset_offset -= 0.0254;
@@ -186,7 +186,7 @@ void Drive::Execute() {
     dpad_right_was_pressed = true;
   } else {
     dpad_right_was_pressed = false;
-  }
+  }*/
   
   frc::SmartDashboard::PutNumber("target offset offset" , limelight_target_offset_offset);
 }

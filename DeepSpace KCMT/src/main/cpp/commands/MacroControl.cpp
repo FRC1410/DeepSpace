@@ -18,7 +18,7 @@ void MacroControl::Initialize() {
   Robot::m_macro_superstructure.SetCompressor(true);
 
   cycle_negative_was_pressed = false;
-  cycle_positive_was_pressed = true;
+  cycle_positive_was_pressed = false;
 
   m_timer.Reset();
   m_timer.Start();
@@ -28,6 +28,9 @@ void MacroControl::Initialize() {
 
   warning_timer.Reset();
   warning_timer.Stop();
+
+  penalty_cooldown_timer.Reset();
+  penalty_cooldown_timer.Start();
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -38,7 +41,7 @@ void MacroControl::Execute() {
     if (Robot::m_limelight.GetPipeline() == limelight_driver_pipeline) {
       if (Robot::m_macro_superstructure.GetProfile() == hatch_profile_number) {
         Robot::m_macro_superstructure.SetLEDs(hatch_color);
-      } else {
+      } else if (Robot::m_macro_superstructure.GetProfile() == ball_profile_number) {
         if (Robot::m_ball_claw.GetLimitSwitch() == true) {
           if (switch_was_true == false) {
             rumble_timer.Reset();
@@ -53,14 +56,79 @@ void MacroControl::Execute() {
         } else {
           Robot::m_macro_superstructure.SetLEDs(ball_color);
         }
+      } else {
+        if (Robot::m_oi.GetOperatorButton(penalty_reset_button) == true) {
+          penalty_color = lime_preset;
+          Robot::m_macro_superstructure.SetLEDs(penalty_color);
+          penalty_cooldown_timer.Reset();
+        }
 
+        if (penalty_cooldown_timer.Get() < 1) {
+          Robot::m_macro_superstructure.SetLEDs(red_preset);
+        } else if (penalty_cooldown_timer.Get() < 2) {
+          Robot::m_macro_superstructure.SetLEDs(orange_preset); 
+        } else if (penalty_cooldown_timer.Get() < 3) {
+          Robot::m_macro_superstructure.SetLEDs(yellow_preset);
+        } else if (penalty_cooldown_timer.Get() < 3.2) {
+          Robot::m_macro_superstructure.SetLEDs(lime_preset);
+        }
+
+        if (Robot::m_oi.GetOperatorButton(down_cycle_button) == true) {
+          if (down_cycle_pressed == false) {
+            if (defense_color == defense_led_min) {
+              defense_color = defense_led_max;
+            } else {
+              defense_color -= 0.02;
+            }
+            Robot::m_macro_superstructure.SetLEDs(defense_color);
+          }
+          down_cycle_pressed = true;
+        } else {
+          down_cycle_pressed = false;
+        }
+
+        if (Robot::m_oi.GetOperatorButton(up_cycle_button) == true) {
+          if (up_cycle_pressed == false) {
+            if (defense_color == defense_led_max) {
+              defense_color = defense_led_min;
+            } else {
+              defense_color += 0.02;
+            }
+            Robot::m_macro_superstructure.SetLEDs(defense_color);
+          }
+          up_cycle_pressed = true;
+        } else {
+          up_cycle_pressed = false;
+        }
+
+        if (Robot::m_oi.GetOperatorButton(opposite_alliance_button) == true) {             
+          if (Robot::m_macro_superstructure.GetAlliance() == 0) {
+            Robot::m_macro_superstructure.SetLEDs(red_chase_preset);
+          } else if (Robot::m_macro_superstructure.GetAlliance() == 1) {
+            Robot::m_macro_superstructure.SetLEDs(blue_chase_preset);
+          }
+        }
+
+        if (Robot::m_oi.GetOperatorButton(fire_preset_button) == true) {
+          Robot::m_macro_superstructure.SetLEDs(medium_fire_preset);
+        }
+
+        if (Robot::m_oi.GetOperatorButton(penalty_increment_button) == true) {
+          if (penalty_increment_pressed == false) {
+            penalty_color = fmod(penalty_color - lime_preset - 0.04, 0.2) + lime_preset;
+            Robot::m_macro_superstructure.SetLEDs(penalty_color);
+          }
+          penalty_increment_pressed = true;
+        } else {
+          penalty_increment_pressed = false;
+        }
       }
     } else {
       Robot::m_macro_superstructure.SetLEDs(vision_targeting_color);
     }
   } else {
     Robot::m_macro_superstructure.SetLEDs(reset_mechanisms_color);
-  }
+  }        
 
   if (Robot::m_oi.GetHumanPlayerButton(LED_cycle_negative_button) == true) {
     if (cycle_negative_was_pressed == false) {

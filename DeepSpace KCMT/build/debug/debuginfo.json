@@ -49,14 +49,14 @@
     "language": "cpp"
   },
   {
-    "artifact": "frcCpp (in project DeepSpace Post Championships)",
+    "artifact": "frcCpp (in project DeepSpace Pre-Champs)",
     "target": "roborio",
     "component": "frcUserProgram",
     "debugfile": "frcCpp_roborio.debugconfig",
     "language": "cpp"
   },
   {
-    "artifact": "frcCpp (in project DeepSpace Pre-Champs)",
+    "artifact": "frcCpp (in project DeepSpace Pre-IRI)",
     "target": "roborio",
     "component": "frcUserProgram",
     "debugfile": "frcCpp_roborio.debugconfig",
