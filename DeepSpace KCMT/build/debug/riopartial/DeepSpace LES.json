@@ -1,0 +1,9 @@
+[
+  {
+    "artifact": "frcCpp (in project DeepSpace LES)",
+    "target": "roborio",
+    "component": "frcUserProgram",
+    "debugfile": "frcCpp_roborio.debugconfig",
+    "language": "cpp"
+  }
+]
